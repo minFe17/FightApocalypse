@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class MainCamera : MonoBehaviour
 {
-    [SerializeField] Transform _cameraPos;
+    [SerializeField] Transform _target;
+    [SerializeField] float _offestY;
+    [SerializeField] float _offsetZ;
 
     void Start()
     {
@@ -13,6 +15,7 @@ public class MainCamera : MonoBehaviour
 
     void Update()
     {
-        transform.position = _cameraPos.position;
+        //카메라 이동
+        transform.position = new Vector3(_target.position.x, _target.position.y + _offestY, _target.position.z + _offsetZ);
     }
 }

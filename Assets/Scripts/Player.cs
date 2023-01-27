@@ -4,33 +4,72 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    [SerializeField] Camera _camera;
+    [SerializeField] int _maxHp;
     [SerializeField] float _moveSpeed;
 
     Animator _animator;
+    Vector3 _move;
+
+    int _curHp;
 
     void Start()
     {
         _animator= GetComponent<Animator>();
+        _curHp = _maxHp;
+    }
+
+    public void Init()
+    {
+
     }
 
     void Update()
     {
         Move();
+        Turn();
     }
 
     public void Move()
     {
+        // x = 키보드 A,D  z = 키보드 W,S
         float x = Input.GetAxis("Horizontal");
         float z = Input.GetAxis("Vertical");
-        Vector3 move = new Vector3(x, 0, z);
-        if(move.magnitude > 0f)
+        _move = new Vector3(x, 0, z);
+        if(_move.magnitude > 0f)
         {
-            transform.Translate(move.normalized * Time.deltaTime * _moveSpeed);
-            _animator.SetBool("isMove", true);
+            transform.Translate(_move.normalized * Time.deltaTime * _moveSpeed, Space.World);
+            _animator.SetBool("isWalk", true);
         }
         else
         {
-            _animator.SetBool("isMove", false);
+            _animator.SetBool("isWalk", false);
+        }
+    }
+
+    public void Turn()
+    {
+        //마우스 위치를 바라보게 회전
+        Ray ray = _camera.ScreenPointToRay(Input.mousePosition);
+        RaycastHit rayHit;
+        if (Physics.Raycast(ray, out rayHit, 100))
+        {
+            Vector3 lookDirection = rayHit.point - transform.position;
+            lookDirection.y = 0;
+            transform.LookAt(transform.position + lookDirection);
+        }
+    }
+
+    public void TakeDamage(int damage)
+    {
+        _curHp -= damage;
+        if(_curHp <= 0) 
+        {
+            gameObject.SetActive(false);
+        }
+        else
+        {
+
         }
     }
 }
