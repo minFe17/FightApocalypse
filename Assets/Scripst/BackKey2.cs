@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class BackKey2 : MonoBehaviour
 {
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -16,7 +17,7 @@ public class BackKey2 : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            SceneManager.LoadScene("Option");
+            gameObject.SetActive(false);
         }
     }
 }

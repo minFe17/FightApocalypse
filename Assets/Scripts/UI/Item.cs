@@ -14,8 +14,6 @@ public class Item
     public Sprite itemImage;
     public bool Use()
     {
-        bool isUsed = false;
-        isUsed= true;
         return false;
     }
 }
