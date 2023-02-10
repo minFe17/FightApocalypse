@@ -24,7 +24,7 @@ public class Bullet : MonoBehaviour
             Remove();
         else if(collision.gameObject.tag == "Enemy")
         {
-            collision.gameObject.GetComponent<Enemy>().TakeDamage(_damage);
+           // collision.gameObject.GetComponent<Enemy>().TakeDamage(_damage);
             Remove();
         }
     }
