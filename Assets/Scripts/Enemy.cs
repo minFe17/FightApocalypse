@@ -33,11 +33,6 @@ public class Enemy : MonoBehaviour
         transform.LookAt(transform.position + move);
     }
 
-    public void TakeDamage(int damage)
-    {
-
-    }
-
     //Collider 한개 더 만들거나 Raycsat
     //_player.GetComponent<Player>().TakeDamage(_damage);
 }

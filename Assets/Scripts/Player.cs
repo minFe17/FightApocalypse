@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -8,8 +7,6 @@ public class Player : MonoBehaviour
     [SerializeField] Camera _camera;
     [SerializeField] int _maxHp;
     [SerializeField] float _moveSpeed;
-    [SerializeField] GameObject _bullet;
-    [SerializeField] Transform _bulletPos;
 
     Animator _animator;
     Vector3 _move;
@@ -31,7 +28,6 @@ public class Player : MonoBehaviour
     {
         Move();
         Turn();
-        Fire();
     }
 
     public void Move()
@@ -61,16 +57,6 @@ public class Player : MonoBehaviour
             Vector3 lookDirection = rayHit.point - transform.position;
             lookDirection.y = 0;
             transform.LookAt(transform.position + lookDirection);
-        }
-    }
-
-    public void Fire()
-    {
-        if(Input.GetButtonDown("Fire"))
-        {
-            GameObject bullet = Instantiate(_bullet);
-            bullet.transform.position = _bulletPos.position;
-            bullet.transform.rotation = _bulletPos.rotation;
         }
     }
 
