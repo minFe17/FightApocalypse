@@ -9,7 +9,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{DBA5E730-1B9D-EDA9-5B19-019FFCEC36AB}</ProjectGuid>
+    <ProjectGuid>{FE796306-61D9-14B3-00FA-84B839C28AEB}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp</AssemblyName>
@@ -77,6 +77,7 @@
     <Compile Include="Assets\Scripts\UI\Slot.cs" />
     <Compile Include="Assets\Scripts\UI\CsvController.cs" />
     <Compile Include="Assets\Scripts\UI\Item.cs" />
+    <Compile Include="Assets\Scripts\UI\Store.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
