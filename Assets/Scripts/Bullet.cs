@@ -1,4 +1,3 @@
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class Bullet : MonoBehaviour
@@ -20,11 +19,11 @@ public class Bullet : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject.tag == "Map")
+        if (collision.gameObject.tag == "Map")
             Remove();
-        else if(collision.gameObject.tag == "Enemy")
+        else if (collision.gameObject.tag == "Enemy")
         {
-           // collision.gameObject.GetComponent<Enemy>().TakeDamage(_damage);
+            collision.gameObject.GetComponent<Enemy>().TakeDamage(_damage);
             Remove();
         }
     }
