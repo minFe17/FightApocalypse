@@ -66,6 +66,7 @@
     <Compile Include="Assets\Scripst\MouseOption.cs" />
     <Compile Include="Assets\Scripst\BackKey2.cs" />
     <Compile Include="Assets\Scripst\Sound.cs" />
+    <Compile Include="Assets\Scripts\Bullet.cs" />
     <Compile Include="Assets\Low Poly Guns\Scripts\GunView.cs" />
     <Compile Include="Assets\Scripst\Lobby.cs" />
     <Compile Include="Assets\Scripts\UI\Inventory.cs" />
@@ -76,7 +77,6 @@
     <Compile Include="Assets\Scripts\UI\Slot.cs" />
     <Compile Include="Assets\Scripts\UI\CsvController.cs" />
     <Compile Include="Assets\Scripts\UI\Item.cs" />
-    <Compile Include="Assets\Scripts\Bullet.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

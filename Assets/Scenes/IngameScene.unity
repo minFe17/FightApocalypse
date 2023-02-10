@@ -854,7 +854,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _target: {fileID: 2095327086}
   _player: {fileID: 2095327083}
-  _maxHp: 5
   _damage: 1
   _speed: 3
 --- !u!54 &1800056851
@@ -922,7 +921,7 @@ MonoBehaviour:
   _maxHp: 5
   _moveSpeed: 5
   _bullet: {fileID: 3893837838203082165, guid: 71b782b113643494ba7969a7d3ec6a9c, type: 3}
-  _bolletPos: {fileID: 437134318}
+  _bulletPos: {fileID: 437134318}
 --- !u!54 &2095327084
 Rigidbody:
   m_ObjectHideFlags: 0
