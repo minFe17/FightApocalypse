@@ -8,6 +8,7 @@ TagManager:
   - Enemy
   - Map
   - Store
+  - Shop
   layers:
   - Default
   - TransparentFX
