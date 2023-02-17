@@ -90,7 +90,6 @@ public class Player : MonoBehaviour
 
     public void ReturnMoveSpeed()
     {
-        Debug.Log(1);
         _isDodge = false;
         _curMoveSpeed = _moveSpeed;
     }
