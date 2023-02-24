@@ -26,7 +26,6 @@ public class Raptor : Enemy
             _isDie = true;
             _enemyController.enemyList.Remove(this.gameObject);
             _player.GetMoney(_money);
-
         }
         else
         {

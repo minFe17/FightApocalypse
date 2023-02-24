@@ -20,6 +20,7 @@ public class Enemy : MonoBehaviour
     protected bool _isAttack;
     protected bool _isHitted;
     protected bool _isDie;
+    protected bool _isMiss;
 
     public void Init(EnemyController enemyController, Transform target, Player player)
     {
@@ -33,7 +34,7 @@ public class Enemy : MonoBehaviour
 
     public void LookTarget()
     {
-        if(!_isDie)
+        if (!_isDie)
         {
             _move = _target.position - transform.position;
             transform.LookAt(transform.position + _move);
@@ -74,7 +75,7 @@ public class Enemy : MonoBehaviour
         _isHitted = false;
     }
 
-    public virtual void Attack()
+    public void Attack()
     {
         if (!_isAttack)
             StartCoroutine(AttackRoutine());
@@ -86,16 +87,33 @@ public class Enemy : MonoBehaviour
         yield return new WaitForSeconds(_attackDelay / 2);
         _animator.SetBool("isAttack", true);
         yield return new WaitForSeconds(0.3f);
-        _player.TakeDamage(_damage);
-        yield return new WaitForSeconds(0.5f);
-        _animator.SetBool("isAttack", false);
-        yield return new WaitForSeconds(_attackDelay / 2);
+        if (!_isMiss)
+        {
+            _player.TakeDamage(_damage);
+            yield return new WaitForSeconds(0.5f);
+            _animator.SetBool("isAttack", false);
+            yield return new WaitForSeconds(_attackDelay / 2);
+        }
+        else
+        {
+            _animator.SetBool("isAttack", false);
+            yield return new WaitForSeconds(0.5f);
+            _isMiss = false;
+        }
+
         _isAttack = false;
+
     }
 
     private void OnTriggerStay(Collider other)
     {
         if (other.gameObject.tag == "Player")
             Attack();
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.tag == "Player")
+            _isMiss = true;
     }
 }
