@@ -15,6 +15,7 @@ public class Player : MonoBehaviour
     int _money;
     int _curHp;
     float _curMoveSpeed;
+    float _skipButtonDownTime;
 
     bool _isDodge;
     bool _isFire;
@@ -107,6 +108,27 @@ public class Player : MonoBehaviour
         {
 
         }
+    }
+
+    public bool SkipTime()
+    {
+        if (Input.GetKey(KeyCode.E))
+            _skipButtonDownTime += Time.deltaTime;
+        else
+            _skipButtonDownTime -= Time.deltaTime;
+
+        if (_skipButtonDownTime >= 3f)
+        {
+            _skipButtonDownTime = 0f;
+            return true;
+        }
+        else if (_skipButtonDownTime < 0f)
+        {
+            _skipButtonDownTime = 0f;
+            return false;
+        }
+        else
+            return false;
     }
 
     public void GetMoney(int money)
