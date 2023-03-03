@@ -1,7 +1,9 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
-public class Player2 : MonoBehaviour
+public class Playerdummy : MonoBehaviour
 {
     [SerializeField] Camera _camera2;
     [SerializeField] int _maxHp2;
@@ -9,8 +11,11 @@ public class Player2 : MonoBehaviour
     //[SerializeField] GameObject _bullet2;
     //[SerializeField] Transform _bulletPos2;
 
-    Animator _animator2;
+    //Animator _animator2;
     Vector3 _move2;
+
+    public GameObject[] weapons;
+    public bool[] hasWeapons;
 
     int _money2;
     int _curHp2;
@@ -18,10 +23,13 @@ public class Player2 : MonoBehaviour
 
     bool _isDodge2;
     bool _isFire2;
+    bool _iDown;
+
+    GameObject nearObject;
 
     void Start()
     {
-        _animator2 = GetComponent<Animator>();
+        //_animator2 = GetComponent<Animator>();
         _curHp2 = _maxHp2;
         _curMoveSpeed2 = _moveSpeed2;
         _money2 = 0;
@@ -38,6 +46,8 @@ public class Player2 : MonoBehaviour
         Turn2();
         //Fire2();
         Dodge2();
+        Interation();
+        GetInput();
     }
 
     public void Move2()
@@ -49,23 +59,23 @@ public class Player2 : MonoBehaviour
         if (_move2.magnitude > 0f)
         {
             transform.Translate(_move2.normalized * Time.deltaTime * _curMoveSpeed2, Space.World);
-            _animator2.SetBool("isWalk", true);
+            //_animator2.SetBool("isWalk", true);
         }
         else
         {
-            _animator2.SetBool("isWalk", false);
+            //_animator2.SetBool("isWalk", false);
         }
     }
 
     public void Turn2()
     {
-        //마우스 위치를 바라보게 회전
+      //마우스 위치를 바라보게 회전
         Ray ray = _camera2.ScreenPointToRay(Input.mousePosition);
         RaycastHit rayHit;
         if (Physics.Raycast(ray, out rayHit, 100))
         {
             Vector3 lookDirection = rayHit.point - transform.position;
-            lookDirection.y = 0;
+           lookDirection.y = 0;
             transform.LookAt(transform.position + lookDirection);
         }
     }
@@ -125,4 +135,45 @@ public class Player2 : MonoBehaviour
     //    yield return new WaitForSeconds(0.3f);
     //    _isFire2 = false;
     //}
+
+    
+    /// ////////////////////////////////////////////////////////////
+    
+    void GetInput()
+    {
+        //_iDown = Input.GetButtonDown("Walk");
+        _iDown = Input.GetButtonDown("Interation");
+    }
+    
+    void Interation()
+    {
+        Debug.Log("idown : "+_iDown+", nearObject"+(nearObject==null));
+        if(_iDown && nearObject != null )
+        {
+            if (nearObject.tag =="Shop")
+            {
+                Shop shop = nearObject.GetComponent <Shop>();
+                shop.Enter(this);
+
+                //Destroy(nearObject);
+            }
+        }
+    }
+    void OnTriggerStay(Collider other)
+    {
+        if (other.tag == "Weapon" || other.tag == "Shop")
+            nearObject = other.gameObject;
+    }
+
+   void OnTriggerExit(Collider other)
+   {
+        if (other.tag == "Weapon")
+            nearObject = null;
+        else if (other.tag == "Shop")
+        {
+            Shop shop = nearObject.GetComponent<Shop>();
+            shop.Exit();
+            nearObject = null;
+        }
+   }
 }

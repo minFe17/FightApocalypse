@@ -1,23 +1,34 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Shop : MonoBehaviour
 {
     public RectTransform uiGroup;
     public Animator anim;
 
-    Player enterPlayer;
-    public void Enter(Player player)
+    public GameObject[] itemObj;
+    public int[] itemPrice;
+    public Transform[] itemPos;
+    public Text talkText;
+
+    Playerdummy enterPlayer;
+    public void Enter(Playerdummy playerdummy)
     {
-        enterPlayer = player;
+        enterPlayer = playerdummy;
         uiGroup.anchoredPosition = Vector3.zero;
     }
 
     
-    void Exit()
+    public void Exit()
     {
-        anim.SetTrigger("doHello");
+        //anim.SetTrigger("doHello");
         uiGroup.anchoredPosition = Vector3.down * 1000;
+    }
+
+    public void Buy(int index)
+    {
+
     }
 }

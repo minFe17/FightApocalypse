@@ -9,7 +9,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{CF8D1591-D435-4ECA-23B8-9AB93972C3C2}</ProjectGuid>
+    <ProjectGuid>{FE796306-61D9-14B3-00FA-84B839C28AEB}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp</AssemblyName>
@@ -62,26 +62,30 @@
     <Compile Include="Assets\Scripts\UI\ItemEffect.cs" />
     <Compile Include="Assets\Low Poly Guns\Scripts\GunsMenu.cs" />
     <Compile Include="Assets\Scripts\Enemy\Enemy.cs" />
+    <Compile Include="Assets\Scripst\UIminiMap.cs" />
     <Compile Include="Assets\Scripts\Enemy\EnemyController.cs" />
     <Compile Include="Assets\Scripts\UI\Shop.cs" />
+    <Compile Include="Assets\PBRPachycephalasaurus\Scripts\Bonehead_BodyEffects.cs" />
     <Compile Include="Assets\DownloadAssets\Dummy\PBRVelociraptor\Scripts\BlendShapeTrigger.cs" />
+    <Compile Include="Assets\Scripst\MapCamera.cs" />
     <Compile Include="Assets\Scripts\Bullet.cs" />
     <Compile Include="Assets\DownloadAssets\Dummy\PBRVelociraptor\Scripts\RaptorSoundEffects.cs" />
     <Compile Include="Assets\Low Poly Guns\Scripts\GunView.cs" />
     <Compile Include="Assets\Scripst\Lobby.cs" />
     <Compile Include="Assets\Scripts\UI\Inventory.cs" />
     <Compile Include="Assets\Scripts\Enemy\Raptor.cs" />
+    <Compile Include="Assets\Scripts\WaveManager.cs" />
+    <Compile Include="Assets\PBRPachycephalasaurus\Scripts\BoneheadSoundEffects.cs" />
     <Compile Include="Assets\Scripts\UI\InventoryUI.cs" />
     <Compile Include="Assets\Scripts\Enemy\Zombie.cs" />
     <Compile Include="Assets\Scripts\Player.cs" />
+    <Compile Include="Assets\Scripts\Enemy\Pachy.cs" />
     <Compile Include="Assets\Scripts\MainCamera.cs" />
     <Compile Include="Assets\Scripst\BackKey.cs" />
     <Compile Include="Assets\Scripts\UI\Slot.cs" />
     <Compile Include="Assets\Scripts\UI\CsvController.cs" />
     <Compile Include="Assets\Scripts\UI\Item.cs" />
-    <Compile Include="Assets\Scripts\UI\Player2.cs" />
-    <Compile Include="Assets\Scripst\MapCamera.cs" />
-    <Compile Include="Assets\Scripst\UIminiMap.cs" />
+    <Compile Include="Assets\Scripts\UI\Playerdummy.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
