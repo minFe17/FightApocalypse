@@ -16,7 +16,8 @@ public class Playerdummy : MonoBehaviour
 
     public GameObject[] weapons;
     public bool[] hasWeapons;
-
+    public int coin;
+    public int maxCoin;
     int _money2;
     int _curHp2;
     float _curMoveSpeed2;
@@ -154,7 +155,6 @@ public class Playerdummy : MonoBehaviour
             {
                 Shop shop = nearObject.GetComponent <Shop>();
                 shop.Enter(this);
-
                 //Destroy(nearObject);
             }
         }

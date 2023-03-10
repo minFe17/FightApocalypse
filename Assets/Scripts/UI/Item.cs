@@ -6,13 +6,15 @@ using UnityEngine;
     {
         Equipment,
         Consumables,
-        Etc
+        Etc,
+        Coin,
     }
 
 [System.Serializable]
     public class Item 
     {
         public ItemType itemType;
+        public int value;
         public string itemName;
         public Sprite itemImage;
         public bool Use()
