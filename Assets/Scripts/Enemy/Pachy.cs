@@ -39,7 +39,7 @@ public class Pachy : Enemy
 
     public void Rush()
     {
-        if(_isRush && !_isHitted && !_isDie)
+        if (_isRush && !_isHitted && !_isDie)
         {
             _animator.SetBool("isReady", false);
             _animator.SetBool("isAttack", true);

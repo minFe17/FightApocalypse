@@ -29,8 +29,8 @@ public class WaveManager : MonoBehaviour
     {
         if (_isClear)
         {
-            if (_player.SkipTime())
-                _time = 3f;
+            if (_player.SkipTime() && _time > 3f)
+                _time = 5f;
             if (_time > 0)
                 _time -= Time.deltaTime;
             else

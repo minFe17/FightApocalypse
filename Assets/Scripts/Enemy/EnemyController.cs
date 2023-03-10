@@ -9,8 +9,6 @@ public class EnemyController : MonoBehaviour
     [SerializeField] GameObject _enemySpawnPos2;
     [SerializeField] WaveManager _waveManager;
     [SerializeField] WaveEnemyData _waveEnemyData;
-    [SerializeField] int _minEnemy; //나중에 지울거
-    [SerializeField] int _maxEnemy; //나중에 지울거
 
     public List<GameObject> enemyList = new List<GameObject>();
     List<GameObject> enemys = new List<GameObject>();

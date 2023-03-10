@@ -1,4 +1,6 @@
+using System;
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -8,6 +10,7 @@ public class Player : MonoBehaviour
     [SerializeField] float _moveSpeed;
     [SerializeField] GameObject _bullet;
     [SerializeField] Transform _bulletPos;
+    [SerializeField] EnemyController _enemyController;
 
     Animator _animator;
     Vector3 _move;
@@ -102,12 +105,18 @@ public class Player : MonoBehaviour
         _curHp -= damage;
         if (_curHp <= 0)
         {
-            gameObject.SetActive(false);
+            Die();
         }
         else
         {
 
         }
+    }
+
+    void Die()
+    {
+        gameObject.SetActive(false);
+        //  게임오버 UI나 씬으로 이동
     }
 
     public bool SkipTime()
@@ -117,7 +126,7 @@ public class Player : MonoBehaviour
         else
             _skipButtonDownTime -= Time.deltaTime;
 
-        if (_skipButtonDownTime >= 3f)
+        if (_skipButtonDownTime >= 2f)
         {
             _skipButtonDownTime = 0f;
             return true;
