@@ -1,10 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
-public class BackKey : MonoBehaviour
- 
+public class Playtest : MonoBehaviour
 {
     // Start is called before the first frame update
     void Start()
@@ -15,12 +13,6 @@ public class BackKey : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-     
-        if(Input.GetKeyDown(KeyCode.Escape))
-        {
-            SceneManager.LoadScene("Lobby");
-        }
-       
-
+        if (UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject()) return;
     }
 }
