@@ -16,8 +16,19 @@ public class Playerdummy : MonoBehaviour
 
     public GameObject[] weapons;
     public bool[] hasWeapons;
-    public int coin;
-    public int maxCoin;
+
+    public int _ammo;
+    public int _coin;
+    public int _potion;
+    public int _speedPotion;
+    public int _grenade;
+
+    public int _maxAmmo;
+    public int _maxCoin;
+    public int _maxPotion;
+    public int _maxSpeedPotion;
+    public int _maxGrenade;
+
     int _money2;
     int _curHp2;
     float _curMoveSpeed2;
@@ -148,7 +159,7 @@ public class Playerdummy : MonoBehaviour
     
     void Interation()
     {
-        Debug.Log("idown : "+_iDown+", nearObject"+(nearObject==null));
+        //Debug.Log("idown : "+_iDown+", nearObject"+(nearObject==null));
         if(_iDown && nearObject != null )
         {
             if (nearObject.tag =="Shop")
@@ -157,6 +168,45 @@ public class Playerdummy : MonoBehaviour
                 shop.Enter(this);
                 //Destroy(nearObject);
             }
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.tag == "Item")
+        {
+            Item item = other.GetComponent<Item>();
+            Inventory.instance.AddItem(item);
+            switch(item.itemType)
+            {
+                case ItemType.Ammo:
+                    _ammo += item.value;
+                    if (_ammo > _maxAmmo)
+                        _ammo = _maxAmmo;
+                    break;
+                case ItemType.Coin:
+                    _coin += item.value;
+                    if (_coin > _maxCoin)
+                        _coin = _maxCoin;
+                    break;
+                case ItemType.Potion:
+                    _potion += item.value;
+                    if (_potion > _maxPotion)
+                        _potion = _maxPotion;
+                    break;
+                case ItemType.SpeedPotion:
+                    _speedPotion += item.value;
+                    if(_speedPotion> _maxSpeedPotion)
+                        _speedPotion= _maxSpeedPotion;
+                    break;
+
+                case ItemType.Grenade:
+                    _grenade += item.value;
+                    if (_grenade > _maxGrenade)
+                        _grenade = _maxGrenade;
+                    break;
+            }
+            Destroy(other.gameObject);
         }
     }
     void OnTriggerStay(Collider other)

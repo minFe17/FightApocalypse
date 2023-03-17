@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Inventory : MonoBehaviour
 {
-    #region Songleton
+    #region Singleton
     public static Inventory instance;
     private void Awake()
     {
@@ -61,7 +61,10 @@ public class Inventory : MonoBehaviour
             if (AddItem(fieldItems.GetItem()))
                 fieldItems.DestroyItem();
         }
+        
     }
+
+    
     void Update()
     {
         

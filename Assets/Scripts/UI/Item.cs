@@ -6,12 +6,16 @@ using UnityEngine;
     {
         Equipment,
         Consumables,
-        Etc,
+        Ammo,
         Coin,
+        Grenade,
+        Potion,
+        SpeedPotion,
+        Etc,
     }
 
 [System.Serializable]
-    public class Item 
+    public class Item : MonoBehaviour
     {
         public ItemType itemType;
         public int value;
@@ -21,6 +25,8 @@ using UnityEngine;
         {
             return false;
         }
+
+       
     }
 
 

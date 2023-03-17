@@ -9,6 +9,7 @@ TagManager:
   - Map
   - Store
   - Shop
+  - Item
   layers:
   - Default
   - TransparentFX
