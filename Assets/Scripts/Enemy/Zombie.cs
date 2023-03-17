@@ -13,9 +13,4 @@ public class Zombie : Enemy
         LookTarget();
         Move();
     }
-
-    public void HideEnemy() //좀비 애니메이션 끝나면 실행
-    {
-        gameObject.SetActive(false);
-    }
 }

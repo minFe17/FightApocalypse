@@ -35,7 +35,8 @@ public class WaveEnemyData : MonoBehaviour
                     temp.ZOMBIE = int.Parse(values[2]);
                     temp.RAPTOR = int.Parse(values[3]);
                     temp.PACHY = int.Parse(values[4]);
-                    temp.TOTALENEMY = int.Parse(values[5]);
+                    temp.BOSS = int.Parse(values[5]);
+                    temp.TOTALENEMY = int.Parse(values[6]);
 
                     lstEnemyData.Add(temp);
                 }
@@ -51,5 +52,6 @@ public struct stEnemyData
     public int ZOMBIE;
     public int RAPTOR;
     public int PACHY;
+    public int BOSS;
     public int TOTALENEMY;
 }

@@ -22,7 +22,7 @@ public class Enemy : MonoBehaviour
     protected bool _isDie;
     protected bool _isMiss;
 
-    public void Init(EnemyController enemyController, Transform target, Player player)
+    public virtual void Init(EnemyController enemyController, Transform target, Player player)
     {
         _enemyController = enemyController;
         _target = target;
@@ -70,12 +70,17 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    public void MoveAgain()
+    public void MoveAgain() //죽지 않으면 애니메이션 끝나고 실행
     {
         _isHitted = false;
     }
 
-    public void Attack()
+    public void EndDie()        //죽으면 애니메이션 끝나고 실행
+    {
+        gameObject.SetActive(false);
+    }
+
+    public virtual void Attack()
     {
         if (!_isAttack)
             StartCoroutine(AttackRoutine());

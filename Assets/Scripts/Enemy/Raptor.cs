@@ -31,7 +31,6 @@ public class Raptor : Enemy
         {
             _isHitted = true;
             _animator.SetTrigger("doHit");
-            Invoke("MoveAgain", 0.3f);
         }
     }
 }

@@ -10,7 +10,6 @@ public class Player : MonoBehaviour
     [SerializeField] float _moveSpeed;
     [SerializeField] GameObject _bullet;
     [SerializeField] Transform _bulletPos;
-    [SerializeField] EnemyController _enemyController;
 
     Animator _animator;
     Vector3 _move;
@@ -22,6 +21,7 @@ public class Player : MonoBehaviour
 
     bool _isDodge;
     bool _isFire;
+    bool _isDie;
 
     void Start()
     {
@@ -100,7 +100,7 @@ public class Player : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
-        if (_isDodge)
+        if (_isDodge || _isDie)
             return;
         _curHp -= damage;
         if (_curHp <= 0)
@@ -115,8 +115,13 @@ public class Player : MonoBehaviour
 
     void Die()
     {
-        gameObject.SetActive(false);
-        //  게임오버 UI나 씬으로 이동
+        _isDie = true;
+        _animator.SetTrigger("doDie");
+    }
+
+    void DieEnd()
+    {
+        Time.timeScale = 0;
     }
 
     public bool SkipTime()
@@ -126,7 +131,7 @@ public class Player : MonoBehaviour
         else
             _skipButtonDownTime -= Time.deltaTime;
 
-        if (_skipButtonDownTime >= 2f)
+        if (_skipButtonDownTime >= 1f)
         {
             _skipButtonDownTime = 0f;
             return true;

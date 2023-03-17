@@ -11,6 +11,7 @@ public class EnemyController : MonoBehaviour
     [SerializeField] WaveEnemyData _waveEnemyData;
 
     public List<GameObject> enemyList = new List<GameObject>();
+
     List<GameObject> enemys = new List<GameObject>();
 
     EEnemyType enemyType;
@@ -19,12 +20,14 @@ public class EnemyController : MonoBehaviour
     int zombieCount;
     int raptorCount;
     int pachyCount;
+    int bossCount;
 
     void Start()
     {
         enemys.Add(Resources.Load("Prefabs/Zombie") as GameObject);
         enemys.Add(Resources.Load("Prefabs/Raptor") as GameObject);
         enemys.Add(Resources.Load("Prefabs/Pachy") as GameObject);
+        enemys.Add(Resources.Load("Prefabs/Boss") as GameObject);
     }
 
     public void SpawnEnemy()
@@ -37,6 +40,7 @@ public class EnemyController : MonoBehaviour
                 zombieCount = data.ZOMBIE;
                 raptorCount = data.RAPTOR;
                 pachyCount = data.PACHY;
+                bossCount = data.BOSS;
             }
         }
 
@@ -47,9 +51,7 @@ public class EnemyController : MonoBehaviour
             GameObject enemy = Instantiate(enemys[(int)enemyType], spawnPos, Quaternion.identity);
             enemy.GetComponent<Enemy>().Init(this, _target, _player);
         }
-
     }
-
 
     Vector3 GetRandomSpawnPosition()
     {
@@ -95,6 +97,11 @@ public class EnemyController : MonoBehaviour
             pachyCount--;
             enemyType = EEnemyType.Pachy;
         }
+        else if(bossCount != 0)
+        {
+            bossCount--;
+            enemyType = EEnemyType.Boss;
+        }
     }
 }
 
@@ -102,5 +109,6 @@ public enum EEnemyType
 {
     Zombie,
     Raptor,
-    Pachy
+    Pachy,
+    Boss,
 }
