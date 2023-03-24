@@ -10,7 +10,7 @@ public class UIminiMap : MonoBehaviour
     [SerializeField] private float zoomMin = 1;
     [SerializeField] private float zoomMax = 30;
     [SerializeField] private float zoomOneStep = 1;
-    [SerializeField] private TMP_Text textMapname;
+    [SerializeField] private TextMeshProUGUI textMapname;
     // Start is called before the first frame update
     private void Awake()
     {
@@ -29,7 +29,7 @@ public class UIminiMap : MonoBehaviour
 
     void Start()
     {
-        
+        minimapCamrea.orthographicSize = 10;
     }
 
     // Update is called once per frame

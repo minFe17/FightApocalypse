@@ -27,12 +27,13 @@ public class BackKey : MonoBehaviour
         }
         else if (_Sound.activeSelf)
         {
-            if (Input.GetKeyDown(KeyCode.Escape))_Sound.SetActive(false);
+            if (Input.GetKeyDown(KeyCode.Escape)) _Sound.SetActive(false);
         }
         else if (_Key.activeSelf)
         {
             if (Input.GetKeyDown(KeyCode.Escape)) _Key.SetActive(false);
         }
+
         else if (_Option.activeSelf)// 켜져있으면 true, 꺼져있으면 false
         {
             
