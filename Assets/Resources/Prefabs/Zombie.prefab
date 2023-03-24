@@ -2224,8 +2224,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff3f7361568c8394d9af1ee31253d4a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxHp: 5
-  _damage: 1
+  _maxHp: 15
+  _damage: 3
   _speed: 3
   _attackDelay: 1
   _money: 20

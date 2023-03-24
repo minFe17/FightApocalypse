@@ -9,12 +9,14 @@ public class Boss : Enemy
     void Start()
     {
         _animator = GetComponent<Animator>();
+        _rigidbody = GetComponent<Rigidbody>();
     }
 
     void Update()
     {
         LookTarget();
         Move();
+        FreezePos();
     }
 
     public override void Init(EnemyController enemyController, Transform target, Player player)
@@ -61,7 +63,7 @@ public class Boss : Enemy
     {
         if (_isDie)
             return;
-        _curHp -= _damage;
+        _curHp -= damage;
 
         if (_curHp <= 0)
         {

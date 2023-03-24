@@ -44,13 +44,16 @@ public class WaveManager : MonoBehaviour
         _enemyController.SpawnEnemy();
         while (true)
         {
-            yield return new WaitForSeconds(0.3f);
             if (_enemyController.enemyList.Count == 0)
             {
                 _isClear = true;
                 _time = _nextWaveTime;
                 _wave++;
                 break;
+            }
+            else
+            {
+                yield return new WaitForSeconds(0.3f);
             }
         }
     }

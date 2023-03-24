@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class Enemy : MonoBehaviour
 {
@@ -13,6 +14,7 @@ public class Enemy : MonoBehaviour
     protected EnemyController _enemyController;
     protected Transform _target;
     protected Animator _animator;
+    protected Rigidbody _rigidbody;
 
     protected Vector3 _move;
 
@@ -54,7 +56,7 @@ public class Enemy : MonoBehaviour
     {
         if (_isDie)
             return;
-        _curHp -= _damage;
+        _curHp -= damage;
 
         if (_curHp <= 0)
         {
@@ -77,13 +79,18 @@ public class Enemy : MonoBehaviour
 
     public void EndDie()        //죽으면 애니메이션 끝나고 실행
     {
-        gameObject.SetActive(false);
+        Destroy(this.gameObject);
     }
 
     public virtual void Attack()
     {
         if (!_isAttack)
             StartCoroutine(AttackRoutine());
+    }
+
+    public void FreezePos()
+    {
+        _rigidbody.velocity = Vector3.zero;
     }
 
     protected virtual IEnumerator AttackRoutine()

@@ -1,6 +1,4 @@
-using System;
 using System.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -8,10 +6,11 @@ public class Player : MonoBehaviour
     [SerializeField] Camera _camera;
     [SerializeField] int _maxHp;
     [SerializeField] float _moveSpeed;
-    [SerializeField] GameObject _bullet;
     [SerializeField] Transform _bulletPos;
 
     Animator _animator;
+    Rigidbody _rigidbody;
+    GameObject _bullet;
     Vector3 _move;
 
     int _money;
@@ -26,6 +25,8 @@ public class Player : MonoBehaviour
     void Start()
     {
         _animator = GetComponent<Animator>();
+        _rigidbody = GetComponent<Rigidbody>();
+        _bullet = Resources.Load("Prefabs/Bullet") as GameObject;
         _curHp = _maxHp;
         _curMoveSpeed = _moveSpeed;
         _money = 0;
@@ -42,6 +43,7 @@ public class Player : MonoBehaviour
         Turn();
         Fire();
         Dodge();
+        FreezePos();
     }
 
     public void Move()
@@ -50,14 +52,34 @@ public class Player : MonoBehaviour
         float x = Input.GetAxis("Horizontal");
         float z = Input.GetAxis("Vertical");
         _move = new Vector3(x, 0, z);
+        MoveAnimatoin(x, z);
+
         if (_move.magnitude > 0f)
-        {
             transform.Translate(_move.normalized * Time.deltaTime * _curMoveSpeed, Space.World);
-            _animator.SetBool("isWalk", true);
-        }
-        else
+    }
+
+    public void MoveAnimatoin(float x, float z)
+    {
+        float y = transform.rotation.eulerAngles.y;
+        if (y < 45 || y > 315)          // 위를 보고있을 때
         {
-            _animator.SetBool("isWalk", false);
+            _animator.SetFloat("AxisX", x);
+            _animator.SetFloat("AxisZ", z);
+        }
+        else if (y > 45 && y < 135)     //오른쪽을 보고있을 때
+        {
+            _animator.SetFloat("AxisX", -z);
+            _animator.SetFloat("AxisZ", x);
+        }
+        else if (y > 135 && y < 225)    //아래쪽을 보고있을 때
+        {
+            _animator.SetFloat("AxisX", -x);
+            _animator.SetFloat("AxisZ", -z);
+        }
+        else                            //왼쪽을 보고있을 때
+        {
+            _animator.SetFloat("AxisX", z);
+            _animator.SetFloat("AxisZ", -x);
         }
     }
 
@@ -107,10 +129,6 @@ public class Player : MonoBehaviour
         {
             Die();
         }
-        else
-        {
-
-        }
     }
 
     void Die()
@@ -148,6 +166,11 @@ public class Player : MonoBehaviour
     public void GetMoney(int money)
     {
         _money += money;
+    }
+
+    public void FreezePos()
+    {
+        _rigidbody.velocity = Vector3.zero;
     }
 
     IEnumerator FireRoutine()

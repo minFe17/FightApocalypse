@@ -8,11 +8,6 @@ public class MainCamera : MonoBehaviour
     [SerializeField] float _offestY;
     [SerializeField] float _offsetZ;
 
-    void Start()
-    {
-        
-    }
-
     void Update()
     {
         //카메라 이동

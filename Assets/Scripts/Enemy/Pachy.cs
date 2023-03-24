@@ -7,6 +7,7 @@ public class Pachy : Enemy
     void Start()
     {
         _animator = GetComponent<Animator>();
+        _rigidbody = GetComponent<Rigidbody>();
     }
 
     void Update()
@@ -14,13 +15,14 @@ public class Pachy : Enemy
         LookTarget();
         Move();
         Rush();
+        FreezePos();
     }
 
     public override void TakeDamage(int damage)
     {
         if (_isDie)
             return;
-        _curHp -= _damage;
+        _curHp -= damage;
 
         if (_curHp <= 0)
         {
