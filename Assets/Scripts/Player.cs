@@ -42,9 +42,13 @@ public class Player : MonoBehaviour
 
     }
 
-    void Update()
+    void FixedUpdate()
     {
         Move();
+    }
+
+    void Update()
+    {
         Turn();
         Fire();
         Dodge();
