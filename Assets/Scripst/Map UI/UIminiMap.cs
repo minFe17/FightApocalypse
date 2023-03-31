@@ -29,7 +29,7 @@ public class UIminiMap : MonoBehaviour
 
     void Start()
     {
-        
+        minimapCamrea.orthographicSize = 10;
     }
 
     // Update is called once per frame

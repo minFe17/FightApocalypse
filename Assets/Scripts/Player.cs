@@ -11,9 +11,14 @@ public class Player : MonoBehaviour
     Animator _animator;
     Rigidbody _rigidbody;
     GameObject _bullet;
+    GameObject nearObject;
     Vector3 _move;
 
-    int _money;
+    int _potion;
+    int _speedPotion;
+    int _maxPotion;
+    int _maxSpeedPotion;
+    public int _money;
     int _curHp;
     float _curMoveSpeed;
     float _skipButtonDownTime;
@@ -21,7 +26,7 @@ public class Player : MonoBehaviour
     bool _isDodge;
     bool _isFire;
     bool _isDie;
-
+    bool _iDown;
     void Start()
     {
         _animator = GetComponent<Animator>();
@@ -44,6 +49,8 @@ public class Player : MonoBehaviour
         Fire();
         Dodge();
         FreezePos();
+        Interation();
+        GetInput();
     }
 
     public void Move()
@@ -130,6 +137,81 @@ public class Player : MonoBehaviour
             Die();
         }
     }
+    /// 추가 부분
+    void GetInput()
+    {
+        _iDown = Input.GetButtonDown("Interation");
+    }
+
+    void Interation()
+    {      
+        if (_iDown && nearObject != null)
+        {
+            if (nearObject.tag == "Shop")
+            {
+                Shop shop = nearObject.GetComponent<Shop>();
+                shop.Enter(this);              
+            }
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Item")
+        {
+            Item item = other.GetComponent<Item>();
+            Inventory.instance.AddItem(item);
+            switch (item.itemType)
+            {
+                //case ItemType.Ammo:
+                //    _ammo += item.value;
+                //    if (_ammo > _maxAmmo)
+                //        _ammo = _maxAmmo;
+                //    break;
+                //case ItemType.Coin:
+                //    _coin += item.value;
+                //    if (_coin > _maxCoin)
+                //        _coin = _maxCoin;
+                //    break;
+                case ItemType.Potion:
+                    _potion += item.value;
+                    if (_potion > _maxPotion)
+                        _potion = _maxPotion;
+                    break;
+                case ItemType.SpeedPotion:
+                    _speedPotion += item.value;
+                    if (_speedPotion > _maxSpeedPotion)
+                        _speedPotion = _maxSpeedPotion;
+                    break;
+
+                //case ItemType.Grenade:
+                //    _grenade += item.value;
+                //    if (_grenade > _maxGrenade)
+                //        _grenade = _maxGrenade;
+                //    break;
+            }
+            Destroy(other.gameObject);
+        }
+    }
+
+    void OnTriggerStay(Collider other)
+    {
+        if (other.tag == "Weapon" || other.tag == "Shop")
+            nearObject = other.gameObject;
+    }
+
+    void OnTriggerExit(Collider other)
+    {
+        if (other.tag == "Weapon")
+            nearObject = null;
+        else if (other.tag == "Shop")
+        {
+            Shop shop = nearObject.GetComponent<Shop>();
+            shop.Exit();
+            nearObject = null;
+        }
+    }
+    /// 
 
     void Die()
     {

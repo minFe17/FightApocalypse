@@ -165,7 +165,7 @@ public class Playerdummy : MonoBehaviour
             if (nearObject.tag =="Shop")
             {
                 Shop shop = nearObject.GetComponent <Shop>();
-                shop.Enter(this);
+                //shop.Enter(this);
                 //Destroy(nearObject);
             }
         }

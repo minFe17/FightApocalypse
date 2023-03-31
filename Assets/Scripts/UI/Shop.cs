@@ -8,16 +8,17 @@ public class Shop : MonoBehaviour
     public RectTransform uiGroup;
     public Animator anim;
 
+    int player;
     public GameObject[] itemObj;
     public int[] itemPrice;
     public Transform[] itemPos;
     public string[] talkData;
     public Text talkText;
 
-    Playerdummy enterPlayer;
-    public void Enter(Playerdummy playerdummy)
+    Player enterPlayer;
+    public void Enter(Player player)
     {
-        enterPlayer = playerdummy;
+        enterPlayer = player;
         uiGroup.anchoredPosition = Vector3.zero;
     }
 
@@ -31,14 +32,14 @@ public class Shop : MonoBehaviour
     public void Buy(int index)
     {
         int price = itemPrice[index];
-        if(price > enterPlayer._coin)
+        if(price > enterPlayer._money)
         {
             StopCoroutine(Talk());
             StartCoroutine(Talk());
             return;
         }
 
-        enterPlayer._coin -= price;
+        enterPlayer._money -= price;
         Vector3 ranVec = Vector3.right * Random.Range(-3, 3) + Vector3.forward * Random.Range(-3, 3);
         Instantiate(itemObj[index], itemPos[index].position + ranVec, itemPos[index].rotation);
                         

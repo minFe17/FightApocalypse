@@ -9,6 +9,7 @@ public class InventoryUI : MonoBehaviour
     Inventory inven;
 
     public GameObject inventoryPanel;
+    public RectTransform uiGroup;
     bool activeInventory = false;
 
     public Slot[] slots;
@@ -88,6 +89,6 @@ public class InventoryUI : MonoBehaviour
     }
     public void DeActiveShop()
     {
-        ActiveShop(false);
+        uiGroup.anchoredPosition = Vector3.down * 1500;
     }
 }

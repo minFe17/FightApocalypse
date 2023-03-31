@@ -35,8 +35,11 @@ public class BackKey : MonoBehaviour
         }
         else
         {
-            if (Input.GetKeyDown(KeyCode.Escape)) _GmPanel.SetActive(true);
-            Time.timeScale = 0f;
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                _GmPanel.SetActive(true);
+                Time.timeScale = 0f;
+            }
         }
 
     }
