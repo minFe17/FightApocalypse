@@ -8,7 +8,7 @@ public class Lobby : MonoBehaviour
     public void GameStart()
     {
         Debug.Log("버튼입력");
-        SceneManager.LoadScene("Main");
+        SceneManager.LoadScene("IngameScene");
         
     }
 

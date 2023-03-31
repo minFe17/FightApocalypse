@@ -979,7 +979,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &252617606
 GameObject:
@@ -3419,7 +3419,6 @@ GameObject:
   - component: {fileID: 887947660}
   - component: {fileID: 887947659}
   - component: {fileID: 887947663}
-  - component: {fileID: 887947664}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -3532,23 +3531,7 @@ MonoBehaviour:
   _soundoption: {fileID: 1714463330}
   _keyoption: {fileID: 620831284}
   _mouseoption: {fileID: 1968363721}
---- !u!114 &887947664
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 887947658}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 718ff2791c4acd54a8f47a79c295bff6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _GMpanel: {fileID: 360937727}
-  _Option: {fileID: 1281673970}
-  _Sound: {fileID: 1714463330}
-  _Mouse: {fileID: 1968363721}
-  _Key: {fileID: 620831284}
+  _GmPanel: {fileID: 360937727}
 --- !u!1 &936791352
 GameObject:
   m_ObjectHideFlags: 0
@@ -4879,8 +4862,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0.0015869141}
-  m_SizeDelta: {x: -469, y: -245.79474}
+  m_AnchoredPosition: {x: 0, y: -0.00018310547}
+  m_SizeDelta: {x: -469, y: -221.08}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1281673972
 MonoBehaviour:
@@ -5499,7 +5482,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 89.446, y: -0.726, z: -0.58}
 --- !u!114 &1389124063
 MonoBehaviour:
@@ -5684,7 +5667,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1447044134
 GameObject:
@@ -6768,8 +6751,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 887947664}
-        m_TargetAssemblyTypeName: BackKey, Assembly-CSharp
+      - m_Target: {fileID: 887947663}
+        m_TargetAssemblyTypeName: Option, Assembly-CSharp
         m_MethodName: YesButton
         m_Mode: 1
         m_Arguments:
@@ -7880,8 +7863,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 887947664}
-        m_TargetAssemblyTypeName: BackKey, Assembly-CSharp
+      - m_Target: {fileID: 887947663}
+        m_TargetAssemblyTypeName: Option, Assembly-CSharp
         m_MethodName: NoButton
         m_Mode: 1
         m_Arguments:
@@ -8319,7 +8302,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!1 &1968363721
 GameObject:
@@ -8805,7 +8788,7 @@ Transform:
   - {fileID: 1520889490}
   - {fileID: 1137490385}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2023650585
 MonoBehaviour:

@@ -11,6 +11,7 @@ public class Option : MonoBehaviour
     [SerializeField] GameObject _soundoption;
     [SerializeField] GameObject _keyoption;
     [SerializeField] GameObject _mouseoption;
+    [SerializeField] GameObject _GmPanel;
 
     void Update()
     {
@@ -32,6 +33,11 @@ public class Option : MonoBehaviour
 
             if (Input.GetKeyDown(KeyCode.Escape)) _opton.SetActive(false);
 
+        }
+        else
+        {
+            if (Input.GetKeyDown(KeyCode.Escape)) _GmPanel.SetActive(true);    
+            Time.timeScale = 0f;
         }
 
     }
@@ -58,5 +64,15 @@ public class Option : MonoBehaviour
     {
         _mouseoption.SetActive(true);
         Debug.Log("번튼입력");
+    }
+
+    public void YesButton()
+    {
+        SceneManager.LoadScene("Lobby");
+    }
+    public void NoButton()
+    {
+        _GmPanel.SetActive(false);
+        Time.timeScale = 1;
     }
 }
