@@ -28,7 +28,7 @@ public class Pachy : Enemy
         {
             _animator.SetTrigger("doDie");
             _isDie = true;
-            _enemyController.enemyList.Remove(this.gameObject);
+            _enemyController.DieEnemy(this.gameObject);
             _player.GetMoney(_money);
         }
         else

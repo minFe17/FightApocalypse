@@ -19,10 +19,11 @@ public class Boss : Enemy
         FreezePos();
     }
 
-    public override void Init(EnemyController enemyController, Transform target, Player player)
+    public override void Init(EnemyController enemyController, Transform target, Player player, IngameUIPanel ingameUi)
     {
-        base.Init(enemyController, target, player);
+        base.Init(enemyController, target, player, ingameUi);
         _attackCollider.enabled = false;
+        _ingameUi.ShowBossHpBar(_curHp, _maxHp);
     }
 
     public override void Attack()
@@ -64,12 +65,14 @@ public class Boss : Enemy
         if (_isDie)
             return;
         _curHp -= damage;
+        _ingameUi.ShowBossHpBar(_curHp, _maxHp);
 
         if (_curHp <= 0)
         {
             _animator.SetTrigger("doDie");
             _isDie = true;
-            _enemyController.enemyList.Remove(this.gameObject);
+            _enemyController.DieEnemy(this.gameObject);
+            _ingameUi.HideBossHpBar();
             _player.GetMoney(_money);
         }
         else

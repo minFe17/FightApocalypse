@@ -15,6 +15,7 @@ public class Enemy : MonoBehaviour
     protected Transform _target;
     protected Animator _animator;
     protected Rigidbody _rigidbody;
+    protected IngameUIPanel _ingameUi;
 
     protected Vector3 _move;
 
@@ -24,14 +25,15 @@ public class Enemy : MonoBehaviour
     protected bool _isDie;
     protected bool _isMiss;
 
-    public virtual void Init(EnemyController enemyController, Transform target, Player player)
+    public virtual void Init(EnemyController enemyController, Transform target, Player player, IngameUIPanel ingameUI)
     {
         _enemyController = enemyController;
         _target = target;
         _player = player;
+        _ingameUi = ingameUI;
         _curHp = _maxHp;
 
-        _enemyController.enemyList.Add(this.gameObject);
+        _enemyController.EnemyList.Add(this.gameObject);
     }
 
     public void LookTarget()
@@ -62,7 +64,7 @@ public class Enemy : MonoBehaviour
         {
             _animator.SetTrigger("doDie");
             _isDie = true;
-            _enemyController.enemyList.Remove(this.gameObject);
+            _enemyController.DieEnemy(this.gameObject);
             _player.GetMoney(_money);
         }
         else

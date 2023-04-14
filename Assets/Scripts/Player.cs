@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using Utils;
 
 public class Player : MonoBehaviour
 {
@@ -7,6 +8,7 @@ public class Player : MonoBehaviour
     [SerializeField] int _maxHp;
     [SerializeField] float _moveSpeed;
     [SerializeField] Transform _bulletPos;
+    [SerializeField] IngameUIPanel _ingameUI;
 
     Animator _animator;
     Rigidbody _rigidbody;
@@ -27,6 +29,8 @@ public class Player : MonoBehaviour
     bool _isFire;
     bool _isDie;
     bool _iDown;
+    bool _openShop;
+
     void Start()
     {
         _animator = GetComponent<Animator>();
@@ -35,6 +39,9 @@ public class Player : MonoBehaviour
         _curHp = _maxHp;
         _curMoveSpeed = _moveSpeed;
         _money = 0;
+        _ingameUI.ShowPlayerHpBar(_curHp, _maxHp);
+        GenericSingleton<WaveManager>.Instance.Player = this;
+        GenericSingleton<WaveManager>.Instance.IngameUI = _ingameUI;
     }
 
     public void Init()
@@ -109,7 +116,7 @@ public class Player : MonoBehaviour
 
     public void Fire()
     {
-        if (Input.GetButton("Fire") && !_isFire)
+        if (Input.GetButton("Fire") && !_isFire && !_openShop)
         {
             StartCoroutine(FireRoutine());
         }
@@ -136,6 +143,8 @@ public class Player : MonoBehaviour
         if (_isDodge || _isDie)
             return;
         _curHp -= damage;
+        _ingameUI.ShowPlayerHpBar(_curHp, _maxHp);
+
         if (_curHp <= 0)
         {
             Die();
@@ -154,7 +163,8 @@ public class Player : MonoBehaviour
             if (nearObject.tag == "Shop")
             {
                 Shop shop = nearObject.GetComponent<Shop>();
-                shop.Enter(this);              
+                shop.Enter(this);
+                _openShop = true;
             }
         }
     }
@@ -212,6 +222,7 @@ public class Player : MonoBehaviour
         {
             Shop shop = nearObject.GetComponent<Shop>();
             shop.Exit();
+            _openShop = false;
             nearObject = null;
         }
     }
@@ -230,7 +241,7 @@ public class Player : MonoBehaviour
 
     public bool SkipTime()
     {
-        if (Input.GetKey(KeyCode.E))
+        if (Input.GetKey(KeyCode.F))
             _skipButtonDownTime += Time.deltaTime;
         else
             _skipButtonDownTime -= Time.deltaTime;
@@ -252,6 +263,7 @@ public class Player : MonoBehaviour
     public void GetMoney(int money)
     {
         _money += money;
+        _ingameUI.ShowMoney(_money);
     }
 
     public void FreezePos()

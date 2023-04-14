@@ -826,7 +826,7 @@ MonoBehaviour:
   _maxHp: 50
   _damage: 10
   _speed: 2
-  _attackDelay: 0
+  _attackDelay: 2
   _money: 100
   _attackCollider: {fileID: 3349493921437266195}
   _attackType: 0

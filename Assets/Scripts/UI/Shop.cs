@@ -40,6 +40,8 @@ public class Shop : MonoBehaviour
         }
 
         enterPlayer._money -= price;
+        //_ingameUI.ShowMoney(enterPlayer._money);  // _ingameUI ΩÃ±€≈Ê
+
         Vector3 ranVec = Vector3.right * Random.Range(-3, 3) + Vector3.forward * Random.Range(-3, 3);
         Instantiate(itemObj[index], itemPos[index].position + ranVec, itemPos[index].rotation);
                         

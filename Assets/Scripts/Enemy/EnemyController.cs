@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using Utils;
 
 public class EnemyController : MonoBehaviour
 {
@@ -7,12 +8,22 @@ public class EnemyController : MonoBehaviour
     [SerializeField] Player _player;
     [SerializeField] GameObject _enemySpawnPos1;
     [SerializeField] GameObject _enemySpawnPos2;
-    [SerializeField] WaveManager _waveManager;
-    [SerializeField] WaveEnemyData _waveEnemyData;
+    [SerializeField] IngameUIPanel _ingameUI;
 
-    public List<GameObject> enemyList = new List<GameObject>();
+    List<GameObject> _enemyList = new List<GameObject>();
+    public List<GameObject> EnemyList
+    {
+        get
+        {
+            return _enemyList;
+        }
+        set
+        {
+            _enemyList = value;
+        }
+    }
 
-    List<GameObject> enemys = new List<GameObject>();
+    List<GameObject> _enemys = new List<GameObject>();
 
     EEnemyType enemyType;
 
@@ -24,17 +35,18 @@ public class EnemyController : MonoBehaviour
 
     void Start()
     {
-        enemys.Add(Resources.Load("Prefabs/Zombie") as GameObject);
-        enemys.Add(Resources.Load("Prefabs/Raptor") as GameObject);
-        enemys.Add(Resources.Load("Prefabs/Pachy") as GameObject);
-        enemys.Add(Resources.Load("Prefabs/Boss") as GameObject);
+        for (int i = 0; i < (int)EEnemyType.Max; i++)
+        {
+            _enemys.Add(Resources.Load($"Prefabs/{(EEnemyType)i}") as GameObject);
+        }
+        GenericSingleton<WaveManager>.Instance.EnemyController = this;
     }
 
     public void SpawnEnemy()
     {
-        foreach (stEnemyData data in _waveEnemyData.lstEnemyData)
+        foreach (stEnemyData data in GenericSingleton<WaveEnemyData>.Instance.LstEnemyData)
         {
-            if (data.WAVE == _waveManager._wave)
+            if (data.WAVE == GenericSingleton<WaveManager>.Instance.Wave)
             {
                 enemyCount = data.TOTALENEMY;
                 zombieCount = data.ZOMBIE;
@@ -48,9 +60,10 @@ public class EnemyController : MonoBehaviour
         {
             Vector3 spawnPos = GetRandomSpawnPosition();
             SpawnEnemyType();
-            GameObject enemy = Instantiate(enemys[(int)enemyType], spawnPos, Quaternion.identity);
-            enemy.GetComponent<Enemy>().Init(this, _target, _player);
+            GameObject enemy = Instantiate(_enemys[(int)enemyType], spawnPos, Quaternion.identity);
+            enemy.GetComponent<Enemy>().Init(this, _target, _player, _ingameUI);
         }
+        _ingameUI.ShowEnemy(enemyCount);
     }
 
     Vector3 GetRandomSpawnPosition()
@@ -97,11 +110,17 @@ public class EnemyController : MonoBehaviour
             pachyCount--;
             enemyType = EEnemyType.Pachy;
         }
-        else if(bossCount != 0)
+        else if (bossCount != 0)
         {
             bossCount--;
             enemyType = EEnemyType.Boss;
         }
+    }
+
+    public void DieEnemy(GameObject enemy)
+    {
+        _enemyList.Remove(enemy);
+        _ingameUI.ShowEnemy(_enemyList.Count);
     }
 }
 

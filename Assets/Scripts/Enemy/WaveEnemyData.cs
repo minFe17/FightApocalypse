@@ -5,11 +5,16 @@ using UnityEngine;
 
 public class WaveEnemyData : MonoBehaviour
 {
-    public List<stEnemyData> lstEnemyData = new List<stEnemyData>();
-
-    void Start()
+    //ΩÃ±€≈Ê
+    List<stEnemyData> _lstEnemyData = new List<stEnemyData>();
+    public List<stEnemyData> LstEnemyData
     {
-        ReadEnemyData();
+        get
+        {
+            if(_lstEnemyData.Count == 0)
+                ReadEnemyData();
+            return _lstEnemyData;
+        }
     }
 
     void ReadEnemyData()
@@ -38,7 +43,7 @@ public class WaveEnemyData : MonoBehaviour
                     temp.BOSS = int.Parse(values[5]);
                     temp.TOTALENEMY = int.Parse(values[6]);
 
-                    lstEnemyData.Add(temp);
+                    _lstEnemyData.Add(temp);
                 }
             }
         }
