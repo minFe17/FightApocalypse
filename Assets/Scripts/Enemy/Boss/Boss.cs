@@ -19,7 +19,7 @@ public class Boss : Enemy
         FreezePos();
     }
 
-    public override void Init(EnemyController enemyController, Transform target, Player player, IngameUIPanel ingameUi)
+    public override void Init(EnemyController enemyController, Transform target, Player player, IngameUI ingameUi)
     {
         base.Init(enemyController, target, player, ingameUi);
         _attackCollider.enabled = false;

@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class Shop : MonoBehaviour
 {
     public RectTransform uiGroup;
+    public RectTransform UIGroup {  set {  uiGroup = value; } }
     public Animator anim;
 
     int player;
@@ -14,8 +15,10 @@ public class Shop : MonoBehaviour
     public Transform[] itemPos;
     public string[] talkData;
     public Text talkText;
+    public Text TalkText {  set { talkText = value; } }
 
     Player enterPlayer;
+
     public void Enter(Player player)
     {
         enterPlayer = player;

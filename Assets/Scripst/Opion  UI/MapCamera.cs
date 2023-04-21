@@ -13,7 +13,6 @@ public class MapCamera : MonoBehaviour
     void Update()
     {
       if(target == false) return;
-        Debug.Log("Ä«¸Þ¶ó");
         transform.position = new Vector3(
             (x ? target.position.x : transform.position.x),
             (y ? target.position.y : transform.position.y),

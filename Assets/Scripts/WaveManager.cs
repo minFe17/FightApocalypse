@@ -1,31 +1,40 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
+using Utils;
 
 public class WaveManager : MonoBehaviour
 {
+    // ΩÃ±€≈Ê
     Player _player;
-    public Player Player {  set { _player = value; } }
+    public Player Player { set { _player = value; } }
 
-    IngameUIPanel _ingameUI;    // IngameUIPanel ΩÃ±€≈Ê¿∏∑Œ
-    public IngameUIPanel IngameUI {  set { _ingameUI = value; } }
+    IngameUI _ingameUI;    // uiManager ΩÃ±€≈Ê ¿ÃøÎ
+    public IngameUI IngameUI { set { _ingameUI = value; } }
+
+    GameObject _shopUI;     // uiManager ΩÃ±€≈Ê ¿ÃøÎ
+    public GameObject ShopUI { set { _shopUI = value; } }
 
     EnemyController _enemyController;
     public EnemyController EnemyController { set { _enemyController = value; } }
 
     int _wave;
-    public int Wave {  get { return _wave; } }
+    public int Wave { get { return _wave; } }
 
-    float _time;
+    float _waveTime;
+    public float WaveTime { get { return _waveTime; } }
     float _nextWaveTime;
     bool _isClear;
 
     void Start()
     {
-        _wave = 1;
-        _nextWaveTime = 120f;
-        _time = _nextWaveTime;
+        _wave = 5;
+        _nextWaveTime = 10f;
+        _waveTime = _nextWaveTime;
         _isClear = true;
         _ingameUI.ShowWave(_wave);
+        _ingameUI.TimeSkipInfoKey.SetActive(true);
+        //GenericSingleton<ShopManager>.Instance.SpawnShop();
     }
 
     void Update()
@@ -37,15 +46,18 @@ public class WaveManager : MonoBehaviour
     {
         if (_isClear)
         {
-            if (_player.SkipTime() && _time > 3f)
+            if (_player.SkipTime() && _waveTime > 3f)
             {
-                _time = 3f;
-                _ingameUI.ShowNextWaveTime(_time);
+                _waveTime = 3f;
+                _ingameUI.ShowNextWaveTime(_waveTime);
+                _ingameUI.TimeSkipInfoKey.SetActive(false);
             }
-            if (_time > 0)
+            if (_waveTime > 0)
             {
-                _time -= Time.deltaTime;
-                _ingameUI.ShowNextWaveTime(_time);
+                if (_waveTime < 4f)
+                    _ingameUI.TimeSkipInfoKey.SetActive(false);
+                _waveTime -= Time.deltaTime;
+                _ingameUI.ShowNextWaveTime(_waveTime);
             }
             else
                 StartCoroutine(WaveRoutine());
@@ -56,14 +68,19 @@ public class WaveManager : MonoBehaviour
     {
         _isClear = false;
         _enemyController.SpawnEnemy();
+        GenericSingleton<ShopManager>.Instance.Shop.SetActive(false);
+        _shopUI.SetActive(false);   //uiManager ΩÃ±€≈Ê ¿ÃøÎ
+        _player.OpenShop = false;
         while (true)
         {
             if (_enemyController.EnemyList.Count == 0)
             {
                 _isClear = true;
-                _time = _nextWaveTime;
+                _waveTime = _nextWaveTime;
                 _wave++;
                 _ingameUI.ShowWave(_wave);
+                _ingameUI.TimeSkipInfoKey.SetActive(true);
+                GenericSingleton<ShopManager>.Instance.Shop.SetActive(true);
                 break;
             }
             else

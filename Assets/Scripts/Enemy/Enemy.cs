@@ -15,7 +15,7 @@ public class Enemy : MonoBehaviour
     protected Transform _target;
     protected Animator _animator;
     protected Rigidbody _rigidbody;
-    protected IngameUIPanel _ingameUi;
+    protected IngameUI _ingameUi;
 
     protected Vector3 _move;
 
@@ -25,7 +25,7 @@ public class Enemy : MonoBehaviour
     protected bool _isDie;
     protected bool _isMiss;
 
-    public virtual void Init(EnemyController enemyController, Transform target, Player player, IngameUIPanel ingameUI)
+    public virtual void Init(EnemyController enemyController, Transform target, Player player, IngameUI ingameUI)
     {
         _enemyController = enemyController;
         _target = target;

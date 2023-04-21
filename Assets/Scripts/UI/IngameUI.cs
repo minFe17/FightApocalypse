@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class IngameUIPanel : MonoBehaviour
+public class IngameUI : MonoBehaviour
 {
     [SerializeField] Text _waveText;
     [SerializeField] Text _waveInfoText;
@@ -9,6 +9,10 @@ public class IngameUIPanel : MonoBehaviour
     [SerializeField] Image _bossHpBar;
     [SerializeField] Image _playerHpBar;
     [SerializeField] Text _moneyText;
+    [SerializeField] GameObject _timeSkipInfoKey;
+    public GameObject TimeSkipInfoKey { get { return _timeSkipInfoKey; } }
+    [SerializeField] GameObject _openShopInfoKey;
+    public GameObject OpenShopInfoKey { get { return _openShopInfoKey; } }
 
     public void ShowWave(int wave)
     {
@@ -46,6 +50,6 @@ public class IngameUIPanel : MonoBehaviour
 
     public void ShowMoney(int money)
     {
-        _moneyText.text = $"{money}$";
+        _moneyText.text = $"$ {money}";
     }
 }

@@ -8,7 +8,8 @@ public class Player : MonoBehaviour
     [SerializeField] int _maxHp;
     [SerializeField] float _moveSpeed;
     [SerializeField] Transform _bulletPos;
-    [SerializeField] IngameUIPanel _ingameUI;
+    [SerializeField] IngameUI _ingameUI;
+    [SerializeField] GameObject _gameOverUI;
 
     Animator _animator;
     Rigidbody _rigidbody;
@@ -30,6 +31,7 @@ public class Player : MonoBehaviour
     bool _isDie;
     bool _iDown;
     bool _openShop;
+    public bool OpenShop { set { _openShop = value; } }
 
     void Start()
     {
@@ -39,9 +41,10 @@ public class Player : MonoBehaviour
         _curHp = _maxHp;
         _curMoveSpeed = _moveSpeed;
         _money = 0;
-        _ingameUI.ShowPlayerHpBar(_curHp, _maxHp);
         GenericSingleton<WaveManager>.Instance.Player = this;
         GenericSingleton<WaveManager>.Instance.IngameUI = _ingameUI;
+        _ingameUI.ShowPlayerHpBar(_curHp, _maxHp);
+        _ingameUI.ShowMoney(_money);
     }
 
     public void Init()
@@ -164,6 +167,8 @@ public class Player : MonoBehaviour
             {
                 Shop shop = nearObject.GetComponent<Shop>();
                 shop.Enter(this);
+                _ingameUI.OpenShopInfoKey.SetActive(false);
+                _ingameUI.TimeSkipInfoKey.SetActive(false);
                 _openShop = true;
             }
         }
@@ -206,6 +211,10 @@ public class Player : MonoBehaviour
             }
             Destroy(other.gameObject);
         }
+        if(other.tag == "Shop")
+        {
+            _ingameUI.OpenShopInfoKey.SetActive(true);
+        }
     }
 
     void OnTriggerStay(Collider other)
@@ -222,6 +231,9 @@ public class Player : MonoBehaviour
         {
             Shop shop = nearObject.GetComponent<Shop>();
             shop.Exit();
+            _ingameUI.OpenShopInfoKey.SetActive(false);
+            if (GenericSingleton<WaveManager>.Instance.WaveTime > 3f)
+                _ingameUI.TimeSkipInfoKey.SetActive(true);
             _openShop = false;
             nearObject = null;
         }
@@ -236,6 +248,8 @@ public class Player : MonoBehaviour
 
     void DieEnd()
     {
+        _gameOverUI.SetActive(true);
+        _gameOverUI.GetComponent<GameOverUI>().ShowGameOverWave(GenericSingleton<WaveManager>.Instance.Wave);
         Time.timeScale = 0;
     }
 

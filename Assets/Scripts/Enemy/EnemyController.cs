@@ -8,7 +8,7 @@ public class EnemyController : MonoBehaviour
     [SerializeField] Player _player;
     [SerializeField] GameObject _enemySpawnPos1;
     [SerializeField] GameObject _enemySpawnPos2;
-    [SerializeField] IngameUIPanel _ingameUI;
+    [SerializeField] IngameUI _ingameUI;
 
     List<GameObject> _enemyList = new List<GameObject>();
     public List<GameObject> EnemyList
