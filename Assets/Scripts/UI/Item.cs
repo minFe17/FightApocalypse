@@ -11,6 +11,7 @@ using UnityEngine;
         Grenade,
         Potion,
         SpeedPotion,
+        Weapon,
         Etc,
     }
 

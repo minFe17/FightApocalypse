@@ -16,7 +16,9 @@ public class Playerdummy : MonoBehaviour
 
     public GameObject[] weapons;
     public bool[] hasWeapons;
-
+    public GameObject[] grenades;
+    public int hasGrenades;
+    public GameObject grenadeObj;
     public int _ammo;
     public int _coin;
     public int _potion;
@@ -36,8 +38,10 @@ public class Playerdummy : MonoBehaviour
     bool _isDodge2;
     bool _isFire2;
     bool _iDown;
-
+    bool _openShop2;
+    bool _gDown;
     GameObject nearObject;
+    
 
     void Start()
     {
@@ -60,6 +64,8 @@ public class Playerdummy : MonoBehaviour
         Dodge2();
         Interation();
         GetInput();
+        Grenade();
+        Attack();
     }
 
     public void Move2()
@@ -151,10 +157,41 @@ public class Playerdummy : MonoBehaviour
     
     /// ////////////////////////////////////////////////////////////
     
+    void Attack()
+    {
+        if(_gDown)
+        {
+
+        }
+    }
+    void Grenade()
+    {
+        if (hasGrenades == 0)
+            return;
+        if(_gDown )
+        {
+            Ray ray = _camera2.ScreenPointToRay(Input.mousePosition);
+            RaycastHit rayHit;
+            if (Physics.Raycast(ray, out rayHit, 100))
+            {
+                Vector3 lookDirection = rayHit.point - transform.position;
+                lookDirection.y = 2;
+
+                GameObject instantGrenade = Instantiate(grenadeObj, transform.position, transform.rotation);
+                Rigidbody rigidGrenade = instantGrenade.GetComponent<Rigidbody>();
+                rigidGrenade.AddForce(lookDirection, ForceMode.Impulse);
+                rigidGrenade.AddTorque(Vector3.back * 10, ForceMode.Impulse);
+
+                hasGrenades--;
+                grenades[hasGrenades].SetActive(false);
+            }
+        }
+    }
     void GetInput()
     {
         //_iDown = Input.GetButtonDown("Walk");
         _iDown = Input.GetButtonDown("Interation");
+        _gDown = Input.GetButton("Fire2");
     }
     
     void Interation()
@@ -164,9 +201,18 @@ public class Playerdummy : MonoBehaviour
         {
             if (nearObject.tag =="Shop")
             {
-                Shop shop = nearObject.GetComponent <Shop>();
-                //shop.Enter(this);
-                //Destroy(nearObject);
+                dummyShop dummyshop = nearObject.GetComponent <dummyShop>();
+                dummyshop.Enter(this);
+                Destroy(nearObject);
+            }
+            if(nearObject.tag =="Weapon")
+            {
+                Item item = nearObject.GetComponent<Item>();
+                int weaponIndex = item.value;
+                hasWeapons[weaponIndex] = true;
+
+                Destroy(nearObject);
+                 
             }
         }
     }
@@ -221,8 +267,9 @@ public class Playerdummy : MonoBehaviour
             nearObject = null;
         else if (other.tag == "Shop")
         {
-            Shop shop = nearObject.GetComponent<Shop>();
-            shop.Exit();
+            dummyShop dummyshop = nearObject.GetComponent<dummyShop>();
+            dummyshop.Exit();
+            _openShop2 = false;       
             nearObject = null;
         }
    }

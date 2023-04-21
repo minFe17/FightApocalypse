@@ -15,10 +15,10 @@ public class dummyShop : MonoBehaviour
     public string[] talkData;
     public Text talkText;
 
-    Playerdummy enterPlayer;
+    Playerdummy enterdummyPlayer;
     public void Enter(Playerdummy playerdummy)
     {
-        enterPlayer = playerdummy;
+        enterdummyPlayer = playerdummy;
         uiGroup.anchoredPosition = Vector3.zero;
     }
 
@@ -32,14 +32,14 @@ public class dummyShop : MonoBehaviour
     public void Buy(int index)
     {
         int price = itemPrice[index];
-        if (price > enterPlayer._coin)
+        if (price > enterdummyPlayer._coin)
         {
             StopCoroutine(Talk());
             StartCoroutine(Talk());
             return;
         }
 
-        enterPlayer._coin -= price;
+        enterdummyPlayer._coin -= price;
         Vector3 ranVec = Vector3.right * Random.Range(-3, 3) + Vector3.forward * Random.Range(-3, 3);
         Instantiate(itemObj[index], itemPos[index].position + ranVec, itemPos[index].rotation);
 

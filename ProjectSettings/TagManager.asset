@@ -10,6 +10,7 @@ TagManager:
   - Store
   - Shop
   - Item
+  - Weapon
   layers:
   - Default
   - TransparentFX
