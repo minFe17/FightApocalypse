@@ -1,9 +1,11 @@
 using System.Collections;
 using UnityEngine;
+using Utils;
 
 public class Pachy : Enemy
 {
     bool _isRush;
+
     void Start()
     {
         _animator = GetComponent<Animator>();
@@ -29,7 +31,7 @@ public class Pachy : Enemy
             _animator.SetTrigger("doDie");
             _isDie = true;
             _enemyController.DieEnemy(this.gameObject);
-            _player.GetMoney(_money);
+            GenericSingleton<WaveManager>.Instance.Player.GetMoney(_money);
         }
         else
         {
@@ -65,7 +67,7 @@ public class Pachy : Enemy
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag == "Player" && _isAttack)
-            _player.TakeDamage(_damage);
+        if (collision.gameObject.CompareTag("Player") && _isAttack)
+            GenericSingleton<WaveManager>.Instance.Player.TakeDamage(_damage);
     }
 }

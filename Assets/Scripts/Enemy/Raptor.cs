@@ -1,5 +1,5 @@
-using System.Collections;
 using UnityEngine;
+using Utils;
 
 public class Raptor : Enemy
 {
@@ -27,7 +27,7 @@ public class Raptor : Enemy
             _animator.SetTrigger("doDie");
             _isDie = true;
             _enemyController.DieEnemy(this.gameObject);
-            _player.GetMoney(_money);
+            GenericSingleton<WaveManager>.Instance.Player.GetMoney(_money);
         }
         else
         {

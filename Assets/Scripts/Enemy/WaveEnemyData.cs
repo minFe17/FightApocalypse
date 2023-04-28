@@ -11,7 +11,7 @@ public class WaveEnemyData : MonoBehaviour
     {
         get
         {
-            if(_lstEnemyData.Count == 0)
+            if (_lstEnemyData.Count == 0)
                 ReadEnemyData();
             return _lstEnemyData;
         }

@@ -1,20 +1,25 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Utils;
 
 public class UIManager : MonoBehaviour
 {
-    // ½Ì±ÛÅæ (³ªÁß¿¡) 
+    // ½Ì±ÛÅæ
 
-    [SerializeField] RectTransform _uiGroup;
-    [SerializeField] Text _talkText;
-    [SerializeField] GameObject _shopUI;
+    GameObject _ui;
 
-    void Start()
+    public IngameUI IngameUI { get; set; }
+    public UIminiMap MiniMapUI { get; set; }
+    public GameObject ShopUI { get; set; }
+    public GameObject GameOverUI { get; set; }
+
+    public Text TalkText { get; set; }
+    public RectTransform ShopUIGroup { get; set; }
+
+    public void CreateUI()
     {
-        GenericSingleton<ShopManager>.Instance.SpawnShop(_uiGroup, _talkText);
-        GenericSingleton<WaveManager>.Instance.ShopUI = _shopUI;
+        GameObject temp = Resources.Load("Prefabs/UI") as GameObject;
+        _ui = Instantiate(temp);
+        _ui.GetComponent<MainUI>().Init();
     }
 }

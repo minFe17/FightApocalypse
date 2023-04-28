@@ -1,21 +1,18 @@
 using System.Collections;
 using UnityEngine;
-using UnityEngine.AI;
+using Utils;
 
 public class Enemy : MonoBehaviour
 {
-    public int _maxHp;
-    public int _damage;
-    public float _speed;
-    public float _attackDelay;
-    public int _money; //랜덤으로 할 수도?
+    [SerializeField] protected int _maxHp;
+    [SerializeField] protected int _damage;
+    [SerializeField] protected float _speed;
+    [SerializeField] protected float _attackDelay;
+    [SerializeField] protected int _money;
 
-    protected Player _player;
     protected EnemyController _enemyController;
-    protected Transform _target;
     protected Animator _animator;
     protected Rigidbody _rigidbody;
-    protected IngameUI _ingameUi;
 
     protected Vector3 _move;
 
@@ -25,14 +22,10 @@ public class Enemy : MonoBehaviour
     protected bool _isDie;
     protected bool _isMiss;
 
-    public virtual void Init(EnemyController enemyController, Transform target, Player player, IngameUI ingameUI)
+    public virtual void Init(EnemyController enemyController)
     {
         _enemyController = enemyController;
-        _target = target;
-        _player = player;
-        _ingameUi = ingameUI;
         _curHp = _maxHp;
-
         _enemyController.EnemyList.Add(this.gameObject);
     }
 
@@ -40,12 +33,12 @@ public class Enemy : MonoBehaviour
     {
         if (!_isDie)
         {
-            _move = _target.position - transform.position;
+            _move = GenericSingleton<WaveManager>.Instance.Player.transform.position - transform.position;
             transform.LookAt(transform.position + _move);
         }
     }
 
-    public void Move()
+    public virtual void Move()
     {
         if (!_isHitted && !_isDie && !_isAttack)
         {
@@ -65,7 +58,7 @@ public class Enemy : MonoBehaviour
             _animator.SetTrigger("doDie");
             _isDie = true;
             _enemyController.DieEnemy(this.gameObject);
-            _player.GetMoney(_money);
+            GenericSingleton<WaveManager>.Instance.Player.GetMoney(_money);
         }
         else
         {
@@ -74,12 +67,12 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    public void MoveAgain() //죽지 않으면 애니메이션 끝나고 실행
+    public void MoveAgain()
     {
         _isHitted = false;
     }
 
-    public void EndDie()        //죽으면 애니메이션 끝나고 실행
+    public void EndDie()
     {
         Destroy(this.gameObject);
     }
@@ -103,7 +96,7 @@ public class Enemy : MonoBehaviour
         yield return new WaitForSeconds(0.3f);
         if (!_isMiss)
         {
-            _player.TakeDamage(_damage);
+            GenericSingleton<WaveManager>.Instance.Player.TakeDamage(_damage);
             yield return new WaitForSeconds(0.5f);
             _animator.SetBool("isAttack", false);
             yield return new WaitForSeconds(_attackDelay / 2);
@@ -121,13 +114,13 @@ public class Enemy : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.gameObject.tag == "Player")
+        if (other.gameObject.CompareTag("Player"))
             Attack();
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.tag == "Player")
+        if (other.gameObject.CompareTag("Player"))
             _isMiss = true;
     }
 }

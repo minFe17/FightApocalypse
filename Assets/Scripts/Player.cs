@@ -4,15 +4,13 @@ using Utils;
 
 public class Player : MonoBehaviour
 {
-    [SerializeField] Camera _camera;
     [SerializeField] int _maxHp;
     [SerializeField] float _moveSpeed;
     [SerializeField] Transform _bulletPos;
-    [SerializeField] IngameUI _ingameUI;
-    [SerializeField] GameObject _gameOverUI;
 
     Animator _animator;
     Rigidbody _rigidbody;
+    Camera _camera;
     GameObject _bullet;
     GameObject nearObject;
     Vector3 _move;
@@ -31,25 +29,19 @@ public class Player : MonoBehaviour
     bool _isDie;
     bool _iDown;
     bool _openShop;
-    public bool OpenShop { set { _openShop = value; } }
+    public bool OpenShop { get { return _openShop; } set { _openShop = value; } }
 
     void Start()
     {
+        CreateCamera();
         _animator = GetComponent<Animator>();
         _rigidbody = GetComponent<Rigidbody>();
         _bullet = Resources.Load("Prefabs/Bullet") as GameObject;
         _curHp = _maxHp;
         _curMoveSpeed = _moveSpeed;
         _money = 0;
-        GenericSingleton<WaveManager>.Instance.Player = this;
-        GenericSingleton<WaveManager>.Instance.IngameUI = _ingameUI;
-        _ingameUI.ShowPlayerHpBar(_curHp, _maxHp);
-        _ingameUI.ShowMoney(_money);
-    }
-
-    public void Init()
-    {
-
+        GenericSingleton<UIManager>.Instance.IngameUI.ShowPlayerHpBar(_curHp, _maxHp);
+        GenericSingleton<UIManager>.Instance.IngameUI.ShowMoney(_money);
     }
 
     void FixedUpdate()
@@ -69,7 +61,6 @@ public class Player : MonoBehaviour
 
     public void Move()
     {
-        // x = 키보드 A,D  z = 키보드 W,S
         float x = Input.GetAxis("Horizontal");
         float z = Input.GetAxis("Vertical");
         _move = new Vector3(x, 0, z);
@@ -82,22 +73,22 @@ public class Player : MonoBehaviour
     public void MoveAnimatoin(float x, float z)
     {
         float y = transform.rotation.eulerAngles.y;
-        if (y < 45 || y > 315)          // 위를 보고있을 때
+        if (y < 45 || y > 315)  
         {
             _animator.SetFloat("AxisX", x);
             _animator.SetFloat("AxisZ", z);
         }
-        else if (y > 45 && y < 135)     //오른쪽을 보고있을 때
+        else if (y > 45 && y < 135)
         {
             _animator.SetFloat("AxisX", -z);
             _animator.SetFloat("AxisZ", x);
         }
-        else if (y > 135 && y < 225)    //아래쪽을 보고있을 때
+        else if (y > 135 && y < 225)
         {
             _animator.SetFloat("AxisX", -x);
             _animator.SetFloat("AxisZ", -z);
         }
-        else                            //왼쪽을 보고있을 때
+        else
         {
             _animator.SetFloat("AxisX", z);
             _animator.SetFloat("AxisZ", -x);
@@ -106,7 +97,6 @@ public class Player : MonoBehaviour
 
     public void Turn()
     {
-        //마우스 위치를 바라보게 회전
         Ray ray = _camera.ScreenPointToRay(Input.mousePosition);
         RaycastHit rayHit;
         if (Physics.Raycast(ray, out rayHit, 100))
@@ -146,7 +136,7 @@ public class Player : MonoBehaviour
         if (_isDodge || _isDie)
             return;
         _curHp -= damage;
-        _ingameUI.ShowPlayerHpBar(_curHp, _maxHp);
+        GenericSingleton<UIManager>.Instance.IngameUI.ShowPlayerHpBar(_curHp, _maxHp);
 
         if (_curHp <= 0)
         {
@@ -160,15 +150,15 @@ public class Player : MonoBehaviour
     }
 
     void Interation()
-    {      
+    {
         if (_iDown && nearObject != null)
         {
-            if (nearObject.tag == "Shop")
+            if (nearObject.CompareTag("Shop"))
             {
                 Shop shop = nearObject.GetComponent<Shop>();
                 shop.Enter(this);
-                _ingameUI.OpenShopInfoKey.SetActive(false);
-                _ingameUI.TimeSkipInfoKey.SetActive(false);
+                GenericSingleton<UIManager>.Instance.IngameUI.OpenShopInfoKey.SetActive(false);
+                GenericSingleton<UIManager>.Instance.IngameUI.TimeSkipInfoKey.SetActive(false);
                 _openShop = true;
             }
         }
@@ -176,7 +166,7 @@ public class Player : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Item")
+        if (other.CompareTag("Item"))
         {
             Item item = other.GetComponent<Item>();
             Inventory.instance.AddItem(item);
@@ -203,42 +193,41 @@ public class Player : MonoBehaviour
                         _speedPotion = _maxSpeedPotion;
                     break;
 
-                //case ItemType.Grenade:
-                //    _grenade += item.value;
-                //    if (_grenade > _maxGrenade)
-                //        _grenade = _maxGrenade;
-                //    break;
+                    //case ItemType.Grenade:
+                    //    _grenade += item.value;
+                    //    if (_grenade > _maxGrenade)
+                    //        _grenade = _maxGrenade;
+                    //    break;
             }
             Destroy(other.gameObject);
         }
-        if(other.tag == "Shop")
+        if (other.CompareTag("Shop"))
         {
-            _ingameUI.OpenShopInfoKey.SetActive(true);
+            GenericSingleton<UIManager>.Instance.IngameUI.OpenShopInfoKey.SetActive(true);
         }
     }
 
     void OnTriggerStay(Collider other)
     {
-        if (other.tag == "Weapon" || other.tag == "Shop")
+        if (other.CompareTag("Weapon") || other.CompareTag("Shop"))
             nearObject = other.gameObject;
     }
 
     void OnTriggerExit(Collider other)
     {
-        if (other.tag == "Weapon")
+        if (other.CompareTag("Weapon"))
             nearObject = null;
-        else if (other.tag == "Shop")
+        else if (other.CompareTag("Shop"))
         {
             Shop shop = nearObject.GetComponent<Shop>();
             shop.Exit();
-            _ingameUI.OpenShopInfoKey.SetActive(false);
+            GenericSingleton<UIManager>.Instance.IngameUI.OpenShopInfoKey.SetActive(false);
             if (GenericSingleton<WaveManager>.Instance.WaveTime > 3f)
-                _ingameUI.TimeSkipInfoKey.SetActive(true);
+                GenericSingleton<UIManager>.Instance.IngameUI.TimeSkipInfoKey.SetActive(true);
             _openShop = false;
             nearObject = null;
         }
     }
-    /// 
 
     void Die()
     {
@@ -248,8 +237,8 @@ public class Player : MonoBehaviour
 
     void DieEnd()
     {
-        _gameOverUI.SetActive(true);
-        _gameOverUI.GetComponent<GameOverUI>().ShowGameOverWave(GenericSingleton<WaveManager>.Instance.Wave);
+        GenericSingleton<UIManager>.Instance.GameOverUI.SetActive(true);
+        GenericSingleton<UIManager>.Instance.GameOverUI.GetComponent<GameOverUI>().ShowGameOverWave(GenericSingleton<WaveManager>.Instance.Wave);
         Time.timeScale = 0;
     }
 
@@ -277,12 +266,20 @@ public class Player : MonoBehaviour
     public void GetMoney(int money)
     {
         _money += money;
-        _ingameUI.ShowMoney(_money);
+        GenericSingleton<UIManager>.Instance.IngameUI.ShowMoney(_money);
     }
 
-    public void FreezePos()
+    void FreezePos()
     {
         _rigidbody.velocity = Vector3.zero;
+    }
+
+    void CreateCamera()
+    {
+        GameObject temp = Resources.Load("Prefabs/Main Camera") as GameObject;
+        GameObject camera = Instantiate(temp);
+        camera.GetComponent<MainCamera>().Target = gameObject.transform;
+        _camera = camera.GetComponent<Camera>();
     }
 
     IEnumerator FireRoutine()

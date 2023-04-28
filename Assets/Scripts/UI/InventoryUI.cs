@@ -3,13 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Utils;
 
 public class InventoryUI : MonoBehaviour
 {
     Inventory inven;
 
     public GameObject inventoryPanel;
-    public RectTransform uiGroup;
     bool activeInventory = false;
 
     public Slot[] slots;
@@ -89,6 +89,6 @@ public class InventoryUI : MonoBehaviour
     }
     public void DeActiveShop()
     {
-        uiGroup.anchoredPosition = Vector3.down * 1500;
+        GenericSingleton<UIManager>.Instance.ShopUIGroup.anchoredPosition = Vector3.down * 1500;
     }
 }

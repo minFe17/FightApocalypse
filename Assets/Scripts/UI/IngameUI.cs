@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using Utils;
 
 public class IngameUI : MonoBehaviour
 {
@@ -14,15 +15,16 @@ public class IngameUI : MonoBehaviour
     [SerializeField] GameObject _openShopInfoKey;
     public GameObject OpenShopInfoKey { get { return _openShopInfoKey; } }
 
-    public void ShowWave(int wave)
+    public void ShowWave()
     {
+        int wave = GenericSingleton<WaveManager>.Instance.Wave;
         _waveText.text = $"Wave : {wave}";
     }
 
-    public void ShowNextWaveTime(float time)
+    public void ShowNextWaveTime()
     {
-        int min = (int)time / 60;
-        int sec = (int)time % 60;
+        int min = (int)GenericSingleton<WaveManager>.Instance.WaveTime / 60;
+        int sec = (int)GenericSingleton<WaveManager>.Instance.WaveTime % 60;
         _waveInfoText.text = "정비 시간 : " + string.Format("{0:D2} : {1:D2}", min, sec);
     }
 

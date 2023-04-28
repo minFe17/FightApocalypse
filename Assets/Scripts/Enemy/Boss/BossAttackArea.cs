@@ -6,15 +6,15 @@ public class BossAttackArea : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Player")
+        if (other.gameObject.CompareTag("Player"))
         {
-            switch (_boss._attackType)
+            switch (_boss.AttackType)
             {
                 case EAttackType.RightSlice:
-                    other.GetComponent<Player>().TakeDamage(_boss._damage);
+                    other.GetComponent<Player>().TakeDamage(_boss.Damage);
                     break;
                 case EAttackType.BothHands:
-                    other.GetComponent<Player>().TakeDamage(_boss._damage * 2);
+                    other.GetComponent<Player>().TakeDamage(_boss.Damage * 2);
                     break;
             }
         }

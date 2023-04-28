@@ -4,34 +4,20 @@ using Utils;
 
 public class EnemyController : MonoBehaviour
 {
-    [SerializeField] Transform _target;
-    [SerializeField] Player _player;
-    [SerializeField] GameObject _enemySpawnPos1;
-    [SerializeField] GameObject _enemySpawnPos2;
-    [SerializeField] IngameUI _ingameUI;
+    [SerializeField] List<GameObject> _enemySpawnPos = new List<GameObject>();
 
     List<GameObject> _enemyList = new List<GameObject>();
-    public List<GameObject> EnemyList
-    {
-        get
-        {
-            return _enemyList;
-        }
-        set
-        {
-            _enemyList = value;
-        }
-    }
+    public List<GameObject> EnemyList { get { return _enemyList; } set { _enemyList = value; } }
 
     List<GameObject> _enemys = new List<GameObject>();
 
     EEnemyType enemyType;
 
-    int enemyCount;
-    int zombieCount;
-    int raptorCount;
-    int pachyCount;
-    int bossCount;
+    int _enemyCount;
+    int _zombieCount;
+    int _raptorCount;
+    int _pachyCount;
+    int _bossCount;
 
     void Start()
     {
@@ -39,6 +25,7 @@ public class EnemyController : MonoBehaviour
         {
             _enemys.Add(Resources.Load($"Prefabs/{(EEnemyType)i}") as GameObject);
         }
+        GenericSingleton<WaveManager>.Instance.StartGame();
         GenericSingleton<WaveManager>.Instance.EnemyController = this;
     }
 
@@ -48,44 +35,30 @@ public class EnemyController : MonoBehaviour
         {
             if (data.WAVE == GenericSingleton<WaveManager>.Instance.Wave)
             {
-                enemyCount = data.TOTALENEMY;
-                zombieCount = data.ZOMBIE;
-                raptorCount = data.RAPTOR;
-                pachyCount = data.PACHY;
-                bossCount = data.BOSS;
+                _enemyCount = data.TOTALENEMY;
+                _zombieCount = data.ZOMBIE;
+                _raptorCount = data.RAPTOR;
+                _pachyCount = data.PACHY;
+                _bossCount = data.BOSS;
             }
         }
 
-        for (int i = 0; i < enemyCount; i++)
+        for (int i = 0; i < _enemyCount; i++)
         {
             Vector3 spawnPos = GetRandomSpawnPosition();
             SpawnEnemyType();
             GameObject enemy = Instantiate(_enemys[(int)enemyType], spawnPos, Quaternion.identity);
-            enemy.GetComponent<Enemy>().Init(this, _target, _player, _ingameUI);
+            enemy.GetComponent<Enemy>().Init(this);
         }
-        _ingameUI.ShowEnemy(enemyCount);
+        GenericSingleton<UIManager>.Instance.IngameUI.ShowEnemy(_enemyList.Count);
     }
 
     Vector3 GetRandomSpawnPosition()
     {
-        int ramdom = Random.Range(0, 2);
-        Vector3 basePos = new Vector3();
-        Vector3 size = new Vector3();
-        switch (ramdom)
-        {
-            case 0:
-                {
-                    basePos = _enemySpawnPos1.transform.position;
-                    size = _enemySpawnPos1.GetComponent<BoxCollider>().size;
-                }
-                break;
-            case 1:
-                {
-                    basePos = _enemySpawnPos2.transform.position;
-                    size = _enemySpawnPos2.GetComponent<BoxCollider>().size;
-                }
-                break;
-        }
+        int ramdom = Random.Range(0, _enemySpawnPos.Count);
+
+        Vector3 basePos = _enemySpawnPos[ramdom].transform.position;
+        Vector3 size = _enemySpawnPos[ramdom].GetComponent<BoxCollider>().size;
 
         float posX = basePos.x + Random.Range(-size.x / 2f, size.x / 2f);
         float posZ = basePos.z + Random.Range(-size.z / 2f, size.z / 2f);
@@ -95,24 +68,24 @@ public class EnemyController : MonoBehaviour
 
     void SpawnEnemyType()
     {
-        if (zombieCount != 0)
+        if (_zombieCount != 0)
         {
-            zombieCount--;
+            _zombieCount--;
             enemyType = EEnemyType.Zombie;
         }
-        else if (raptorCount != 0)
+        else if (_raptorCount != 0)
         {
-            raptorCount--;
+            _raptorCount--;
             enemyType = EEnemyType.Raptor;
         }
-        else if (pachyCount != 0)
+        else if (_pachyCount != 0)
         {
-            pachyCount--;
+            _pachyCount--;
             enemyType = EEnemyType.Pachy;
         }
-        else if (bossCount != 0)
+        else if (_bossCount != 0)
         {
-            bossCount--;
+            _bossCount--;
             enemyType = EEnemyType.Boss;
         }
     }
@@ -120,7 +93,7 @@ public class EnemyController : MonoBehaviour
     public void DieEnemy(GameObject enemy)
     {
         _enemyList.Remove(enemy);
-        _ingameUI.ShowEnemy(_enemyList.Count);
+        GenericSingleton<UIManager>.Instance.IngameUI.ShowEnemy(_enemyList.Count);
     }
 }
 

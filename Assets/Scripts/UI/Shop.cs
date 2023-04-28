@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Utils;
 
 public class Shop : MonoBehaviour
 {
@@ -9,7 +10,6 @@ public class Shop : MonoBehaviour
     public RectTransform UIGroup {  set {  uiGroup = value; } }
     public Animator anim;
 
-    int player;
     public GameObject[] itemObj;
     public int[] itemPrice;
     public Transform[] itemPos;
@@ -43,7 +43,7 @@ public class Shop : MonoBehaviour
         }
 
         enterPlayer._money -= price;
-        //_ingameUI.ShowMoney(enterPlayer._money);  // _ingameUI ΩÃ±€≈Ê
+        GenericSingleton<UIManager>.Instance.IngameUI.ShowMoney(enterPlayer._money);
 
         Vector3 ranVec = Vector3.right * Random.Range(-3, 3) + Vector3.forward * Random.Range(-3, 3);
         Instantiate(itemObj[index], itemPos[index].position + ranVec, itemPos[index].rotation);

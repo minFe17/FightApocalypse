@@ -1,40 +1,33 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using TMPro;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class UIminiMap : MonoBehaviour
 {
-    [SerializeField] private Camera minimapCamrea;
     [SerializeField] private float zoomMin = 1;
     [SerializeField] private float zoomMax = 30;
     [SerializeField] private float zoomOneStep = 1;
     [SerializeField] private TextMeshProUGUI textMapname;
-    // Start is called before the first frame update
+
+    Camera _minimapCamera;
+    public Camera MiniMapCamera { set { _minimapCamera = value; } }
+
     private void Awake()
     {
         textMapname.text = SceneManager.GetActiveScene().name;
     }
     public void ZoomIn()
     {
-        minimapCamrea.orthographicSize = Mathf.Max(minimapCamrea.orthographicSize - zoomOneStep, zoomMin);
+        _minimapCamera.orthographicSize = Mathf.Max(_minimapCamera.orthographicSize - zoomOneStep, zoomMin);
     }
 
     public void ZoomOut()
-    { 
-       minimapCamrea.orthographicSize = Mathf.Min(minimapCamrea.orthographicSize+zoomOneStep, zoomMax);
+    {
+        _minimapCamera.orthographicSize = Mathf.Min(_minimapCamera.orthographicSize + zoomOneStep, zoomMax);
     }
-
 
     void Start()
     {
-        minimapCamrea.orthographicSize = 10;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        _minimapCamera.orthographicSize = 10;
     }
 }

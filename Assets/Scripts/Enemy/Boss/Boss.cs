@@ -1,10 +1,14 @@
 using UnityEngine;
+using Utils;
 
 public class Boss : Enemy
 {
     [SerializeField] BoxCollider _attackCollider;
 
-    public EAttackType _attackType;
+    public int Damage { get { return _damage; } }
+
+    EAttackType _attackType;
+    public EAttackType AttackType { get { return _attackType; } }
 
     void Start()
     {
@@ -19,11 +23,20 @@ public class Boss : Enemy
         FreezePos();
     }
 
-    public override void Init(EnemyController enemyController, Transform target, Player player, IngameUI ingameUi)
+    public override void Init(EnemyController enemyController)
     {
-        base.Init(enemyController, target, player, ingameUi);
+        base.Init(enemyController);
         _attackCollider.enabled = false;
-        _ingameUi.ShowBossHpBar(_curHp, _maxHp);
+        GenericSingleton<UIManager>.Instance.IngameUI.ShowBossHpBar(_curHp, _maxHp);
+    }
+
+    public override void Move()
+    {
+        if (!_isDie && !_isAttack)
+        {
+            _animator.SetBool("isWalk", true);
+            transform.Translate(_move.normalized * Time.deltaTime * _speed, Space.World);
+        }
     }
 
     public override void Attack()
@@ -49,12 +62,12 @@ public class Boss : Enemy
         }
     }
 
-    void OnAttackArea()     // 공격 애니메이션에서 호출
+    void OnAttackArea()
     {
         _attackCollider.enabled = true;
     }
 
-    void OffAttackArea()    // 공격 애니메이션에서 호출
+    void OffAttackArea()
     {
         _attackCollider.enabled = false;
         _isAttack = false;
@@ -65,15 +78,15 @@ public class Boss : Enemy
         if (_isDie)
             return;
         _curHp -= damage;
-        _ingameUi.ShowBossHpBar(_curHp, _maxHp);
+        GenericSingleton<UIManager>.Instance.IngameUI.ShowBossHpBar(_curHp, _maxHp);
 
         if (_curHp <= 0)
         {
             _animator.SetTrigger("doDie");
             _isDie = true;
             _enemyController.DieEnemy(this.gameObject);
-            _ingameUi.HideBossHpBar();
-            _player.GetMoney(_money);
+            GenericSingleton<UIManager>.Instance.IngameUI.HideBossHpBar();
+            GenericSingleton<WaveManager>.Instance.Player.GetMoney(_money);
         }
         else
         {
