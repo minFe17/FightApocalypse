@@ -38,10 +38,13 @@ public class Playerdummy : MonoBehaviour
     bool _isDodge2;
     bool _isFire2;
     bool _iDown;
+    bool _fDown;
     bool _openShop2;
     bool _gDown;
+    bool _isFireReady;
     GameObject nearObject;
-    
+    Weapon equipWeapon;
+    float fireDelay;
 
     void Start()
     {
@@ -159,10 +162,10 @@ public class Playerdummy : MonoBehaviour
     
     void Attack()
     {
-        if(_gDown)
-        {
-
-        }
+        //if(_gDown)
+        //{
+        //    equipWeapon.Use();
+        //}
     }
     void Grenade()
     {
@@ -192,6 +195,7 @@ public class Playerdummy : MonoBehaviour
         //_iDown = Input.GetButtonDown("Walk");
         _iDown = Input.GetButtonDown("Interation");
         _gDown = Input.GetButton("Fire2");
+        _fDown = Input.GetButtonDown("Fire1");
     }
     
     void Interation()

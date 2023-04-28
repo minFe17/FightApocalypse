@@ -11,4 +11,8 @@ public class Weapon : MonoBehaviour
     public BoxCollider meleeArea;
     public TrailRenderer trailEffect;
 
+    public void Use()
+    {
+
+    }
 }
