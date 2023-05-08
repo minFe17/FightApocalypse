@@ -66,38 +66,13 @@ public class Player : MonoBehaviour
         float x = Input.GetAxis("Horizontal");
         float z = Input.GetAxis("Vertical");
         _move = new Vector3(x, 0, z);
-        //MoveAnimatoin(x, z);
-        
+
+        _animator.SetFloat("Rotation", transform.rotation.eulerAngles.y);
         _animator.SetFloat("AxisX", x);
         _animator.SetFloat("AxisZ", z);
 
         if (_move.magnitude > 0f)
             transform.Translate(_move.normalized * Time.deltaTime * _curMoveSpeed, Space.World);
-    }
-
-    public void MoveAnimatoin(float x, float z)
-    {
-        float y = transform.rotation.eulerAngles.y;
-        if (y < 45 || y > 315)  
-        {
-            _animator.SetFloat("AxisX", x);
-            _animator.SetFloat("AxisZ", z);
-        }
-        else if (y > 45 && y < 135)
-        {
-            _animator.SetFloat("AxisX", -z);
-            _animator.SetFloat("AxisZ", x);
-        }
-        else if (y > 135 && y < 225)
-        {
-            _animator.SetFloat("AxisX", -x);
-            _animator.SetFloat("AxisZ", -z);
-        }
-        else
-        {
-            _animator.SetFloat("AxisX", z);
-            _animator.SetFloat("AxisZ", -x);
-        }
     }
 
     public void Turn()

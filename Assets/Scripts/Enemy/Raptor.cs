@@ -6,6 +6,7 @@ public class Raptor : Enemy
     [SerializeField] GameObject _attackArea;
 
     public int Damage { get { return _damage; } }
+
     void Start()
     {
         _animator = GetComponent<Animator>();
