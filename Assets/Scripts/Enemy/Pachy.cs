@@ -1,11 +1,8 @@
-using System.Collections;
 using UnityEngine;
 using Utils;
 
 public class Pachy : Enemy
 {
-    bool _isRush;
-
     void Start()
     {
         _animator = GetComponent<Animator>();
@@ -16,7 +13,6 @@ public class Pachy : Enemy
     {
         LookTarget();
         Move();
-        Rush();
         FreezePos();
     }
 
@@ -40,28 +36,19 @@ public class Pachy : Enemy
         }
     }
 
-    public void Rush()
+    public override void AttackReady()
     {
-        if (_isRush && !_isHitted && !_isDie)
-        {
-            _animator.SetBool("isReady", false);
-            _animator.SetBool("isAttack", true);
-            transform.Translate(_move.normalized * Time.deltaTime * _speed * 5, Space.World);
-        }
+        _animator.SetTrigger("doReady");
     }
 
-    protected override IEnumerator AttackRoutine()
+    public override void Attack()
     {
         _isAttack = true;
-        yield return new WaitForSeconds(_attackDelay / 2);
-        _animator.SetBool("isReady", true);
-        yield return new WaitForSeconds(1f);
-        _isRush = true;
+        _animator.SetTrigger("doAttack");
+    }
 
-        yield return new WaitForSeconds(0.5f);
-        _animator.SetBool("isAttack", false);
-        _isRush = false;
-        yield return new WaitForSeconds(_attackDelay / 2);
+    public override void EndAttack()
+    {
         _isAttack = false;
     }
 

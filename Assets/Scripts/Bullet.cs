@@ -6,10 +6,14 @@ public class Bullet : MonoBehaviour
     [SerializeField] float _lifeTime;
     [SerializeField] int _damage;
 
+    void Start()
+    {
+        Invoke("Remove", _lifeTime);
+    }
+
     void Update()
     {
         transform.Translate(Vector3.forward * Time.deltaTime * _speed);
-        Invoke("Remove", _lifeTime);
     }
 
     public void Remove()

@@ -6,18 +6,16 @@ public class WaveManager : MonoBehaviour
 {
     // ΩÃ±€≈Ê
     Player _player;
-    public Player Player { get { return _player; } }
-
     EnemyController _enemyController;
-    public EnemyController EnemyController { set { _enemyController = value; } }
-
     int _wave = 1;
-    public int Wave { get { return _wave; } }
-
     float _waveTime;
-    public float WaveTime { get { return _waveTime; } }
     float _nextWaveTime = 2 * 60f;
     bool _isClear = true;
+
+    public Player Player { get { return _player; } }
+    public EnemyController EnemyController { set { _enemyController = value; } }
+    public int Wave { get { return _wave; } }
+    public float WaveTime { get { return _waveTime; } }
 
     void Update()
     {

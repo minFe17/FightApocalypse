@@ -19,7 +19,7 @@ public class Player : MonoBehaviour
     int _speedPotion;
     int _maxPotion;
     int _maxSpeedPotion;
-    public int _money;
+    int _money;
     int _curHp;
     float _curMoveSpeed;
     float _skipButtonDownTime;
@@ -29,6 +29,8 @@ public class Player : MonoBehaviour
     bool _isDie;
     bool _iDown;
     bool _openShop;
+
+    public int Money {  get { return _money; } set { _money = value; } }
     public bool OpenShop { get { return _openShop; } set { _openShop = value; } }
 
     void Start()
@@ -64,7 +66,10 @@ public class Player : MonoBehaviour
         float x = Input.GetAxis("Horizontal");
         float z = Input.GetAxis("Vertical");
         _move = new Vector3(x, 0, z);
-        MoveAnimatoin(x, z);
+        //MoveAnimatoin(x, z);
+        
+        _animator.SetFloat("AxisX", x);
+        _animator.SetFloat("AxisZ", z);
 
         if (_move.magnitude > 0f)
             transform.Translate(_move.normalized * Time.deltaTime * _curMoveSpeed, Space.World);
@@ -172,16 +177,6 @@ public class Player : MonoBehaviour
             Inventory.instance.AddItem(item);
             switch (item.itemType)
             {
-                //case ItemType.Ammo:
-                //    _ammo += item.value;
-                //    if (_ammo > _maxAmmo)
-                //        _ammo = _maxAmmo;
-                //    break;
-                //case ItemType.Coin:
-                //    _coin += item.value;
-                //    if (_coin > _maxCoin)
-                //        _coin = _maxCoin;
-                //    break;
                 case ItemType.Potion:
                     _potion += item.value;
                     if (_potion > _maxPotion)
@@ -192,12 +187,6 @@ public class Player : MonoBehaviour
                     if (_speedPotion > _maxSpeedPotion)
                         _speedPotion = _maxSpeedPotion;
                     break;
-
-                    //case ItemType.Grenade:
-                    //    _grenade += item.value;
-                    //    if (_grenade > _maxGrenade)
-                    //        _grenade = _maxGrenade;
-                    //    break;
             }
             Destroy(other.gameObject);
         }

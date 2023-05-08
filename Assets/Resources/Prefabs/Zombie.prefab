@@ -1115,13 +1115,15 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 896978595327987822}
+  - component: {fileID: 8525788776326087958}
+  - component: {fileID: 3752709884448979541}
   m_Layer: 6
   m_Name: Base HumanRArmPalm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &896978595327987822
 Transform:
   m_ObjectHideFlags: 0
@@ -1142,6 +1144,32 @@ Transform:
   m_Father: {fileID: 8561937225506646907}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &8525788776326087958
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3662167022901089304}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.3, y: 0.3, z: 0.3}
+  m_Center: {x: -0.2, y: 0, z: 0}
+--- !u!114 &3752709884448979541
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3662167022901089304}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 819927b90b8ab0442be902a1b326eace, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _zombie: {fileID: -8025512974430402477}
 --- !u!1 &3874798413245388553
 GameObject:
   m_ObjectHideFlags: 0
@@ -1455,13 +1483,15 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5929051921150791542}
+  - component: {fileID: 6356848084837507134}
+  - component: {fileID: 7403821301020745388}
   m_Layer: 6
   m_Name: Base HumanLArmPalm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &5929051921150791542
 Transform:
   m_ObjectHideFlags: 0
@@ -1482,6 +1512,32 @@ Transform:
   m_Father: {fileID: 6331912226733712239}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &6356848084837507134
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4926436652229370228}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.3, y: 0.3, z: 0.3}
+  m_Center: {x: -0.2, y: 0, z: 0}
+--- !u!114 &7403821301020745388
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4926436652229370228}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 819927b90b8ab0442be902a1b326eace, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _zombie: {fileID: -8025512974430402477}
 --- !u!1 &5206983597212700782
 GameObject:
   m_ObjectHideFlags: 0
@@ -2229,6 +2285,8 @@ MonoBehaviour:
   _speed: 3
   _attackDelay: 1
   _money: 20
+  _attackArea1: {fileID: 4926436652229370228}
+  _attackArea2: {fileID: 3662167022901089304}
 --- !u!95 &6954349052968721467
 Animator:
   serializedVersion: 5

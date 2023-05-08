@@ -5,7 +5,6 @@ using Utils;
 public class UIManager : MonoBehaviour
 {
     // ΩÃ±€≈Ê
-
     GameObject _ui;
 
     public IngameUI IngameUI { get; set; }

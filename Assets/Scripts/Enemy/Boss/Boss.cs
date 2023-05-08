@@ -5,10 +5,10 @@ public class Boss : Enemy
 {
     [SerializeField] BoxCollider _attackCollider;
 
-    public int Damage { get { return _damage; } }
-
     EAttackType _attackType;
+
     public EAttackType AttackType { get { return _attackType; } }
+    public int Damage { get { return _damage; } }
 
     void Start()
     {

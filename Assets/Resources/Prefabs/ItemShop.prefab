@@ -210,8 +210,8 @@ MonoBehaviour:
   uiGroup: {fileID: 0}
   anim: {fileID: 0}
   itemObj:
-  - {fileID: 1000012970591572, guid: 7cafb89b5a0f61f479d0a748962abbbc, type: 3}
-  - {fileID: 1000013846074356, guid: 11e31a2ebb4e6e246bcf8c0ba034a031, type: 3}
+  - {fileID: 1000012970591572, guid: ebd585ba85de1874c991b880c44687e8, type: 3}
+  - {fileID: 1000013846074356, guid: db7ba1b30954203499f5030b5c168688, type: 3}
   - {fileID: 8748639651185667160, guid: 15f85f52570f05146aba33e4196e2a03, type: 3}
   itemPrice: 0f0000000f00000032000000
   itemPos:

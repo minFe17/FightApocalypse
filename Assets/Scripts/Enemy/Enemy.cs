@@ -77,50 +77,24 @@ public class Enemy : MonoBehaviour
         Destroy(this.gameObject);
     }
 
-    public virtual void Attack()
+    public virtual void AttackReady()
     {
-        if (!_isAttack)
-            StartCoroutine(AttackRoutine());
+        _animator.SetTrigger("doAttack");
+        _isAttack = true;
     }
+
+    public virtual void Attack() { }
+
+    public virtual void EndAttack() { }
 
     public void FreezePos()
     {
         _rigidbody.velocity = Vector3.zero;
     }
 
-    protected virtual IEnumerator AttackRoutine()
-    {
-        _isAttack = true;
-        yield return new WaitForSeconds(_attackDelay / 2);
-        _animator.SetBool("isAttack", true);
-        yield return new WaitForSeconds(0.3f);
-        if (!_isMiss)
-        {
-            GenericSingleton<WaveManager>.Instance.Player.TakeDamage(_damage);
-            yield return new WaitForSeconds(0.5f);
-            _animator.SetBool("isAttack", false);
-            yield return new WaitForSeconds(_attackDelay / 2);
-        }
-        else
-        {
-            _animator.SetBool("isAttack", false);
-            yield return new WaitForSeconds(0.5f);
-            _isMiss = false;
-        }
-
-        _isAttack = false;
-
-    }
-
     private void OnTriggerStay(Collider other)
     {
-        if (other.gameObject.CompareTag("Player"))
-            Attack();
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.gameObject.CompareTag("Player"))
-            _isMiss = true;
+        if (other.gameObject.CompareTag("Player") && !_isAttack)
+            AttackReady();
     }
 }

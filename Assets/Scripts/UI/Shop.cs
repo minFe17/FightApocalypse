@@ -35,15 +35,15 @@ public class Shop : MonoBehaviour
     public void Buy(int index)
     {
         int price = itemPrice[index];
-        if(price > enterPlayer._money)
+        if(price > enterPlayer.Money)
         {
             StopCoroutine(Talk());
             StartCoroutine(Talk());
             return;
         }
 
-        enterPlayer._money -= price;
-        GenericSingleton<UIManager>.Instance.IngameUI.ShowMoney(enterPlayer._money);
+        enterPlayer.Money -= price;
+        GenericSingleton<UIManager>.Instance.IngameUI.ShowMoney(enterPlayer.Money);
 
         Vector3 ranVec = Vector3.right * Random.Range(-3, 3) + Vector3.forward * Random.Range(-3, 3);
         Instantiate(itemObj[index], itemPos[index].position + ranVec, itemPos[index].rotation);

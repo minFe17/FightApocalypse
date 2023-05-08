@@ -11,10 +11,11 @@ public class IngameUI : MonoBehaviour
     [SerializeField] Image _playerHpBar;
     [SerializeField] Text _moneyText;
     [SerializeField] GameObject _timeSkipInfoKey;
-    public GameObject TimeSkipInfoKey { get { return _timeSkipInfoKey; } }
     [SerializeField] GameObject _openShopInfoKey;
-    public GameObject OpenShopInfoKey { get { return _openShopInfoKey; } }
 
+    public GameObject TimeSkipInfoKey { get { return _timeSkipInfoKey; } }
+    public GameObject OpenShopInfoKey { get { return _openShopInfoKey; } }
+    
     public void ShowWave()
     {
         int wave = GenericSingleton<WaveManager>.Instance.Wave;

@@ -7,9 +7,9 @@ public class EnemyController : MonoBehaviour
     [SerializeField] List<GameObject> _enemySpawnPos = new List<GameObject>();
 
     List<GameObject> _enemyList = new List<GameObject>();
-    public List<GameObject> EnemyList { get { return _enemyList; } set { _enemyList = value; } }
-
     List<GameObject> _enemys = new List<GameObject>();
+
+    public List<GameObject> EnemyList { get { return _enemyList; } set { _enemyList = value; } }
 
     EEnemyType enemyType;
 
