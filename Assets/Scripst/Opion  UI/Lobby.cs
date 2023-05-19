@@ -7,9 +7,13 @@ public class Lobby : MonoBehaviour
 {
     public void GameStart()
     {
-        Debug.Log("버튼입력");
+        Time.timeScale = 1f;
         SceneManager.LoadScene("IngameScene");
-        
+    }
+
+    public void ExitGame()
+    {
+        Application.Quit();
     }
 
 }

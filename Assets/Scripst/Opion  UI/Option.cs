@@ -47,12 +47,9 @@ public class Option : MonoBehaviour
 
     public void OpTion()
     {
-        
-
         _opton.SetActive(true);
-   
-
     }
+
     public void KeyOption()
     {
         _keyoption.SetActive(true);
@@ -61,18 +58,17 @@ public class Option : MonoBehaviour
     public void SoundOption()
     {
         _soundoption.SetActive(true);   
-
     }
     public void MouseOption() 
     {
         _mouseoption.SetActive(true);
-        Debug.Log("번튼입력");
     }
 
     public void YesButton()
     {
         SceneManager.LoadScene("Lobby");
     }
+
     public void NoButton()
     {
         _GmPanel.SetActive(false);
