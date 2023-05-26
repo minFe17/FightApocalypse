@@ -41,7 +41,7 @@ public class Player : MonoBehaviour
         _bullet = Resources.Load("Prefabs/Bullet") as GameObject;
         _curHp = _maxHp;
         _curMoveSpeed = _moveSpeed;
-        _money = 0;
+        _money = 50;
         GenericSingleton<UIManager>.Instance.IngameUI.ShowPlayerHpBar(_curHp, _maxHp);
         GenericSingleton<UIManager>.Instance.IngameUI.ShowMoney(_money);
     }
@@ -99,10 +99,22 @@ public class Player : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.LeftShift) && !_isDodge)
         {
-            _isDodge = true;
-            _curMoveSpeed *= 2;
-            Invoke("ReturnMoveSpeed", 0.5f);
+            float y = Quaternion.FromToRotation(Vector3.forward, _move).eulerAngles.y;
+
+            if (Mathf.Abs(transform.rotation.eulerAngles.y - y) <= 30 || Mathf.Abs(transform.rotation.eulerAngles.y - y) >= 330)
+            {
+                _animator.SetTrigger("doDodge");
+                _animator.SetFloat("Rotation", transform.rotation.eulerAngles.y);
+                _curMoveSpeed *= 3;
+                _isDodge = true;
+            }
         }
+    }
+
+    public void EndDodge()
+    {
+        _isDodge = false;
+        _curMoveSpeed = _moveSpeed;
     }
 
     public void ReturnMoveSpeed()
@@ -148,6 +160,7 @@ public class Player : MonoBehaviour
     {
         if (other.CompareTag("Item"))
         {
+            _animator.SetTrigger("doPickUpItem");
             Item item = other.GetComponent<Item>();
             Inventory.instance.AddItem(item);
             switch (item.itemType)

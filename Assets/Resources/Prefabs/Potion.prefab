@@ -9760,7 +9760,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad9a8911b67757c4eab192cc98a5cf4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemType: 0
+  itemType: 5
   value: 0
   itemName: Potion
   itemImage: {fileID: 21300000, guid: ede524d575379f241a347e7df1e1c79b, type: 3}
