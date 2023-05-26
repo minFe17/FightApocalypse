@@ -8,12 +8,10 @@ using Utils;
 public class InventoryUI : MonoBehaviour
 {
     Inventory inven;
-
-    public GameObject inventoryPanel;
+    Slot[] slots;
+    [SerializeField] GameObject inventoryPanel;
+    [SerializeField] Transform slotHolder;
     bool activeInventory = false;
-
-    public Slot[] slots;
-    public Transform slotHolder;
 
     private void Start()
     {
@@ -25,7 +23,7 @@ public class InventoryUI : MonoBehaviour
         closeShop.onClick.AddListener(DeActiveShop);
     }
 
-    private void SlotChange(int val)
+    private void SlotChange()
     {
         for (int i =0; i < slots.Length; i++) 
         {
@@ -43,8 +41,8 @@ public class InventoryUI : MonoBehaviour
             activeInventory = !activeInventory;
             inventoryPanel.SetActive(activeInventory);
         }
-        if (Input.GetMouseButtonUp(0))
-            RayShop();
+        //if (Input.GetMouseButtonUp(0))
+        //    RayShop();
     }
 
     public void AddSlot()
@@ -60,7 +58,7 @@ public class InventoryUI : MonoBehaviour
         }
         for(int i =0; i<inven.items.Count;i++)
         {
-            slots[i].item = inven.items[i];
+            slots[i].Item = inven.items[i];
             slots[i].UpdateSlotUI();
         }
     }
@@ -68,25 +66,25 @@ public class InventoryUI : MonoBehaviour
     public GameObject shop;
     public Button closeShop;
 
-    public void RayShop()
-    {
-        Vector3 mousePos =Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        mousePos.z = -10;
-        RaycastHit hit;// = Physics.Raycast(mousePos, transform.forward, 30);
-        Ray ray = new Ray(mousePos, transform.forward);
-        Debug.DrawRay(ray.origin, ray.direction * 3000, Color.red, 5f);
-        if(Physics.Raycast(mousePos, transform.forward, out hit, 30))
-        {
-            if(hit.collider.CompareTag("Store"))
-            {
-                ActiveShop(true);
-            }
-        }
-    }
-    public void ActiveShop(bool isOpen)
-    {
-        shop.SetActive(isOpen);
-    }
+    //public void RayShop()
+    //{
+    //    Vector3 mousePos =Camera.main.ScreenToWorldPoint(Input.mousePosition);
+    //    mousePos.z = -10;
+    //    RaycastHit hit;// = Physics.Raycast(mousePos, transform.forward, 30);
+    //    Ray ray = new Ray(mousePos, transform.forward);
+    //    Debug.DrawRay(ray.origin, ray.direction * 3000, Color.red, 5f);
+    //    if(Physics.Raycast(mousePos, transform.forward, out hit, 30))
+    //    {
+    //        if(hit.collider.CompareTag("Store"))
+    //        {
+    //            ActiveShop(true);
+    //        }
+    //    }
+    //}
+    //public void ActiveShop(bool isOpen)
+    //{
+    //    shop.SetActive(isOpen);
+    //}
     public void DeActiveShop()
     {
         GenericSingleton<UIManager>.Instance.ShopUIGroup.anchoredPosition = Vector3.down * 1500;

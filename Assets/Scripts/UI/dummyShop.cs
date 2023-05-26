@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -25,7 +24,6 @@ public class dummyShop : MonoBehaviour
 
     public void Exit()
     {
-        //anim.SetTrigger("doHello");
         uiGroup.anchoredPosition = Vector3.down * 1500;
     }
 

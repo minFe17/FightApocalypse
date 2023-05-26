@@ -6,15 +6,15 @@ using Utils;
 
 public class Shop : MonoBehaviour
 {
-    public RectTransform uiGroup;
+    RectTransform uiGroup;
     public RectTransform UIGroup {  set {  uiGroup = value; } }
-    public Animator anim;
+    
 
-    public GameObject[] itemObj;
-    public int[] itemPrice;
-    public Transform[] itemPos;
-    public string[] talkData;
-    public Text talkText;
+    [SerializeField] GameObject[] itemObj;
+    [SerializeField] int[] itemPrice;
+    [SerializeField] Transform[] itemPos;
+    [SerializeField] string[] talkData;
+    Text talkText;
     public Text TalkText {  set { talkText = value; } }
 
     Player enterPlayer;
@@ -27,8 +27,7 @@ public class Shop : MonoBehaviour
 
     
     public void Exit()
-    {
-        //anim.SetTrigger("doHello");
+    {     
         uiGroup.anchoredPosition = Vector3.down * 1500;
     }
 

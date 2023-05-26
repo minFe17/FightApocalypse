@@ -30,7 +30,7 @@ public class Player : MonoBehaviour
     bool _iDown;
     bool _openShop;
 
-    public int Money {  get { return _money; } set { _money = value; } }
+    public int Money { get { return _money; } set { _money = value; } }
     public bool OpenShop { get { return _openShop; } set { _openShop = value; } }
 
     void Start()
@@ -244,8 +244,10 @@ public class Player : MonoBehaviour
         GameObject camera = Instantiate(temp);
         camera.GetComponent<MainCamera>().Target = gameObject.transform;
         _camera = camera.GetComponent<Camera>();
+        
     }
 
+    
     IEnumerator FireRoutine()
     {
         _isFire = true;

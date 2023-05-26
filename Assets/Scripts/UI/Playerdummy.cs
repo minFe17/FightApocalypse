@@ -42,8 +42,7 @@ public class Playerdummy : MonoBehaviour
     bool _openShop2;
     bool _gDown;
     bool _isFireReady;
-    GameObject nearObject;
-    Weapon equipWeapon;
+    GameObject nearObject;   
     float fireDelay;
 
     void Start()
@@ -162,10 +161,10 @@ public class Playerdummy : MonoBehaviour
     
     void Attack()
     {
-        //if(_gDown)
-        //{
-        //    equipWeapon.Use();
-        //}
+        if(_gDown)
+        {
+            //equipWeapon.Use();
+        }
     }
     void Grenade()
     {

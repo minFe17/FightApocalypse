@@ -881,7 +881,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inventoryPanel: {fileID: 981675203}
-  uiGroup: {fileID: 660969977}
   slots: []
   slotHolder: {fileID: 1709469555}
   shop: {fileID: 660969976}
@@ -18748,21 +18747,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a92339713399782479aae6794f01c26d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  uiGroup: {fileID: 660969977}
-  anim: {fileID: 0}
   itemObj:
   - {fileID: 202631720}
   - {fileID: 1710191186}
   - {fileID: 8748639651185667160, guid: 15f85f52570f05146aba33e4196e2a03, type: 3}
-  itemPrice: 0f0000000f00000032000000
-  itemPos:
-  - {fileID: 1152376234}
-  - {fileID: 340414821}
-  - {fileID: 614929499}
-  talkData:
-  - "\uC0C1\uC810"
-  - "\uB3C8\uC774 \uBD80\uC871\uD569\uB2C8\uB2E4."
-  talkText: {fileID: 1043526757}
+  itemPrice: 0a0000001e00000000000000
 --- !u!1 &1230223786
 GameObject:
   m_ObjectHideFlags: 0
@@ -20709,9 +20698,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 009fc51b9f0dbb143a0dd39eae5d3dda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _target: {fileID: 1387327811}
   _offestY: 2
   _offsetZ: -4
+  _dummy: {fileID: 1387327811}
 --- !u!4 &1399102594 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4000011940550886, guid: 31fee1c2b8079524babddad687e95210, type: 3}

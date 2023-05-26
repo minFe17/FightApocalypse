@@ -1,12 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting.Dependencies.NCalc;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class Slot : MonoBehaviour
 {
-    public Item item;
-    public Image itemIcon;
+    private Item item;
+    public Item Item { get { return item; } set { item = value; } }
+    [SerializeField] Image itemIcon;
 
     public void UpdateSlotUI()
     {

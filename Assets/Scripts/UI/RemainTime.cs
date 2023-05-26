@@ -5,7 +5,7 @@ using UnityEngine.UI;
 public class RemainTime : MonoBehaviour
 {
     Text text;
-    public static float _rTime = 300f;
+    static float _rTime = 300f;
     void Start()
     {
         text=GetComponent<Text>();
