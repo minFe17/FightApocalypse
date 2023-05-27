@@ -207,8 +207,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a92339713399782479aae6794f01c26d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  uiGroup: {fileID: 0}
-  anim: {fileID: 0}
   itemObj:
   - {fileID: 1000012970591572, guid: ebd585ba85de1874c991b880c44687e8, type: 3}
   - {fileID: 1000013846074356, guid: db7ba1b30954203499f5030b5c168688, type: 3}
@@ -221,7 +219,6 @@ MonoBehaviour:
   talkData:
   - "\uC0C1\uC810"
   - "\uB3C8\uC774 \uBD80\uC871\uD569\uB2C8\uB2E4."
-  talkText: {fileID: 0}
 --- !u!198 &1181334546003803869
 ParticleSystem:
   m_ObjectHideFlags: 0

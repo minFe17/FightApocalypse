@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.30477065, g: 0.48549998, b: 0.6340366, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -861,7 +861,7 @@ RectTransform:
   - {fileID: 660969977}
   - {fileID: 144403407}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -881,7 +881,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inventoryPanel: {fileID: 981675203}
-  slots: []
   slotHolder: {fileID: 1709469555}
   shop: {fileID: 660969976}
   closeShop: {fileID: 1106002159}
@@ -1516,7 +1515,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
 --- !u!1 &121867238 stripped
 GameObject:
@@ -2717,7 +2716,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &313561623
 PrefabInstance:
@@ -8474,6 +8473,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 320917133}
     m_Modifications:
+    - target: {fileID: 1912443093388517007, guid: 540de0cd3c3388241bdc0bcff60a276c, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
     - target: {fileID: 2597995962241141898, guid: 540de0cd3c3388241bdc0bcff60a276c, type: 3}
       propertyPath: m_Name
       value: Grenade
@@ -8543,6 +8546,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1492940370}
     m_Modifications:
+    - target: {fileID: 1912443093388517007, guid: 540de0cd3c3388241bdc0bcff60a276c, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
     - target: {fileID: 2597995962241141898, guid: 540de0cd3c3388241bdc0bcff60a276c, type: 3}
       propertyPath: m_Name
       value: Grenade
@@ -10502,7 +10509,8 @@ MonoBehaviour:
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_fontSharedMaterials: []
+  m_fontSharedMaterials:
+  - {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
@@ -11099,7 +11107,6 @@ Transform:
   - {fileID: 4647781}
   - {fileID: 1821410103}
   - {fileID: 1629569947}
-  - {fileID: 1982390435}
   m_Father: {fileID: 2116926565}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -11287,6 +11294,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 605338942}
     m_Modifications:
+    - target: {fileID: 1912443093388517007, guid: 540de0cd3c3388241bdc0bcff60a276c, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
     - target: {fileID: 2597995962241141898, guid: 540de0cd3c3388241bdc0bcff60a276c, type: 3}
       propertyPath: m_Name
       value: Grenade
@@ -13835,7 +13846,8 @@ MonoBehaviour:
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_fontSharedMaterials: []
+  m_fontSharedMaterials:
+  - {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
@@ -18752,6 +18764,8 @@ MonoBehaviour:
   - {fileID: 1710191186}
   - {fileID: 8748639651185667160, guid: 15f85f52570f05146aba33e4196e2a03, type: 3}
   itemPrice: 0a0000001e00000000000000
+  itemPos: []
+  talkData: []
 --- !u!1 &1230223786
 GameObject:
   m_ObjectHideFlags: 0
@@ -19967,7 +19981,8 @@ MonoBehaviour:
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_fontSharedMaterials: []
+  m_fontSharedMaterials:
+  - {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
@@ -20138,6 +20153,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 995116406}
     m_Modifications:
+    - target: {fileID: 1912443093388517007, guid: 540de0cd3c3388241bdc0bcff60a276c, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
     - target: {fileID: 2597995962241141898, guid: 540de0cd3c3388241bdc0bcff60a276c, type: 3}
       propertyPath: m_Name
       value: Grenade
@@ -20419,7 +20438,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -20464,7 +20483,7 @@ Transform:
   - {fileID: 1571707725}
   - {fileID: 760406501}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &1387327812
 Rigidbody:
@@ -21266,7 +21285,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -21309,7 +21328,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 14
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1514257737
 MonoBehaviour:
@@ -21568,7 +21587,7 @@ Transform:
   - {fileID: 1492940370}
   - {fileID: 995116406}
   m_Father: {fileID: 0}
-  m_RootOrder: 13
+  m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1569077135
 PrefabInstance:
@@ -21695,7 +21714,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -22134,7 +22153,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -22480,6 +22499,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: FieldItem
       objectReference: {fileID: 0}
+    - target: {fileID: 6460300391987621538, guid: 46893d2d732b9cd47bb6ffe566fa5d19, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
     - target: {fileID: 6460300391987621539, guid: 46893d2d732b9cd47bb6ffe566fa5d19, type: 3}
       propertyPath: m_RootOrder
       value: 5
@@ -23473,11 +23496,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5679dbafae207c647bfe22b5551bbeba, type: 3}
---- !u!4 &1982390435 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4000014045810036, guid: 5679dbafae207c647bfe22b5551bbeba, type: 3}
-  m_PrefabInstance: {fileID: 1982390434}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1984852017 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4000013041734426, guid: d803e729730d97a4e89edf13b602b3f4, type: 3}
@@ -24781,6 +24799,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1912443093388517007, guid: 540de0cd3c3388241bdc0bcff60a276c, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
     - target: {fileID: 2597995962241141898, guid: 540de0cd3c3388241bdc0bcff60a276c, type: 3}
       propertyPath: m_Name
       value: Grenade
