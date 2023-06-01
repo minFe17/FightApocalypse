@@ -3,8 +3,6 @@ using Utils;
 
 public class Raptor : Enemy
 {
-    [SerializeField] GameObject _attackArea;
-
     public int Damage { get { return _damage; } }
 
     void Start()
@@ -38,16 +36,5 @@ public class Raptor : Enemy
             _isHitted = true;
             _animator.SetTrigger("doHit");
         }
-    }
-
-    public override void Attack()
-    {
-        _attackArea.SetActive(true);
-    }
-
-    public override void EndAttack()
-    {
-        _attackArea.SetActive(false);
-        _isAttack = false;
     }
 }

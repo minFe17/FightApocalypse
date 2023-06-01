@@ -100,6 +100,7 @@ public class EnemyController : MonoBehaviour
 public enum EEnemyType
 {
     Zombie,
+    Ghoul,
     Raptor,
     Pachy,
     Boss,

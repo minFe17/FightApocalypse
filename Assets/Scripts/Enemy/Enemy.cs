@@ -1,14 +1,13 @@
-using System.Collections;
 using UnityEngine;
 using Utils;
 
 public class Enemy : MonoBehaviour
 {
+    [SerializeField] protected GameObject _attackArea;
     [SerializeField] protected int _maxHp;
     [SerializeField] protected int _damage;
     [SerializeField] protected float _speed;
     [SerializeField] protected float _attackDelay;
-    [SerializeField] protected int _money;
 
     protected EnemyController _enemyController;
     protected Animator _animator;
@@ -17,6 +16,7 @@ public class Enemy : MonoBehaviour
     protected Vector3 _move;
 
     protected int _curHp;
+    protected int _money;
     protected bool _isAttack;
     protected bool _isHitted;
     protected bool _isDie;
@@ -27,6 +27,7 @@ public class Enemy : MonoBehaviour
         _enemyController = enemyController;
         _curHp = _maxHp;
         _enemyController.EnemyList.Add(this.gameObject);
+        _money = Random.Range(1, 11) * 10;
     }
 
     public void LookTarget()
@@ -83,13 +84,27 @@ public class Enemy : MonoBehaviour
         _isAttack = true;
     }
 
-    public virtual void Attack() { }
+    public virtual void Attack()
+    {
+        _attackArea.SetActive(true);
+    }
 
-    public virtual void EndAttack() { }
+    public virtual void EndAttack()
+    {
+        _attackArea.SetActive(false);
+        _isAttack = false;
+    }
 
     public void FreezePos()
     {
         _rigidbody.velocity = Vector3.zero;
+    }
+
+    public void HealHP()
+    {
+        _curHp += 10;
+        if(_curHp > _maxHp)
+            _curHp = _maxHp;
     }
 
     private void OnTriggerStay(Collider other)

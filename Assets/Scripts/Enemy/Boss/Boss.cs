@@ -3,8 +3,6 @@ using Utils;
 
 public class Boss : Enemy
 {
-    [SerializeField] BoxCollider _attackCollider;
-
     EAttackType _attackType;
 
     public EAttackType AttackType { get { return _attackType; } }
@@ -26,7 +24,6 @@ public class Boss : Enemy
     public override void Init(EnemyController enemyController)
     {
         base.Init(enemyController);
-        _attackCollider.enabled = false;
         GenericSingleton<UIManager>.Instance.IngameUI.ShowBossHpBar(_curHp, _maxHp);
     }
 
@@ -39,10 +36,11 @@ public class Boss : Enemy
         }
     }
 
-    public override void Attack()
+    public override void AttackReady()
     {
         if (!_isAttack)
         {
+            Debug.Log(1);
             _isAttack = true;
             RandomAttack();
         }
@@ -50,7 +48,7 @@ public class Boss : Enemy
 
     void RandomAttack()
     {
-        _attackType = (EAttackType)Random.Range(1, (int)EAttackType.Max);
+        _attackType = (EAttackType)Random.Range(0, (int)EAttackType.Max);
         switch (_attackType)
         {
             case EAttackType.RightSlice:
@@ -60,17 +58,6 @@ public class Boss : Enemy
                 _animator.SetTrigger("doAttack2");
                 break;
         }
-    }
-
-    void OnAttackArea()
-    {
-        _attackCollider.enabled = true;
-    }
-
-    void OffAttackArea()
-    {
-        _attackCollider.enabled = false;
-        _isAttack = false;
     }
 
     public override void TakeDamage(int damage)
@@ -98,7 +85,6 @@ public class Boss : Enemy
 
 public enum EAttackType
 {
-    None,
     RightSlice,
     BothHands,
     Max,

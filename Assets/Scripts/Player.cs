@@ -257,7 +257,6 @@ public class Player : MonoBehaviour
         GameObject camera = Instantiate(temp);
         camera.GetComponent<MainCamera>().Target = gameObject.transform;
         _camera = camera.GetComponent<Camera>();
-        
     }
 
     

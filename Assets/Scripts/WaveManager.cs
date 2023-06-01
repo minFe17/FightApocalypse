@@ -9,11 +9,11 @@ public class WaveManager : MonoBehaviour
     EnemyController _enemyController;
     int _wave = 1;
     float _waveTime;
-    float _nextWaveTime = 2 * 60f;
+    float _nextWaveTime = 60f;
     bool _isClear = true;
 
     public Player Player { get { return _player; } }
-    public EnemyController EnemyController { set { _enemyController = value; } }
+    public EnemyController EnemyController { set => _enemyController = value; }
     public int Wave { get { return _wave; } }
     public float WaveTime { get { return _waveTime; } }
 

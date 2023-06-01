@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 491304}
   - component: {fileID: 13719338}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: SK_Soldier_Legs
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 481140}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: ShootFX
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -126,7 +126,7 @@ GameObject:
   m_Component:
   - component: {fileID: 420522}
   - component: {fileID: 13783508}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: SK_Soldier_Head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -211,7 +211,7 @@ GameObject:
   m_Component:
   - component: {fileID: 414936}
   - component: {fileID: 13720394}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: SK_Soldier_Torso
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -296,7 +296,7 @@ GameObject:
   m_Component:
   - component: {fileID: 420174}
   - component: {fileID: 13792380}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Weapon_Rifle_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -382,7 +382,7 @@ GameObject:
   m_Component:
   - component: {fileID: 464274}
   - component: {fileID: 9516764}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Weapon_Rifle_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -435,7 +435,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 440554}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Weapon_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -472,9 +472,9 @@ GameObject:
   - component: {fileID: 6106315607231963024}
   - component: {fileID: 8805505373127530673}
   - component: {fileID: 7846339096406731972}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -585,7 +585,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 472368}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: WeaponGrip
   m_TagString: Untagged
   m_Icon: {fileID: 0}
