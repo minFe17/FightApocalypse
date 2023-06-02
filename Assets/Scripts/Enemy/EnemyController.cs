@@ -15,6 +15,7 @@ public class EnemyController : MonoBehaviour
 
     int _enemyCount;
     int _zombieCount;
+    int _ghoulCount;
     int _raptorCount;
     int _pachyCount;
     int _bossCount;
@@ -37,6 +38,7 @@ public class EnemyController : MonoBehaviour
             {
                 _enemyCount = data.TOTALENEMY;
                 _zombieCount = data.ZOMBIE;
+                _ghoulCount = data.GHOUL;
                 _raptorCount = data.RAPTOR;
                 _pachyCount = data.PACHY;
                 _bossCount = data.BOSS;
@@ -72,6 +74,11 @@ public class EnemyController : MonoBehaviour
         {
             _zombieCount--;
             enemyType = EEnemyType.Zombie;
+        }
+        else if (_ghoulCount != 0)
+        {
+            _ghoulCount--;
+            enemyType = EEnemyType.Ghoul;
         }
         else if (_raptorCount != 0)
         {

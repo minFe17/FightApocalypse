@@ -73,7 +73,7 @@ public class Enemy : MonoBehaviour
         _isHitted = false;
     }
 
-    public void EndDie()
+    public virtual void EndDie()
     {
         Destroy(this.gameObject);
     }

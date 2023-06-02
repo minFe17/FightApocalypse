@@ -4249,12 +4249,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2142cb8e554e5a34483201473772620f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxHp: 20
+  _attackArea: {fileID: 4745635998310546798}
+  _maxHp: 10
   _damage: 5
   _speed: 5
   _attackDelay: 0.3
-  _money: 30
-  _attackArea: {fileID: 4745635998310546798}
 --- !u!95 &4745636000298523816
 Animator:
   serializedVersion: 5
