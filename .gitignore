@@ -10,7 +10,7 @@
 /[Ll]ogs/
 /[Uu]ser[Ss]ettings/
 /Assets/RPG_FPS_game_assets_industrial/
-
+/obj/
 # MemoryCaptures can get excessive in size.
 # They also could contain extremely sensitive data
 /[Mm]emoryCaptures/
