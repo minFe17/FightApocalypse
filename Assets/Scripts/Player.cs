@@ -42,7 +42,6 @@ public class Player : MonoBehaviour
         _bullet = Resources.Load("Prefabs/Bullet") as GameObject;
         _curHp = _maxHp;
         _curMoveSpeed = _moveSpeed;
-        _money = 50;
         GenericSingleton<UIManager>.Instance.IngameUI.ShowPlayerHpBar(_curHp, _maxHp);
         GenericSingleton<UIManager>.Instance.IngameUI.ShowMoney(_money);
     }
