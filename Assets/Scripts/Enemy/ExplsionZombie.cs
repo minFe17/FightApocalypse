@@ -3,7 +3,7 @@ using Utils;
 
 public class ExplsionZombie : Enemy
 {
-    GameObject _explsion;   //죽으면 소환
+    GameObject _explsion;
     
     public int Damage { get { return _damage; } }
 

@@ -23,6 +23,7 @@ public class Player : MonoBehaviour
     int _curHp;
     float _curMoveSpeed;
     float _skipButtonDownTime;
+    float _dodgeCoolTime;
 
     bool _isDodge;
     bool _isFire;
@@ -63,6 +64,8 @@ public class Player : MonoBehaviour
 
     public void Move()
     {
+        if (_isDie)
+            return;
         float x = Input.GetAxis("Horizontal");
         float z = Input.GetAxis("Vertical");
         _move = new Vector3(x, 0, z);
@@ -72,11 +75,13 @@ public class Player : MonoBehaviour
         _animator.SetFloat("AxisZ", z);
 
         if (_move.magnitude > 0f)
-            transform.Translate(_move.normalized * Time.deltaTime * _curMoveSpeed, Space.World);
+            _rigidbody.velocity = _move.normalized * _curMoveSpeed;
     }
 
     public void Turn()
     {
+        if (_isDie)
+            return;
         Ray ray = _camera.ScreenPointToRay(Input.mousePosition);
         RaycastHit rayHit;
         if (Physics.Raycast(ray, out rayHit, 100))
@@ -89,6 +94,8 @@ public class Player : MonoBehaviour
 
     public void Fire()
     {
+        if (_isDie)
+            return;
         if (Input.GetButton("Fire") && !_isFire && !_openShop)
         {
             StartCoroutine(FireRoutine());
@@ -97,6 +104,13 @@ public class Player : MonoBehaviour
 
     public void Dodge()
     {
+        if (_isDie)
+            return;
+        if (_dodgeCoolTime < 2f)
+        {
+            _dodgeCoolTime += Time.deltaTime;
+            return;
+        }
         if (Input.GetKeyDown(KeyCode.LeftShift) && !_isDodge)
         {
             float y = Quaternion.FromToRotation(Vector3.forward, _move).eulerAngles.y;
@@ -107,6 +121,7 @@ public class Player : MonoBehaviour
                 _animator.SetFloat("Rotation", transform.rotation.eulerAngles.y);
                 _curMoveSpeed *= 3;
                 _isDodge = true;
+                _dodgeCoolTime = 0;
             }
         }
     }
@@ -259,7 +274,7 @@ public class Player : MonoBehaviour
         _camera = camera.GetComponent<Camera>();
     }
 
-    
+
     IEnumerator FireRoutine()
     {
         _isFire = true;
