@@ -12,6 +12,7 @@ public class InventoryUI : MonoBehaviour
     [SerializeField] GameObject inventoryPanel;
     [SerializeField] Transform slotHolder;
     Player player;
+    public Player _Player { set { player = value; } }
     bool activeInventory = false;
 
     private void Start()
@@ -51,6 +52,12 @@ public class InventoryUI : MonoBehaviour
     {
         inven.SlotCnt++;
         //player.SpendMoney();
+        if (player != null)
+        {
+            if(player.Money >100)
+            player.Money = -100;
+        }
+
     }
 
     void RedrawSlotUI()
