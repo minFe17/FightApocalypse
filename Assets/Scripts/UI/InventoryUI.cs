@@ -50,12 +50,14 @@ public class InventoryUI : MonoBehaviour
 
     public void AddSlot()
     {
-        inven.SlotCnt++;
         //player.SpendMoney();
         if (player != null)
         {
-            if(player.Money >100)
-            player.Money = -100;
+            if (player.Money > 100)
+            {
+                player.Money = -100;
+                inven.SlotCnt++;
+            }
         }
 
     }
