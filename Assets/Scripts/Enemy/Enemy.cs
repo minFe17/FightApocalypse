@@ -57,10 +57,10 @@ public class Enemy : MonoBehaviour
         if (_curHp <= 0)
         {
             _animator.SetTrigger("doDie");
+            
             _isDie = true;
             _enemyController.DieEnemy(this.gameObject);
             GenericSingleton<WaveManager>.Instance.Player.GetMoney(_money);
-            Debug.Log(1);
         }
         else
         {
@@ -77,7 +77,6 @@ public class Enemy : MonoBehaviour
     public virtual void EndDie()
     {
         Destroy(this.gameObject);
-        Debug.Log(2);
     }
 
     public virtual void AttackReady()

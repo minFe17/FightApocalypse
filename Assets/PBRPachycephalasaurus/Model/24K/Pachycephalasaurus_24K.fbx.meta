@@ -44,7 +44,7 @@ ModelImporter:
     second: Armature|Pachycephalasaurus_KnockedDown
   - first:
       74: -819861211311983860
-    second: Armature|Pachycephalasaurus_KnockedOut
+    second: Die
   - first:
       74: 2651248080357364460
     second: Armature|Pachycephalasaurus_LoseHeadbutt
@@ -521,7 +521,7 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Armature|Pachycephalasaurus_KnockedOut
+      name: Die
       takeName: Armature|Pachycephalasaurus_KnockedOut
       internalID: -819861211311983860
       firstFrame: 0

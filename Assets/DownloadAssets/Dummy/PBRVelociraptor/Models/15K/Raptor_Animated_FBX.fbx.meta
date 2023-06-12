@@ -104,7 +104,7 @@ ModelImporter:
     second: RaptorArmature|Raptor_Roar2_Anim
   - first:
       74: 7347129157420261156
-    second: RaptorArmature|Raptor_Death1_Anim
+    second: Die
   - first:
       74: -3398154367868365451
     second: RaptorArmature|Raptor_Death2_Anim
@@ -960,7 +960,7 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: RaptorArmature|Raptor_Death1_Anim
+      name: Die
       takeName: RaptorArmature|Raptor_Death1_Anim
       internalID: 0
       firstFrame: 0

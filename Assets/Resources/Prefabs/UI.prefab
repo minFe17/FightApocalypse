@@ -1731,7 +1731,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &6513276872541227324
 RectTransform:
   m_ObjectHideFlags: 0
@@ -8517,8 +8517,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _ingameUI: {fileID: 6513276874108766501}
   _miniMapUI: {fileID: 6513276873674647616}
-  _shopUI: {fileID: 0}
+  _shopUI: {fileID: 9049368800545663911}
   _gameOverUI: {fileID: 6513276873568944164}
+  _inventoryUI: {fileID: 6513276873830673512}
   _talkText: {fileID: 4750009175892697228}
   _uiGroup: {fileID: 503422299587361694}
 --- !u!1 &6513276873834932954

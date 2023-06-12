@@ -13,7 +13,6 @@ public class Boss : Enemy
         _animator = GetComponent<Animator>();
         _rigidbody = GetComponent<Rigidbody>();
     }
-
     void Update()
     {
         LookTarget();

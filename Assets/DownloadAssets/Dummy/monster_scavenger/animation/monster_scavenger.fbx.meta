@@ -17,7 +17,7 @@ ModelImporter:
     second: root|Anim_monster_scavenger_Death
   - first:
       74: -5741060747698949940
-    second: root|Anim_monster_scavenger_Death1
+    second: Die
   - first:
       74: 3222431177123244227
     second: root|Anim_monster_scavenger_gethit
@@ -222,7 +222,7 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: root|Anim_monster_scavenger_Death1
+      name: Die
       takeName: root|Anim_monster_scavenger_Death1
       internalID: -5741060747698949940
       firstFrame: 0

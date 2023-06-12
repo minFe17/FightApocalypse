@@ -86,6 +86,8 @@ public class WaveManager : MonoBehaviour
         }
         while (true)
         {
+            if (Player.IsDie)
+                break;
             if (_enemyController.EnemyList.Count == 0)
             {
                 _isClear = true;

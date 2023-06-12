@@ -8,6 +8,7 @@ public class MainUI : MonoBehaviour
     [SerializeField] UIminiMap _miniMapUI;
     [SerializeField] GameObject _shopUI;
     [SerializeField] GameObject _gameOverUI;
+    [SerializeField] InventoryUI _inventoryUI;
     [SerializeField] Text _talkText;
     [SerializeField] RectTransform _uiGroup;
 
@@ -17,6 +18,7 @@ public class MainUI : MonoBehaviour
         GenericSingleton<UIManager>.Instance.MiniMapUI = _miniMapUI;
         GenericSingleton<UIManager>.Instance.ShopUI = _shopUI;
         GenericSingleton<UIManager>.Instance.GameOverUI = _gameOverUI;
+        GenericSingleton<UIManager>.Instance.InventoryUI = _inventoryUI;
         GenericSingleton<UIManager>.Instance.TalkText= _talkText;
         GenericSingleton<UIManager>.Instance.ShopUIGroup = _uiGroup;
     }

@@ -6,6 +6,7 @@ public class Player : MonoBehaviour
 {
     [SerializeField] int _maxHp;
     [SerializeField] float _moveSpeed;
+    [SerializeField] float _maxMoveSpeed;
     [SerializeField] Transform _bulletPos;
 
     Animator _animator;
@@ -33,6 +34,7 @@ public class Player : MonoBehaviour
 
     public int Money { get { return _money; } set { _money = value; } }
     public bool OpenShop { get { return _openShop; } set { _openShop = value; } }
+    public bool IsDie { get { return _isDie; } }
 
     void Start()
     {
@@ -42,6 +44,7 @@ public class Player : MonoBehaviour
         _bullet = Resources.Load("Prefabs/Bullet") as GameObject;
         _curHp = _maxHp;
         _curMoveSpeed = _moveSpeed;
+        GenericSingleton<UIManager>.Instance.InventoryUI._Player = this;
         GenericSingleton<UIManager>.Instance.IngameUI.ShowPlayerHpBar(_curHp, _maxHp);
         GenericSingleton<UIManager>.Instance.IngameUI.ShowMoney(_money);
     }
@@ -118,7 +121,7 @@ public class Player : MonoBehaviour
             {
                 _animator.SetTrigger("doDodge");
                 _animator.SetFloat("Rotation", transform.rotation.eulerAngles.y);
-                _curMoveSpeed *= 3;
+                _curMoveSpeed *= 2;
                 _isDodge = true;
                 _dodgeCoolTime = 0;
             }
@@ -128,6 +131,24 @@ public class Player : MonoBehaviour
     public void SpendMoney()
     {
         _money -= 100;
+    }
+
+    public void HealHP()
+    {
+        if (_maxHp <= _curHp)
+            return;
+        _curHp += 20;
+        if (_maxHp < _curHp)
+            _curHp = _maxHp;
+    }
+
+    public void UpSpeed()
+    {
+        if (_maxMoveSpeed <= _moveSpeed)
+            return;
+        _moveSpeed += 2;
+        if (_maxMoveSpeed < _moveSpeed)
+            _moveSpeed = _maxMoveSpeed;
     }
 
     public void EndDodge()

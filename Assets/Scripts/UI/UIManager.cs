@@ -11,6 +11,7 @@ public class UIManager : MonoBehaviour
     public UIminiMap MiniMapUI { get; set; }
     public GameObject ShopUI { get; set; }
     public GameObject GameOverUI { get; set; }
+    public InventoryUI InventoryUI { get; set; }
 
     public Text TalkText { get; set; }
     public RectTransform ShopUIGroup { get; set; }

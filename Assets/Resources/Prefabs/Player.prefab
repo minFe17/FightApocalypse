@@ -533,6 +533,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _maxHp: 100
   _moveSpeed: 5
+  _maxMoveSpeed: 15
   _bulletPos: {fileID: 6258489322518038487}
 --- !u!114 &6106315607231963024
 MonoBehaviour:
