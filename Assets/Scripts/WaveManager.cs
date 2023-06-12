@@ -78,7 +78,7 @@ public class WaveManager : MonoBehaviour
         IsNewGame = false;
         _enemyController.SpawnEnemy();
         GenericSingleton<ShopManager>.Instance.Shop.SetActive(false);
-        Generic
+        GenericSingleton<UIManager>.Instance.IngameUI.ShowSkipKeyButtonDownTime(0, 1f);
         if (_player.OpenShop == true)
         {
             GenericSingleton<ShopManager>.Instance.Shop.GetComponentInChildren<Shop>().Exit();

@@ -11,11 +11,13 @@ public class InventoryUI : MonoBehaviour
     Slot[] slots;
     [SerializeField] GameObject inventoryPanel;
     [SerializeField] Transform slotHolder;
+    Player player;
     bool activeInventory = false;
 
     private void Start()
     {
         inven = Inventory.instance;
+        
         slots = slotHolder.GetComponentsInChildren<Slot>();
         inven.onSlotCountChange += SlotChange;
         inven.onChangeItem += RedrawSlotUI;
@@ -48,6 +50,7 @@ public class InventoryUI : MonoBehaviour
     public void AddSlot()
     {
         inven.SlotCnt++;
+        //player.SpendMoney();
     }
 
     void RedrawSlotUI()
