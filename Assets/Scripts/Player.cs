@@ -125,6 +125,11 @@ public class Player : MonoBehaviour
         }
     }
 
+    public void SpendMoney()
+    {
+        _money -= 100;
+    }
+
     public void EndDodge()
     {
         _isDodge = false;
@@ -236,9 +241,15 @@ public class Player : MonoBehaviour
     public bool SkipTime()
     {
         if (Input.GetKey(KeyCode.F))
+        {
             _skipButtonDownTime += Time.deltaTime;
+            GenericSingleton<UIManager>.Instance.IngameUI.ShowSkipKeyButtonDownTime(_skipButtonDownTime, 1f);
+        }
         else
+        {
             _skipButtonDownTime -= Time.deltaTime;
+            GenericSingleton<UIManager>.Instance.IngameUI.ShowSkipKeyButtonDownTime(_skipButtonDownTime, 1f);
+        }
 
         if (_skipButtonDownTime >= 1f)
         {

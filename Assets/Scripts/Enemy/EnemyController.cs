@@ -23,9 +23,12 @@ public class EnemyController : MonoBehaviour
 
     void Start()
     {
-        for (int i = 0; i < (int)EEnemyType.Max; i++)
+        if(_enemys.Count == 0)
         {
-            _enemys.Add(Resources.Load($"Prefabs/{(EEnemyType)i}") as GameObject);
+            for (int i = 0; i < (int)EEnemyType.Max; i++)
+            {
+                _enemys.Add(Resources.Load($"Prefabs/{(EEnemyType)i}") as GameObject);
+            }
         }
         GenericSingleton<WaveManager>.Instance.StartGame();
         GenericSingleton<WaveManager>.Instance.EnemyController = this;

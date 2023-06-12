@@ -7,15 +7,16 @@ public class WaveManager : MonoBehaviour
     // ½Ì±ÛÅæ
     Player _player;
     EnemyController _enemyController;
-    int _wave = 1;
+    int _wave;
     float _waveTime;
     float _nextWaveTime = 60f;
-    bool _isClear = true;
+    bool _isClear;
 
     public Player Player { get { return _player; } }
-    public EnemyController EnemyController { set => _enemyController = value; }
+    public EnemyController EnemyController { set { _enemyController = value; } }
     public int Wave { get { return _wave; } }
     public float WaveTime { get { return _waveTime; } }
+    public bool IsNewGame { get; set; }
 
     void Update()
     {
@@ -24,7 +25,9 @@ public class WaveManager : MonoBehaviour
 
     public void StartGame()
     {
+        _wave = 1;
         _waveTime = _nextWaveTime;
+        _isClear = true;
         GenericSingleton<UIManager>.Instance.CreateUI();
         GenericSingleton<UIManager>.Instance.IngameUI.ShowWave();
         GenericSingleton<UIManager>.Instance.IngameUI.TimeSkipInfoKey.SetActive(true);
@@ -72,8 +75,10 @@ public class WaveManager : MonoBehaviour
     IEnumerator WaveRoutine()
     {
         _isClear = false;
+        IsNewGame = false;
         _enemyController.SpawnEnemy();
         GenericSingleton<ShopManager>.Instance.Shop.SetActive(false);
+        Generic
         if (_player.OpenShop == true)
         {
             GenericSingleton<ShopManager>.Instance.Shop.GetComponentInChildren<Shop>().Exit();

@@ -12,6 +12,7 @@ public class IngameUI : MonoBehaviour
     [SerializeField] Text _moneyText;
     [SerializeField] GameObject _timeSkipInfoKey;
     [SerializeField] GameObject _openShopInfoKey;
+    [SerializeField] Image _timeSkipKeyDownTime;
 
     public GameObject TimeSkipInfoKey { get { return _timeSkipInfoKey; } }
     public GameObject OpenShopInfoKey { get { return _openShopInfoKey; } }
@@ -54,5 +55,10 @@ public class IngameUI : MonoBehaviour
     public void ShowMoney(int money)
     {
         _moneyText.text = $"$ {money}";
+    }
+
+    public void ShowSkipKeyButtonDownTime(float curButtonCoolTime, float maxButtonCoolTime)
+    {
+        _timeSkipKeyDownTime.fillAmount =  curButtonCoolTime / maxButtonCoolTime;
     }
 }
