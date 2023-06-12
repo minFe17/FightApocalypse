@@ -11,7 +11,7 @@ public class ExplsionZombie : Enemy
     {
         _animator = GetComponent<Animator>();
         _rigidbody = GetComponent<Rigidbody>();
-        _explsion = Resources.Load("Prefabs/Explsion") as GameObject;
+        _explsion = Resources.Load("Prefabs/Enemy/Explsion") as GameObject;
     }
 
     void Update()

@@ -27,7 +27,7 @@ public class Enemy : MonoBehaviour
         _enemyController = enemyController;
         _curHp = _maxHp;
         _enemyController.EnemyList.Add(this.gameObject);
-        _money = Random.Range(1, 11) * 10;
+        _money = Random.Range(1, 6) * 5;
     }
 
     public void LookTarget()
