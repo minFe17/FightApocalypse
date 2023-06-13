@@ -13,6 +13,7 @@ TagManager:
   - Weapon
   - Explsion
   - Wall
+  - PoisonBall
   layers:
   - Default
   - TransparentFX
@@ -26,7 +27,7 @@ TagManager:
   - MiniMapCamera
   - Explsion
   - Bullet
-  - 
+  - PoisonBall
   - 
   - 
   - 

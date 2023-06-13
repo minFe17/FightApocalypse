@@ -140,6 +140,8 @@ public class Player : MonoBehaviour
         _curHp += 20;
         if (_maxHp < _curHp)
             _curHp = _maxHp;
+
+        GenericSingleton<UIManager>.Instance.IngameUI.ShowPlayerHpBar(_curHp, _maxHp);
     }
 
     public void UpSpeed()
