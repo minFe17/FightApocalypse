@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Utils;
@@ -17,8 +14,7 @@ public class InventoryUI : MonoBehaviour
 
     private void Start()
     {
-        inven = Inventory.instance;
-        
+        inven = Inventory.instance;       
         slots = slotHolder.GetComponentsInChildren<Slot>();
         inven.onSlotCountChange += SlotChange;
         inven.onChangeItem += RedrawSlotUI;
@@ -50,14 +46,13 @@ public class InventoryUI : MonoBehaviour
 
     public void AddSlot()
     {
-        //player.SpendMoney();
         if (player != null)
         {
-            if (player.Money > 100)
+            if (player.Money > 50)
             {
-                player.Money = -100;
+                player.GetMoney(-50);
                 inven.SlotCnt++;
-            }
+            }           
         }
 
     }

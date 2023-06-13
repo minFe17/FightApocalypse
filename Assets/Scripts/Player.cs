@@ -193,7 +193,7 @@ public class Player : MonoBehaviour
                 GenericSingleton<UIManager>.Instance.IngameUI.TimeSkipInfoKey.SetActive(false);
                 _openShop = true;
             }
-        }
+        }      
     }
 
     private void OnTriggerEnter(Collider other)

@@ -17,6 +17,7 @@ public class Inventory : MonoBehaviour
     }
     #endregion
 
+    Player player;
     public delegate void OnSlotCoutnChange();
     public OnSlotCoutnChange onSlotCountChange;
 
@@ -24,7 +25,6 @@ public class Inventory : MonoBehaviour
     public OnChangeItem onChangeItem;
 
     public List<Item> items = new List<Item>();
-
     private int slotCnt;
     public int SlotCnt
     {
@@ -39,6 +39,7 @@ public class Inventory : MonoBehaviour
     void Start()
     {
         SlotCnt = 4;
+        player = GetComponent<Player>();
     }
 
     public bool AddItem(Item _item)
@@ -47,12 +48,43 @@ public class Inventory : MonoBehaviour
         {
             items.Add(_item);
             if(onChangeItem !=null)
-            onChangeItem.Invoke();
-            return true;    
+            onChangeItem.Invoke();          
+            return true;
         }
         return false;
     }
-
+    private void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            for(int i = 0; i < items.Count; i++)
+            {
+                Debug.Log(items[i].itemType);
+                if (items[i].itemType == ItemType.Potion)
+                {
+                    player.HealHP();
+                    items.RemoveAt(i);
+                    if (onChangeItem != null)
+                        onChangeItem.Invoke();
+                    break;
+                }
+            }
+        }
+        if(Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            for(int i =0; i < items.Count;i++) 
+            {
+                if (items[i].itemType == ItemType.SpeedPotion)
+                {
+                    player.UpSpeed();
+                    items.RemoveAt(i);
+                    if (onChangeItem != null)
+                        onChangeItem.Invoke();
+                    break;
+                }
+            }
+        }
+    }
     void OnTriggerEnter(Collider collision)
     { 
         if(collision.CompareTag("FieldItem"))
