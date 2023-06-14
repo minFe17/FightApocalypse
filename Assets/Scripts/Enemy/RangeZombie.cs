@@ -62,7 +62,7 @@ public class RangeZombie : Enemy
 
     public void ThrowBullet()
     {
-        _poisonBall.ThrownBullet();
+        _poisonBall.ThrownBullet(transform);
     }
 
     public override void EndAttack()

@@ -72,6 +72,12 @@ public class WaveManager : MonoBehaviour
         }
     }
 
+    public void EndGame()
+    {
+        GenericSingleton<UIManager>.Instance.GameClearUI.SetActive(true);
+        Time.timeScale = 0;
+    }
+
     IEnumerator WaveRoutine()
     {
         _isClear = false;
@@ -90,13 +96,20 @@ public class WaveManager : MonoBehaviour
                 break;
             if (_enemyController.EnemyList.Count == 0)
             {
-                _isClear = true;
-                _waveTime = _nextWaveTime;
-                _wave++;
-                GenericSingleton<UIManager>.Instance.IngameUI.ShowWave();
-                GenericSingleton<UIManager>.Instance.IngameUI.TimeSkipInfoKey.SetActive(true);
-                GenericSingleton<ShopManager>.Instance.Shop.SetActive(true);
-                break;
+                if (GenericSingleton<WaveEnemyData>.Instance.LstEnemyData.Count <= _wave)
+                {
+                    EndGame();
+                }
+                else
+                {
+                    _isClear = true;
+                    _waveTime = _nextWaveTime;
+                    _wave++;
+                    GenericSingleton<UIManager>.Instance.IngameUI.ShowWave();
+                    GenericSingleton<UIManager>.Instance.IngameUI.TimeSkipInfoKey.SetActive(true);
+                    GenericSingleton<ShopManager>.Instance.Shop.SetActive(true);
+                    break;
+                }
             }
             else
             {

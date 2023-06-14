@@ -35,10 +35,11 @@ public class PoisonBall : MonoBehaviour
             transform.Translate(Vector3.forward * Time.deltaTime * _speed);
     }
 
-    public void ThrownBullet()
+    public void ThrownBullet(Transform rangeZombie)
     {
         _isThrown = true;
-        transform.rotation = _bulletPos.transform.rotation;
+        
+        transform.rotation = rangeZombie.transform.rotation;
     }
 
     public void Remove()
