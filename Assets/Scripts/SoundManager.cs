@@ -1,16 +1,21 @@
-using System.Collections.Generic;
 using UnityEngine;
 
 public class SoundManager : MonoBehaviour
 {
-    [SerializeField] List<AudioSource> _fbxAudio;
-    int _index;
+    // ΩÃ±€≈Ê
+    SoundController _soundController;
 
-    public void PlayFBXAudio(AudioClip audio)
-    {
-        _fbxAudio[_index].clip = audio;
-        _index++;
-        if(_index == _fbxAudio.Count)
-            _index = 0;
+    public SoundController SoundController 
+    { 
+        get
+        { 
+            if(_soundController == null)
+            {
+                GameObject temp = Resources.Load("Prefabs/SoundController") as GameObject;
+                GameObject soundController = Instantiate(temp);
+                _soundController = soundController.GetComponent<SoundController>();
+            }
+            return _soundController;
+        }
     }
 }

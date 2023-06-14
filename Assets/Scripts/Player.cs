@@ -9,6 +9,7 @@ public class Player : MonoBehaviour
     [SerializeField] float _maxMoveSpeed;
     [SerializeField] Transform _bulletPos;
 
+    AudioClip _shotAudio;
     Animator _animator;
     Rigidbody _rigidbody;
     Camera _camera;
@@ -31,9 +32,11 @@ public class Player : MonoBehaviour
     bool _isDie;
     bool _iDown;
     bool _openShop;
+    bool _openOption;
 
     public int Money { get { return _money; } set { _money = value; } }
     public bool OpenShop { get { return _openShop; } set { _openShop = value; } }
+    public bool OpenOption { set { _openOption = value; } }
     public bool IsDie { get { return _isDie; } }
 
     void Start()
@@ -42,6 +45,7 @@ public class Player : MonoBehaviour
         _animator = GetComponent<Animator>();
         _rigidbody = GetComponent<Rigidbody>();
         _bullet = Resources.Load("Prefabs/Bullet") as GameObject;
+        _shotAudio = Resources.Load("Prefabs/ShotAudio") as AudioClip;
         _curHp = _maxHp;
         _curMoveSpeed = _moveSpeed;
         GenericSingleton<UIManager>.Instance.InventoryUI._Player = this;
@@ -98,7 +102,7 @@ public class Player : MonoBehaviour
     {
         if (_isDie)
             return;
-        if (Input.GetButton("Fire") && !_isFire && !_openShop)
+        if (Input.GetButton("Fire") && !_isFire && !_openShop && !_openOption)
         {
             StartCoroutine(FireRoutine());
         }
@@ -195,7 +199,7 @@ public class Player : MonoBehaviour
                 GenericSingleton<UIManager>.Instance.IngameUI.TimeSkipInfoKey.SetActive(false);
                 _openShop = true;
             }
-        }      
+        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -258,6 +262,7 @@ public class Player : MonoBehaviour
     {
         GenericSingleton<UIManager>.Instance.GameOverUI.SetActive(true);
         GenericSingleton<UIManager>.Instance.GameOverUI.GetComponent<GameOverUI>().ShowGameOverWave(GenericSingleton<WaveManager>.Instance.Wave);
+        GenericSingleton<SoundManager>.Instance.SoundController.StopBGM();
         Time.timeScale = 0;
     }
 
@@ -315,6 +320,7 @@ public class Player : MonoBehaviour
         GameObject bullet = Instantiate(_bullet);
         bullet.transform.position = _bulletPos.position;
         bullet.transform.rotation = _bulletPos.rotation;
+        GenericSingleton<SoundManager>.Instance.SoundController.PlayFBXAudio(_shotAudio);
         yield return new WaitForSeconds(0.3f);
         _isFire = false;
     }

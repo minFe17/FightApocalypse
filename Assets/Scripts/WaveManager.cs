@@ -34,6 +34,7 @@ public class WaveManager : MonoBehaviour
         GenericSingleton<ShopManager>.Instance.SpawnShop();
         SpawnPlayer();
         CreateMiniMap();
+        GenericSingleton<SoundManager>.Instance.SoundController.StartBGM();
     }
 
     public void SpawnPlayer()
@@ -99,6 +100,7 @@ public class WaveManager : MonoBehaviour
                 if (GenericSingleton<WaveEnemyData>.Instance.LstEnemyData.Count <= _wave)
                 {
                     EndGame();
+                    GenericSingleton<SoundManager>.Instance.SoundController.StopBGM();
                 }
                 else
                 {

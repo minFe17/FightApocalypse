@@ -1,9 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UIElements;
+using Utils;
 
 public class Option : MonoBehaviour
 {
@@ -31,8 +28,11 @@ public class Option : MonoBehaviour
         else if (_opton.activeSelf)// 켜져있으면 true, 꺼져있으면 false
         {
 
-            if (Input.GetKeyDown(KeyCode.Escape)) _opton.SetActive(false);
-
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                _opton.SetActive(false);
+                GenericSingleton<WaveManager>.Instance.Player.OpenOption = false;
+            }
         }
         else
         {
@@ -48,6 +48,7 @@ public class Option : MonoBehaviour
     public void OpTion()
     {
         _opton.SetActive(true);
+        GenericSingleton<WaveManager>.Instance.Player.OpenOption = true;
     }
 
     public void KeyOption()

@@ -30,15 +30,21 @@ public class Ghoul : Enemy
             _isDie = true;
             _enemyController.DieEnemy(this.gameObject);
             GenericSingleton<WaveManager>.Instance.Player.GetMoney(_money);
-            for (int i = 0; i < _enemyController.EnemyList.Count; i++)
-            {
-                _enemyController.EnemyList[i].GetComponent<Enemy>().HealHP();
-            }
         }
         else
         {
             _isHitted = true;
             Invoke("MoveAgain", 0.3f);
+        }
+    }
+
+    public override void EndDie()
+    {
+        base.EndDie();
+        for (int i = 0; i < _enemyController.EnemyList.Count; i++)
+        {
+            if (_enemyController.EnemyList[i].GetComponent<Enemy>().IsDie == false)
+                _enemyController.EnemyList[i].GetComponent<Enemy>().HealHP();
         }
     }
 }

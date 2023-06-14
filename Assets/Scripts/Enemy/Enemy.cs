@@ -20,7 +20,8 @@ public class Enemy : MonoBehaviour
     protected bool _isAttack;
     protected bool _isHitted;
     protected bool _isDie;
-    protected bool _isMiss;
+
+    public bool IsDie { get { return _isDie; } }
 
     public virtual void Init(EnemyController enemyController)
     {

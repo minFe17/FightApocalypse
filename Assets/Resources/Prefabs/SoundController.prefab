@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 877714219187299028}
   - component: {fileID: 877714219187299029}
   m_Layer: 0
-  m_Name: FBX 2
+  m_Name: SFX 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -170,11 +170,11 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_audioClip: {fileID: 8300000, guid: 4d99e73e07d9ef048b52abe18c832cab, type: 3}
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -267,7 +267,7 @@ GameObject:
   - component: {fileID: 877714219828379752}
   - component: {fileID: 877714219828379753}
   m_Layer: 0
-  m_Name: FBX 3
+  m_Name: SFX 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -393,9 +393,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 877714220246801504}
-  - component: {fileID: 877714220246801505}
+  - component: {fileID: 6825333643649209475}
   m_Layer: 0
-  m_Name: SoundManager
+  m_Name: SoundController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -420,7 +420,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &877714220246801505
+--- !u!114 &6825333643649209475
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -429,10 +429,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 877714220246801535}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 06029816e549da44bba3edd8665c0ad5, type: 3}
+  m_Script: {fileID: 11500000, guid: 9e2a179e0816fd241886b8e3ceb734b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _fbxAudio:
+  _bgm: {fileID: 877714219599432222}
+  _sfxAudio:
   - {fileID: 877714220315482567}
   - {fileID: 877714219187299029}
   - {fileID: 877714219828379753}
@@ -447,7 +448,7 @@ GameObject:
   - component: {fileID: 877714220315482566}
   - component: {fileID: 877714220315482567}
   m_Layer: 0
-  m_Name: FBX 1
+  m_Name: SFX 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
