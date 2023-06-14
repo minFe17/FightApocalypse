@@ -102,7 +102,7 @@ public class Enemy : MonoBehaviour
         _rigidbody.velocity = Vector3.zero;
     }
 
-    public void HealHP()
+    public virtual void HealHP()
     {
         _curHp += 10;
         if(_curHp > _maxHp)

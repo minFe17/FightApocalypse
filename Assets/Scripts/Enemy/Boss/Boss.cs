@@ -80,6 +80,12 @@ public class Boss : Enemy
             _animator.SetTrigger("doHit");
         }
     }
+
+    public override void HealHP()
+    {
+        base.HealHP();
+        GenericSingleton<UIManager>.Instance.IngameUI.ShowBossHpBar(_curHp, _maxHp);
+    }
 }
 
 public enum EAttackType

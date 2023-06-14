@@ -8379,7 +8379,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _opton: {fileID: 6513276874200183269}
-  _soundoption: {fileID: 0}
+  _soundoption: {fileID: 4521688294403641736}
   _keyoption: {fileID: 6513276873280346370}
   _mouseoption: {fileID: 6513276873370492995}
   _GmPanel: {fileID: 6513276873378833692}
