@@ -34,6 +34,7 @@ public class Option : MonoBehaviour
             {
                 _opton.SetActive(false);
                 OpenOption = false;
+                Time.timeScale = 1;
             }
         }
         else
@@ -51,6 +52,7 @@ public class Option : MonoBehaviour
     {
         _opton.SetActive(true);
         OpenOption = true;
+        Time.timeScale = 0;
     }
 
     public void KeyOption()

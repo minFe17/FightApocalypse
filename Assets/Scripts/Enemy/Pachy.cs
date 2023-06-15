@@ -4,6 +4,7 @@ using Utils;
 public class Pachy : Enemy
 {
     float _pachyMoveSpeed;
+    bool _isReady;
 
     void Start()
     {
@@ -17,6 +18,15 @@ public class Pachy : Enemy
         LookTarget();
         Move();
         FreezePos();
+    }
+
+    public override void Move()
+    {
+        if (!_isHitted && !_isDie && !_isReady)
+        {
+            _animator.SetBool("isWalk", true);
+            transform.Translate(_move.normalized * Time.deltaTime * _speed, Space.World);
+        }
     }
 
     public override void TakeDamage(int damage)
@@ -41,11 +51,13 @@ public class Pachy : Enemy
 
     public override void AttackReady()
     {
-        _animator.setBool("doReady");
+        _animator.SetBool("isReady", true);
+        _isReady = true;
     }
 
     public override void Attack()
     {
+        _isReady = false;
         _isAttack = true;
         _animator.SetTrigger("doAttack");
         _speed *= 2f;
@@ -60,6 +72,8 @@ public class Pachy : Enemy
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Player") && _isAttack)
+        {
             GenericSingleton<WaveManager>.Instance.Player.TakeDamage(_damage);
+        }
     }
 }
