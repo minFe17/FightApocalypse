@@ -4925,6 +4925,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1000012503029934
 GameObject:
   m_ObjectHideFlags: 0
@@ -9763,7 +9764,7 @@ MonoBehaviour:
   itemType: 5
   value: 0
   itemName: Potion
-  itemImage: {fileID: 21300000, guid: ede524d575379f241a347e7df1e1c79b, type: 3}
+  itemImage: {fileID: 21300000, guid: d680404714ebc2146a2c4babe295213e, type: 3}
 --- !u!136 &3879629184014616689
 CapsuleCollider:
   m_ObjectHideFlags: 0

@@ -9681,6 +9681,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1000013846074356
 GameObject:
   m_ObjectHideFlags: 0
@@ -9732,7 +9733,7 @@ MonoBehaviour:
   itemType: 6
   value: 1
   itemName: SpeedPotion
-  itemImage: {fileID: 21300000, guid: c9a696b9ef0ae374b87fb2a9f4372264, type: 3}
+  itemImage: {fileID: 21300000, guid: 517dc9def3897f34fb2b5007ab0f1f6b, type: 3}
 --- !u!54 &1081545712718979624
 Rigidbody:
   m_ObjectHideFlags: 0

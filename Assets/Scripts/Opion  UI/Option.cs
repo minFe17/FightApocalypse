@@ -7,17 +7,17 @@ public class Option : MonoBehaviour
     [SerializeField] GameObject _opton;
     [SerializeField] GameObject _soundoption;
     [SerializeField] GameObject _keyoption;
-    [SerializeField] GameObject _mouseoption;
+    //[SerializeField] GameObject _mouseoption;
     [SerializeField] GameObject _GmPanel;
 
     void Update()
     {
-        if (_mouseoption.activeSelf)
-        {
-            if (Input.GetKeyDown(KeyCode.Escape)) _mouseoption.SetActive(false);
+        //if (_mouseoption.activeSelf)
+        //{
+        //    if (Input.GetKeyDown(KeyCode.Escape)) _mouseoption.SetActive(false);
 
-        }
-        else if (_soundoption.activeSelf)
+        //}
+        if (_soundoption.activeSelf)
         {
             if (Input.GetKeyDown(KeyCode.Escape)) _soundoption.SetActive(false);
         }
@@ -60,10 +60,10 @@ public class Option : MonoBehaviour
     {
         _soundoption.SetActive(true);   
     }
-    public void MouseOption() 
-    {
-        _mouseoption.SetActive(true);
-    }
+    //public void MouseOption() 
+    //{
+    //    _mouseoption.SetActive(true);
+    //}
 
     public void YesButton()
     {
