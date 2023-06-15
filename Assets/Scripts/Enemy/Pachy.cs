@@ -57,6 +57,8 @@ public class Pachy : Enemy
 
     public override void Attack()
     {
+        if (_isDie)
+            return;
         _isReady = false;
         _isAttack = true;
         _animator.SetTrigger("doAttack");
