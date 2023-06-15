@@ -3,10 +3,13 @@ using Utils;
 
 public class Pachy : Enemy
 {
+    float _pachyMoveSpeed;
+
     void Start()
     {
         _animator = GetComponent<Animator>();
         _rigidbody = GetComponent<Rigidbody>();
+        _pachyMoveSpeed = _speed;
     }
 
     void Update()
@@ -38,18 +41,20 @@ public class Pachy : Enemy
 
     public override void AttackReady()
     {
-        _animator.SetTrigger("doReady");
+        _animator.setBool("doReady");
     }
 
     public override void Attack()
     {
         _isAttack = true;
         _animator.SetTrigger("doAttack");
+        _speed *= 2f;
     }
 
     public override void EndAttack()
     {
         _isAttack = false;
+        _speed = _pachyMoveSpeed;
     }
 
     private void OnCollisionEnter(Collision collision)

@@ -23,5 +23,6 @@ public class MainUI : MonoBehaviour
         GenericSingleton<UIManager>.Instance.GameClearUI = _gameClearUI;
         GenericSingleton<UIManager>.Instance.TalkText = _talkText;
         GenericSingleton<UIManager>.Instance.ShopUIGroup = _uiGroup;
+        GenericSingleton<UIManager>.Instance.OptionUI = GetComponent<Option>();
     }
 }

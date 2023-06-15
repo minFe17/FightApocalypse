@@ -39,7 +39,6 @@ public class Boss : Enemy
     {
         if (!_isAttack)
         {
-            Debug.Log(1);
             _isAttack = true;
             RandomAttack();
         }

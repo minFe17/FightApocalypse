@@ -7,25 +7,31 @@ public class SoundOption : MonoBehaviour
     [SerializeField] Slider _bgmSlider;
     [SerializeField] Slider _sfxSlider;
 
+    SoundManager _soundManager;
     SoundController _soundController;
 
     private void Awake()
     {
-        _soundController = GenericSingleton<SoundManager>.Instance.SoundController;
-        _bgmSlider.value = 0.5f;
-        _sfxSlider.value = 0.5f;
-        _soundController.BGM.volume = 0.5f;
+        _soundManager = GenericSingleton<SoundManager>.Instance;
+        _soundController = _soundManager.SoundController;
+
+        _bgmSlider.value = _soundManager.BgmSound;
+        _sfxSlider.value = _soundManager.SFXSound;
+
+        _soundController.BGM.volume = _soundManager.BgmSound;
         for (int i = 0; i < _soundController.SFXAudio.Count; i++)
-            _soundController.SFXAudio[i].volume = 0.5f;
+            _soundController.SFXAudio[i].volume = _soundManager.SFXSound;
     }
 
     public void ChangeBGMSoundVolume()
     {
+        _soundManager.BgmSound = _bgmSlider.value;
         _soundController.BGM.volume = _bgmSlider.value;
     }
 
     public void ChangeSFXSoundVolume()
     {
+        _soundManager.SFXSound = _sfxSlider.value;
         for (int i = 0; i < _soundController.SFXAudio.Count; i++)
         {
             _soundController.SFXAudio[i].volume = _sfxSlider.value;

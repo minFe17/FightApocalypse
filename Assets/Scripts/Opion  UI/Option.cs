@@ -10,6 +10,8 @@ public class Option : MonoBehaviour
     //[SerializeField] GameObject _mouseoption;
     [SerializeField] GameObject _GmPanel;
 
+    public bool OpenOption { get; private set; }
+
     void Update()
     {
         //if (_mouseoption.activeSelf)
@@ -31,7 +33,7 @@ public class Option : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Escape))
             {
                 _opton.SetActive(false);
-                GenericSingleton<WaveManager>.Instance.Player.OpenOption = false;
+                OpenOption = false;
             }
         }
         else
@@ -48,7 +50,7 @@ public class Option : MonoBehaviour
     public void OpTion()
     {
         _opton.SetActive(true);
-        GenericSingleton<WaveManager>.Instance.Player.OpenOption = true;
+        OpenOption = true;
     }
 
     public void KeyOption()

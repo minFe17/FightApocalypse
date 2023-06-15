@@ -4,6 +4,10 @@ public class SoundManager : MonoBehaviour
 {
     // ΩÃ±€≈Ê
     SoundController _soundController;
+    float _bgmSound = 0.5f;
+    float _sfxSound = 0.5f;
+    public float BgmSound { get { return _bgmSound; } set { _bgmSound = value; } }
+    public float SFXSound { get { return _sfxSound; } set { _sfxSound = value; } }
 
     public SoundController SoundController 
     { 

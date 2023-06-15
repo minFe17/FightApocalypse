@@ -15,6 +15,9 @@ public class Player : MonoBehaviour
     Camera _camera;
     GameObject _bullet;
     GameObject nearObject;
+
+    UIManager _uiManager;
+    Option _optionUI;
     Vector3 _move;
 
     int _potion;
@@ -32,11 +35,9 @@ public class Player : MonoBehaviour
     bool _isDie;
     bool _iDown;
     bool _openShop;
-    bool _openOption;
 
     public int Money { get { return _money; } set { _money = value; } }
     public bool OpenShop { get { return _openShop; } set { _openShop = value; } }
-    public bool OpenOption { set { _openOption = value; } }
     public bool IsDie { get { return _isDie; } }
 
     void Start()
@@ -48,9 +49,11 @@ public class Player : MonoBehaviour
         _shotAudio = Resources.Load("Prefabs/ShotAudio") as AudioClip;
         _curHp = _maxHp;
         _curMoveSpeed = _moveSpeed;
-        GenericSingleton<UIManager>.Instance.InventoryUI._Player = this;
-        GenericSingleton<UIManager>.Instance.IngameUI.ShowPlayerHpBar(_curHp, _maxHp);
-        GenericSingleton<UIManager>.Instance.IngameUI.ShowMoney(_money);
+        _uiManager = GenericSingleton<UIManager>.Instance;
+        _optionUI = _uiManager.OptionUI;
+        _uiManager.InventoryUI._Player = this;
+        _uiManager.IngameUI.ShowPlayerHpBar(_curHp, _maxHp);
+        _uiManager.IngameUI.ShowMoney(_money);
     }
 
     void FixedUpdate()
@@ -102,7 +105,7 @@ public class Player : MonoBehaviour
     {
         if (_isDie)
             return;
-        if (Input.GetButton("Fire") && !_isFire && !_openShop && !_openOption)
+        if (Input.GetButton("Fire") && !_isFire && !_openShop && !_uiManager.OptionUI.OpenOption)
         {
             StartCoroutine(FireRoutine());
         }
@@ -145,7 +148,7 @@ public class Player : MonoBehaviour
         if (_maxHp < _curHp)
             _curHp = _maxHp;
 
-        GenericSingleton<UIManager>.Instance.IngameUI.ShowPlayerHpBar(_curHp, _maxHp);
+        _uiManager.IngameUI.ShowPlayerHpBar(_curHp, _maxHp);
     }
 
     public void UpSpeed()
@@ -174,7 +177,7 @@ public class Player : MonoBehaviour
         if (_isDodge || _isDie)
             return;
         _curHp -= damage;
-        GenericSingleton<UIManager>.Instance.IngameUI.ShowPlayerHpBar(_curHp, _maxHp);
+        _uiManager.IngameUI.ShowPlayerHpBar(_curHp, _maxHp);
 
         if (_curHp <= 0)
         {
@@ -195,8 +198,8 @@ public class Player : MonoBehaviour
             {
                 Shop shop = nearObject.GetComponent<Shop>();
                 shop.Enter(this);
-                GenericSingleton<UIManager>.Instance.IngameUI.OpenShopInfoKey.SetActive(false);
-                GenericSingleton<UIManager>.Instance.IngameUI.TimeSkipInfoKey.SetActive(false);
+                _uiManager.IngameUI.OpenShopInfoKey.SetActive(false);
+                _uiManager.IngameUI.TimeSkipInfoKey.SetActive(false);
                 _openShop = true;
             }
         }
@@ -226,7 +229,7 @@ public class Player : MonoBehaviour
         }
         if (other.CompareTag("Shop"))
         {
-            GenericSingleton<UIManager>.Instance.IngameUI.OpenShopInfoKey.SetActive(true);
+            _uiManager.IngameUI.OpenShopInfoKey.SetActive(true);
         }
     }
 
@@ -244,9 +247,9 @@ public class Player : MonoBehaviour
         {
             Shop shop = nearObject.GetComponent<Shop>();
             shop.Exit();
-            GenericSingleton<UIManager>.Instance.IngameUI.OpenShopInfoKey.SetActive(false);
+            _uiManager.IngameUI.OpenShopInfoKey.SetActive(false);
             if (GenericSingleton<WaveManager>.Instance.WaveTime > 3f)
-                GenericSingleton<UIManager>.Instance.IngameUI.TimeSkipInfoKey.SetActive(true);
+                _uiManager.IngameUI.TimeSkipInfoKey.SetActive(true);
             _openShop = false;
             nearObject = null;
         }
@@ -260,8 +263,8 @@ public class Player : MonoBehaviour
 
     void DieEnd()
     {
-        GenericSingleton<UIManager>.Instance.GameOverUI.SetActive(true);
-        GenericSingleton<UIManager>.Instance.GameOverUI.GetComponent<GameOverUI>().ShowGameOverWave(GenericSingleton<WaveManager>.Instance.Wave);
+        _uiManager.GameOverUI.SetActive(true);
+        _uiManager.GameOverUI.GetComponent<GameOverUI>().ShowGameOverWave(GenericSingleton<WaveManager>.Instance.Wave);
         GenericSingleton<SoundManager>.Instance.SoundController.StopBGM();
         Time.timeScale = 0;
     }
@@ -271,12 +274,12 @@ public class Player : MonoBehaviour
         if (Input.GetKey(KeyCode.F))
         {
             _skipButtonDownTime += Time.deltaTime;
-            GenericSingleton<UIManager>.Instance.IngameUI.ShowSkipKeyButtonDownTime(_skipButtonDownTime, 1f);
+            _uiManager.IngameUI.ShowSkipKeyButtonDownTime(_skipButtonDownTime, 1f);
         }
         else
         {
             _skipButtonDownTime -= Time.deltaTime;
-            GenericSingleton<UIManager>.Instance.IngameUI.ShowSkipKeyButtonDownTime(_skipButtonDownTime, 1f);
+            _uiManager.IngameUI.ShowSkipKeyButtonDownTime(_skipButtonDownTime, 1f);
         }
 
         if (_skipButtonDownTime >= 1f)
@@ -296,7 +299,7 @@ public class Player : MonoBehaviour
     public void GetMoney(int money)
     {
         _money += money;
-        GenericSingleton<UIManager>.Instance.IngameUI.ShowMoney(_money);
+        _uiManager.IngameUI.ShowMoney(_money);
     }
 
     void FreezePos()

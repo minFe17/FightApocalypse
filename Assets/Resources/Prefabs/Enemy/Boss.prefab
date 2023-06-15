@@ -824,11 +824,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _attackArea: {fileID: 3349493921437266194}
-  _maxHp: 50
+  _maxHp: 70
   _damage: 10
   _speed: 2
   _attackDelay: 2
-  _money: 100
 --- !u!95 &3668376243138506110
 Animator:
   serializedVersion: 5
@@ -849,6 +848,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!65 &3668376243138506111
 BoxCollider:
   m_ObjectHideFlags: 0

@@ -2285,8 +2285,6 @@ MonoBehaviour:
   _damage: 2
   _speed: 3
   _attackDelay: 1
-  _money: 20
-  _attackArea1: {fileID: 4926436652229370228}
   _attackArea2: {fileID: 3662167022901089304}
 --- !u!95 &6954349052968721467
 Animator:
@@ -2308,6 +2306,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!65 &6954349052968721464
 BoxCollider:
   m_ObjectHideFlags: 0
