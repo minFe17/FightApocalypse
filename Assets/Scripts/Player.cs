@@ -42,6 +42,7 @@ public class Player : MonoBehaviour
 
     void Start()
     {
+        _money = 3000;
         CreateCamera();
         _animator = GetComponent<Animator>();
         _rigidbody = GetComponent<Rigidbody>();
@@ -153,17 +154,17 @@ public class Player : MonoBehaviour
 
     public void UpSpeed()
     {
-        if (_maxMoveSpeed <= _moveSpeed)
+        if (_maxMoveSpeed <= _curMoveSpeed)
             return;
-        _moveSpeed += 2;
-        if (_maxMoveSpeed < _moveSpeed)
-            _moveSpeed = _maxMoveSpeed;
+        _curMoveSpeed += 2;
+        if (_maxMoveSpeed < _curMoveSpeed)
+            _curMoveSpeed = _maxMoveSpeed;
     }
 
     public void EndDodge()
     {
         _isDodge = false;
-        _curMoveSpeed = _moveSpeed;
+        _curMoveSpeed /= 2f;
     }
 
     public void ReturnMoveSpeed()
