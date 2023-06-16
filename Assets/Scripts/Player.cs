@@ -42,7 +42,6 @@ public class Player : MonoBehaviour
 
     void Start()
     {
-        _money = 3000;
         CreateCamera();
         _animator = GetComponent<Animator>();
         _rigidbody = GetComponent<Rigidbody>();
