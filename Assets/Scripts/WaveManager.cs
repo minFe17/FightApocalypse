@@ -76,7 +76,6 @@ public class WaveManager : MonoBehaviour
     public void EndGame()
     {
         GenericSingleton<UIManager>.Instance.GameClearUI.SetActive(true);
-        Debug.Log(1);
         Time.timeScale = 0;
     }
 
