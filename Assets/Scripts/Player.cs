@@ -71,7 +71,7 @@ public class Player : MonoBehaviour
         GetInput();
     }
 
-    public void Move()
+    public void Move()  // Blend Tree를 활용하여 플레이어 애니메이션 실행
     {
         if (_isDie)
             return;
@@ -87,17 +87,41 @@ public class Player : MonoBehaviour
             _rigidbody.velocity = _move.normalized * _curMoveSpeed;
     }
 
-    public void Turn()
+    public void Turn()  // Ray를 사용하여 플레이어 방향 조정
     {
         if (_isDie)
             return;
-        Ray ray = _camera.ScreenPointToRay(Input.mousePosition);
+        Ray ray = _camera.ScreenPointToRay(Input.mousePosition);    
         RaycastHit rayHit;
         if (Physics.Raycast(ray, out rayHit, 100))
         {
             Vector3 lookDirection = rayHit.point - transform.position;
             lookDirection.y = 0;
             transform.LookAt(transform.position + lookDirection);
+        }
+    }
+
+    public void Dodge()     // Dodge
+    {
+        if (_isDie)
+            return;
+        if (_dodgeCoolTime < 2f)    // Dodge 쿨타임 체크
+        {
+            _dodgeCoolTime += Time.deltaTime;
+            return;
+        }
+        if (Input.GetKeyDown(KeyCode.LeftShift) && !_isDodge)
+        {
+            float y = Quaternion.FromToRotation(Vector3.forward, _move).eulerAngles.y;
+
+            if (Mathf.Abs(transform.rotation.eulerAngles.y - y) <= 30 || Mathf.Abs(transform.rotation.eulerAngles.y - y) >= 330)    // 캐릭터 방향과 일치하는지 체크
+            {
+                _animator.SetTrigger("doDodge");
+                _animator.SetFloat("Rotation", transform.rotation.eulerAngles.y);
+                _curMoveSpeed *= 2;
+                _isDodge = true;
+                _dodgeCoolTime = 0;
+            }
         }
     }
 
@@ -108,30 +132,6 @@ public class Player : MonoBehaviour
         if (Input.GetButton("Fire") && !_isFire && !_openShop && !_uiManager.OptionUI.OpenOption)
         {
             StartCoroutine(FireRoutine());
-        }
-    }
-
-    public void Dodge()
-    {
-        if (_isDie)
-            return;
-        if (_dodgeCoolTime < 2f)
-        {
-            _dodgeCoolTime += Time.deltaTime;
-            return;
-        }
-        if (Input.GetKeyDown(KeyCode.LeftShift) && !_isDodge)
-        {
-            float y = Quaternion.FromToRotation(Vector3.forward, _move).eulerAngles.y;
-
-            if (Mathf.Abs(transform.rotation.eulerAngles.y - y) <= 30 || Mathf.Abs(transform.rotation.eulerAngles.y - y) >= 330)
-            {
-                _animator.SetTrigger("doDodge");
-                _animator.SetFloat("Rotation", transform.rotation.eulerAngles.y);
-                _curMoveSpeed *= 2;
-                _isDodge = true;
-                _dodgeCoolTime = 0;
-            }
         }
     }
 
@@ -205,7 +205,79 @@ public class Player : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter(Collider other)
+    void Die()
+    {
+        _isDie = true;
+        _animator.SetTrigger("doDie");
+    }
+
+    void DieEnd()
+    {
+        _uiManager.GameOverUI.SetActive(true);
+        _uiManager.GameOverUI.GetComponent<GameOverUI>().ShowGameOverWave(GenericSingleton<WaveManager>.Instance.Wave);
+        GenericSingleton<SoundManager>.Instance.SoundController.StopBGM();
+        Time.timeScale = 0;
+    }
+
+    void FreezePos()
+    {
+        _rigidbody.velocity = Vector3.zero;
+    }
+
+    void CreateCamera()
+    {
+        GameObject temp = Resources.Load("Prefabs/Main Camera") as GameObject;
+        GameObject camera = Instantiate(temp);
+        camera.GetComponent<MainCamera>().Target = gameObject.transform;
+        _camera = camera.GetComponent<Camera>();
+    }
+
+    IEnumerator FireRoutine()
+    {
+        _isFire = true;
+        _animator.SetTrigger("doShot");
+        GameObject bullet = Instantiate(_bullet);
+        bullet.transform.position = _bulletPos.position;
+        bullet.transform.rotation = _bulletPos.rotation;
+        GenericSingleton<SoundManager>.Instance.SoundController.PlayFBXAudio(_shotAudio);
+        yield return new WaitForSeconds(0.3f);
+        _isFire = false;
+    }
+
+    public bool SkipTime()
+    {
+        if (Input.GetKey(KeyCode.F))
+        {
+            _skipButtonDownTime += Time.deltaTime;
+            _uiManager.IngameUI.ShowSkipKeyButtonDownTime(_skipButtonDownTime, 1f);
+        }
+        else
+        {
+            _skipButtonDownTime -= Time.deltaTime;
+            _uiManager.IngameUI.ShowSkipKeyButtonDownTime(_skipButtonDownTime, 1f);
+        }
+
+        if (_skipButtonDownTime >= 1f)
+        {
+            _skipButtonDownTime = 0f;
+            return true;
+        }
+        else if (_skipButtonDownTime < 0f)
+        {
+            _skipButtonDownTime = 0f;
+            return false;
+        }
+        else
+            return false;
+    }
+
+    public void GetMoney(int money)
+    {
+        _money += money;
+        _uiManager.IngameUI.ShowMoney(_money);
+    }
+
+    void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Item"))
         {
@@ -253,78 +325,5 @@ public class Player : MonoBehaviour
             _openShop = false;
             nearObject = null;
         }
-    }
-
-    void Die()
-    {
-        _isDie = true;
-        _animator.SetTrigger("doDie");
-    }
-
-    void DieEnd()
-    {
-        _uiManager.GameOverUI.SetActive(true);
-        _uiManager.GameOverUI.GetComponent<GameOverUI>().ShowGameOverWave(GenericSingleton<WaveManager>.Instance.Wave);
-        GenericSingleton<SoundManager>.Instance.SoundController.StopBGM();
-        Time.timeScale = 0;
-    }
-
-    public bool SkipTime()
-    {
-        if (Input.GetKey(KeyCode.F))
-        {
-            _skipButtonDownTime += Time.deltaTime;
-            _uiManager.IngameUI.ShowSkipKeyButtonDownTime(_skipButtonDownTime, 1f);
-        }
-        else
-        {
-            _skipButtonDownTime -= Time.deltaTime;
-            _uiManager.IngameUI.ShowSkipKeyButtonDownTime(_skipButtonDownTime, 1f);
-        }
-
-        if (_skipButtonDownTime >= 1f)
-        {
-            _skipButtonDownTime = 0f;
-            return true;
-        }
-        else if (_skipButtonDownTime < 0f)
-        {
-            _skipButtonDownTime = 0f;
-            return false;
-        }
-        else
-            return false;
-    }
-
-    public void GetMoney(int money)
-    {
-        _money += money;
-        _uiManager.IngameUI.ShowMoney(_money);
-    }
-
-    void FreezePos()
-    {
-        _rigidbody.velocity = Vector3.zero;
-    }
-
-    void CreateCamera()
-    {
-        GameObject temp = Resources.Load("Prefabs/Main Camera") as GameObject;
-        GameObject camera = Instantiate(temp);
-        camera.GetComponent<MainCamera>().Target = gameObject.transform;
-        _camera = camera.GetComponent<Camera>();
-    }
-
-
-    IEnumerator FireRoutine()
-    {
-        _isFire = true;
-        _animator.SetTrigger("doShot");
-        GameObject bullet = Instantiate(_bullet);
-        bullet.transform.position = _bulletPos.position;
-        bullet.transform.rotation = _bulletPos.rotation;
-        GenericSingleton<SoundManager>.Instance.SoundController.PlayFBXAudio(_shotAudio);
-        yield return new WaitForSeconds(0.3f);
-        _isFire = false;
     }
 }
