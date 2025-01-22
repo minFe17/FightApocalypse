@@ -44,7 +44,7 @@ public class Ghoul : Enemy
         for (int i = 0; i < _enemyController.EnemyList.Count; i++)
         {
             if (_enemyController.EnemyList[i].GetComponent<Enemy>().IsDie == false)
-                _enemyController.EnemyList[i].GetComponent<Enemy>().HealHP();
+                _enemyController.EnemyList[i].GetComponent<Enemy>().HealHP();   // 죽으면 남은 몬스터들 피 회복
         }
     }
 }
