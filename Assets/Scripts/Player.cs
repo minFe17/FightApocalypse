@@ -71,57 +71,77 @@ public class Player : MonoBehaviour
         GetInput();
     }
 
-    public void Move()  // Blend Tree를 활용하여 플레이어 애니메이션 실행
+    void Move()  
     {
         if (_isDie)
             return;
+
+        // 입력 값 받아오기
         float x = Input.GetAxis("Horizontal");
         float z = Input.GetAxis("Vertical");
+
+        // 이동 방향 벡터 계산 (XZ 평면 기준)
         _move = new Vector3(x, 0, z);
 
+        // 현재 캐릭터의 Y축 회전값을 Rotation 파라미터에 전달
         _animator.SetFloat("Rotation", transform.rotation.eulerAngles.y);
+
+        // Blend Tree의 AxisX/AxisZ 파라미터를 설정하여 방향에 맞는 애니메이션 실행
         _animator.SetFloat("AxisX", x);
         _animator.SetFloat("AxisZ", z);
 
+        // 이동 입력이 있는 경우, Rigidbody를 통해 실제 이동 처리
         if (_move.magnitude > 0f)
             _rigidbody.velocity = _move.normalized * _curMoveSpeed;
     }
 
-    public void Turn()  // Ray를 사용하여 플레이어 방향 조정
+    public void Turn()
     {
         if (_isDie)
-            return;
-        Ray ray = _camera.ScreenPointToRay(Input.mousePosition);    
+            return;  // 사망 상태일 경우 회전 로직 무시
+
+        // 마우스 위치에서 카메라 기준으로 Ray(광선)를 생성
+        Ray ray = _camera.ScreenPointToRay(Input.mousePosition);
+
         RaycastHit rayHit;
+        // Ray가 지형이나 오브젝트에 닿으면 회전 로직 수행
         if (Physics.Raycast(ray, out rayHit, 100))
         {
+            // 충돌 지점과 플레이어 위치의 차이를 기준으로 바라볼 방향 계산
             Vector3 lookDirection = rayHit.point - transform.position;
-            lookDirection.y = 0;
+            lookDirection.y = 0;  // 수직 방향은 회전에서 제외하여 수평 회전만 적용
+
+            // 계산된 방향을 기준으로 캐릭터가 그 방향을 바라보게 회전
             transform.LookAt(transform.position + lookDirection);
         }
     }
-
-    public void Dodge()     // Dodge
+    void Dodge()
     {
         if (_isDie)
             return;
-        if (_dodgeCoolTime < 2f)    // Dodge 쿨타임 체크
+
+        if (_dodgeCoolTime < 2f)
         {
             _dodgeCoolTime += Time.deltaTime;
             return;
         }
-        if (Input.GetKeyDown(KeyCode.LeftShift) && !_isDodge)
-        {
-            float y = Quaternion.FromToRotation(Vector3.forward, _move).eulerAngles.y;
 
-            if (Mathf.Abs(transform.rotation.eulerAngles.y - y) <= 30 || Mathf.Abs(transform.rotation.eulerAngles.y - y) >= 330)    // 캐릭터 방향과 일치하는지 체크
-            {
-                _animator.SetTrigger("doDodge");
-                _animator.SetFloat("Rotation", transform.rotation.eulerAngles.y);
-                _curMoveSpeed *= 2;
-                _isDodge = true;
-                _dodgeCoolTime = 0;
-            }
+        if (!Input.GetKeyDown(KeyCode.LeftShift) || _isDodge)
+            return;
+
+        // 이동 방향에 해당하는 회전 각도 계산
+        float targetY = Quaternion.FromToRotation(Vector3.forward, _move).eulerAngles.y;
+        float currentY = transform.rotation.eulerAngles.y;
+        float angleDiff = Mathf.Abs(currentY - targetY);
+
+        // 캐릭터의 회전 방향이 이동 방향과 일정 각도 이내일 때만 회피 가능
+        if (angleDiff <= 30f || angleDiff >= 330f)
+        {
+            _animator.SetTrigger("doDodge");
+            _animator.SetFloat("Rotation", currentY);
+            _curMoveSpeed *= 2;
+            _isDodge = true;
+            _dodgeCoolTime = 0f;
         }
     }
 
