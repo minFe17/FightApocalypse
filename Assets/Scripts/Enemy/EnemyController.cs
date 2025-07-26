@@ -37,18 +37,18 @@ public class EnemyController : MonoBehaviour
 
     public void SpawnEnemy()
     {
-        foreach (stEnemyData data in GenericSingleton<WaveEnemyData>.Instance.LstEnemyData)
+        foreach (EnemySpawnData data in GenericSingleton<WaveEnemyData>.Instance.LstEnemyData)
         {
-            if (data.WAVE == GenericSingleton<WaveManager>.Instance.Wave)
+            if (data.Wave == GenericSingleton<WaveManager>.Instance.Wave)
             {
-                _enemyCount = data.TOTALENEMY;
-                _zombieCount = data.ZOMBIE;
-                _rangeZombieCount = data.RANGEZOMBIE;
-                _explsionZombieCount = data.EXPLSIONZOMBIE;
-                _ghoulCount = data.GHOUL;
-                _raptorCount = data.RAPTOR;
-                _pachyCount = data.PACHY;
-                _bossCount = data.BOSS;
+                _enemyCount = data.TotalEnemy;
+                _zombieCount = data.Zombie;
+                _rangeZombieCount = data.RangeZombie;
+                _explsionZombieCount = data.ExplosionZombie;
+                _ghoulCount = data.Ghoul;
+                _raptorCount = data.Raptor;
+                _pachyCount = data.Pachy;
+                _bossCount = data.Boss;
             }
         }
 

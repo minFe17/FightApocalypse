@@ -162,23 +162,33 @@ public class Player : MonoBehaviour
 
     public void HealHP()
     {
-        if (_maxHp <= _curHp)
+        if (_maxHp <= _curHp) 
             return;
-        _curHp += 20;
+
+        // 체력 20 회복
+        _curHp += 20; 
+
+        // 회복 후 최대 체력 초과 시 최대 체력으로 고정
         if (_maxHp < _curHp)
             _curHp = _maxHp;
 
-        _uiManager.IngameUI.ShowPlayerHpBar(_curHp, _maxHp);
+        // 체력 UI 갱신
+        _uiManager.IngameUI.ShowPlayerHpBar(_curHp, _maxHp); 
     }
 
     public void UpSpeed()
     {
-        if (_maxMoveSpeed <= _curMoveSpeed)
+        if (_maxMoveSpeed <= _curMoveSpeed) 
             return;
+
+        // 이동 속도 2 증가
         _curMoveSpeed += 2;
-        if (_maxMoveSpeed < _curMoveSpeed)
+
+        // 증가 후 최대 속도 초과 시 최대 속도로 고정
+        if (_maxMoveSpeed < _curMoveSpeed) 
             _curMoveSpeed = _maxMoveSpeed;
     }
+
 
     public void EndDodge()
     {
@@ -197,13 +207,14 @@ public class Player : MonoBehaviour
         if (_isDodge || _isDie)
             return;
         _curHp -= damage;
+
+        // 팀원이 제작한 플레이어 체력 UI 함수 사용
         _uiManager.IngameUI.ShowPlayerHpBar(_curHp, _maxHp);
 
         if (_curHp <= 0)
-        {
             Die();
-        }
     }
+
     /// 추가 부분
     void GetInput()
     {

@@ -4,7 +4,7 @@ using Utils;
 
 public class WaveManager : MonoBehaviour
 {
-    // ΩÃ±€≈Ê
+    // ΩÃ±€≈œ
     Player _player;
     EnemyController _enemyController;
     int _wave;

@@ -50,10 +50,10 @@ public class Boss : Enemy
         switch (_attackType)
         {
             case EAttackType.RightSlice:
-                _animator.SetTrigger("doAttack1");
+                _animator.SetTrigger("doAttackRightSlice");
                 break;
             case EAttackType.BothHands:
-                _animator.SetTrigger("doAttack2");
+                _animator.SetTrigger("doAttackBothHands");
                 break;
         }
     }
@@ -83,6 +83,8 @@ public class Boss : Enemy
     public override void HealHP()
     {
         base.HealHP();
+
+        // 팀원이 제작한 보스 체력 UI 함수 사용
         GenericSingleton<UIManager>.Instance.IngameUI.ShowBossHpBar(_curHp, _maxHp);
     }
 }

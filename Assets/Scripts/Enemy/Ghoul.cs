@@ -40,11 +40,17 @@ public class Ghoul : Enemy
 
     public override void EndDie()
     {
+        // 부모 클래스의 EndDie 함수 실행
         base.EndDie();
+
+        // 살아있는 적들의 체력을 회복시킴 (자신이 죽을 때 발동)
         for (int i = 0; i < _enemyController.EnemyList.Count; i++)
         {
-            if (_enemyController.EnemyList[i].GetComponent<Enemy>().IsDie == false)
-                _enemyController.EnemyList[i].GetComponent<Enemy>().HealHP();   // 죽으면 남은 몬스터들 피 회복
+            GameObject enemyObject = _enemyController.EnemyList[i];
+            Enemy enemy = enemyObject.GetComponent<Enemy>();
+
+            if (enemy != null && !enemy.IsDie)
+                enemy.HealHP();
         }
     }
 }
