@@ -97,8 +97,9 @@ public class Player : MonoBehaviour
 
     public void Turn()
     {
+        // 사망 상태일 경우 회전 로직 무시
         if (_isDie)
-            return;  // 사망 상태일 경우 회전 로직 무시
+            return;  
 
         // 마우스 위치에서 카메라 기준으로 Ray(광선)를 생성
         Ray ray = _camera.ScreenPointToRay(Input.mousePosition);
@@ -115,6 +116,7 @@ public class Player : MonoBehaviour
             transform.LookAt(transform.position + lookDirection);
         }
     }
+
     void Dodge()
     {
         if (_isDie)
