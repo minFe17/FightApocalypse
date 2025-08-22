@@ -6,6 +6,7 @@
 - **플랫폼** : PC (Windows)
 - **Unity 버전** : 2021.3.27f1
 - **📄 노션 링크** : [Notion 링크](https://mincheolstudy.notion.site/Fight-Apocalypse-182d4b6c965c8018b1c3d8b1ef1a6fd5)
+- **🎬 영상 링크** : [영상 링크](https://www.youtube.com/watch?v=C0KvlsVkRjY)
 ---
 
 ## 🎯 기술 목표
